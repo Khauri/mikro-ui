@@ -1,0 +1,23 @@
+import defaultTheme from '../../theme';
+import {getThemeVariables, makeCssSafe} from '../../theme/utils';
+
+<attrs/{default: customizeFn, theme = defaultTheme, renderBody} />
+
+<!-- This will be optimized later. Just prototyping right now. -->
+<css=`
+  :host, :root {${getThemeVariables(defaultTheme)} }
+  
+  html, body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+  
+` id="mikro-theme"/>
+
+<set={customizeFn, theme}>
+  <${renderBody} />
+</set>

@@ -1,0 +1,21 @@
+<attrs/{renderBody} />
+
+<!doctype html>
+<html>
+  <head>
+    <title>Mikro Docs</title>
+  </head>
+  <body>
+    <provider>
+      <v-stack>
+        <site-header />
+        <h-stack position="relative">
+          <navigation />
+          <box flex=1 p=4 maxW="100%" overflowX="hidden">
+            <${renderBody} />
+          </box>
+        </h-stack>
+      </v-stack>
+    </provider>
+  </body>
+</html>

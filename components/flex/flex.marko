@@ -1,0 +1,23 @@
+<attrs/{
+  align,
+  basis,
+  direction,
+  justify,
+  grow,
+  shrink,
+  wrap,
+  renderBody, 
+  ...rest
+} />
+
+<box d="flex"
+  flexAlign=align
+  flexBasis=basis
+  flexDirection=direction
+  justifyContent=justify
+  flexGrow=grow
+  flexShrink=shrink
+  flexWrap=wrap
+  ...rest>
+  <${renderBody} />
+</box>

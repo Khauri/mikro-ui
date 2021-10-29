@@ -1,0 +1,11 @@
+import parse from './utils/index.js';
+
+<!-- This seems to be broken -->
+<!-- <get/theme="provider" /> -->
+<attrs/{component: componentName, variant, layerStyle, renderBody, _return, ...props} />
+
+<const/result=parse({input: props, component: componentName, variant, layerStyle}) />
+
+<css=result.css id=result.classname />
+
+<return={attrs: result.attrs, classname: `css-${result.classname}`} />

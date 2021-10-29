@@ -1,0 +1,36 @@
+<!-- 
+  This component is the most important and would benefit the most from optimizations.
+  This system is similar to SSR css-in-js.
+  This renders a native (non-marko) <style> tag on both the client and server.
+  The client will add additional style tags as requried. The initial server rendered style tags
+  prevent a flash of unstyled content.
+  Some improvements would be:
+    1. Use a compiler hook to attach the css to the `head` automatically.
+    2. Only use a single style tag. Just add or remove rules individually.
+-->
+<attrs/{default: css, id} />
+<id/defaultId />
+<const/stylesheetId=`css-${(id || defaultId).replace(/\W/gi, '-')}` />
+
+<!-- Using raw $! at top level seems to be broken -->
+<if=(true)>
+  $!{`<style id="${stylesheetId}">${css}</style>`}
+</if>
+
+<!-- 
+  This part only runs on the client. For static pages it isn't really necessary.
+  Unfortunately this means you can't create 0kb js pages unless there's a way
+  to conditionally determine if the parent component is stateful. 
+-->
+<effect() {
+  const el = document.querySelector(`#${stylesheetId}`);
+  if(!el) {
+    document.head.insertAdjacentHTML("beforeend", `<style id="${stylesheetId}">${css}</style>`)
+  } else {
+    document.head.appendChild(el);
+  }
+  // Rehydrate the stylesheet if it exists and move it to the head element
+  return () => {
+    document.querySelector(`#${stylesheetId}`).remove();
+  };
+} />

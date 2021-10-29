@@ -1,0 +1,23 @@
+{
+  "name": "mikro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "marko-serve ./docs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "babel-loader": "^8.2.3"
+  },
+  "dependencies": {
+    "@marko/build": "^4.2.3",
+    "@marko/serve": "^4.2.3",
+    "@marko/tags-api-preview": "^0.1.4",
+    "marko": "^5.16.1"
+  }
+}
