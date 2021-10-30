@@ -1,0 +1,22 @@
+diff --git a/node_modules/@marko/build/dist/util.js b/node_modules/@marko/build/dist/util.js
+index 9cb7295..6af2730 100644
+--- a/node_modules/@marko/build/dist/util.js
++++ b/node_modules/@marko/build/dist/util.js
+@@ -30,13 +30,15 @@ const useAppModuleOrFallback = (dir, moduleName) => {
+ 
+ const getDirectoryLookup = async (cwd, ignore) => {
+   const lookup = {};
+-  const filenames = await fastGlob(["**/*.marko"], {
++  // Added md here
++  const filenames = await fastGlob(["**/*.{marko,md}"], {
+     cwd,
+     ignore
+   });
+ 
+   for (const filename of filenames) {
+-    lookup[fileNameToURL(filename).replace(/(^|\/)(?:index\/(?=index\.marko$))?([^/]+)?\.marko$/, "$1$2")] = path.join(cwd, filename);
++    // Added md here
++    lookup[fileNameToURL(filename).replace(/(^|\/)(?:index\/(?=index\.(?:marko|md)$))?([^/]+)?\.(?:marko|md)$/, "$1$2")] = path.join(cwd, filename);
+   }
+ 
+   return lookup;

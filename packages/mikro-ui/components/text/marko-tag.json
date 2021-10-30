@@ -1,0 +1,9 @@
+{
+  "attributes": {},
+  "autocomplete": [
+    {
+      "snippet": "text",
+      "description": "Display text. Default is a paragraph."
+    }
+  ]
+}

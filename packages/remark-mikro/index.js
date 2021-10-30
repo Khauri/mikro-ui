@@ -62,7 +62,7 @@ function walk(node, handlers, depth = 0, spaces = 2) {
   }, '').replace(/^/gm, ' '.repeat(depth * spaces));
 }
 
-export default function remarkMikro(settings = {}) {
+module.exports = function RemarkMikro(settings = {}) {
   const options = {...settings}
 
   Object.assign(this, {Compiler: compiler})

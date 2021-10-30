@@ -3,14 +3,24 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
-    "dev": "marko-serve ./docs"
+    "dev": "marko-serve ."
   },
   "dependencies": {
+    "@babel/code-frame": "7.15",
+    "@babel/core": "7.15",
+    "@babel/generator": "7.15",
+    "@babel/parser": "7.15",
+    "@babel/plugin-transform-modules-commonjs": "7.15",
+    "@babel/preset-env": "7.15",
+    "@babel/runtime": "7.15",
+    "@babel/traverse": "7.15",
+    "@babel/types": "7.15",
+    "@marko/tags-api-preview": "^0.1.6",
+    "marko": "^5.17.2",
     "mikro": "file:../packages/mikro-ui",
     "remark-mikro": "file:../packages/remark-mikro"
   },
@@ -19,6 +29,8 @@
   "license": "ISC",
   "devDependencies": {
     "@marko/build": "^4.2.3",
-    "@marko/serve": "^4.2.3"
+    "@marko/serve": "^4.2.3",
+    "remark-loader": "^4.0.0",
+    "webpack-inject-plugin": "^1.5.5"
   }
 }
