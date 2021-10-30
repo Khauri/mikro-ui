@@ -63,6 +63,7 @@ Currently development consists of building the documentation using the componenn
 
 ```sh
 git clone ....
+cd mikro/website
 npm install
 npm run dev
 ```

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "directories": {
     "doc": "docs"
   },
@@ -10,9 +11,14 @@
     "dev": "marko-serve ./docs"
   },
   "dependencies": {
-    "mikro": "file:../packages/mikro-ui"
+    "mikro": "file:../packages/mikro-ui",
+    "remark-mikro": "file:../packages/remark-mikro"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@marko/build": "^4.2.3",
+    "@marko/serve": "^4.2.3"
+  }
 }
