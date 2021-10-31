@@ -7,10 +7,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babel-loader": "^8.2.3"
+    "babel-loader": "^8.2.3",
+    "marko": "^5.17.3"
   },
   "dependencies": {
-    "@marko/tags-api-preview": "^0.1.4",
-    "marko": "^5.16.1"
+    "@marko/tags-api-preview": "^0.1.6"
+  },
+  "peerDependencies": {
+    "marko": "^5.17.3"
   }
 }

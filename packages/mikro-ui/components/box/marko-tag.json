@@ -1,9 +1,0 @@
-{
-  "attributes": {},
-  "autocomplete": [
-    {
-      "snippet": "box",
-      "description": "Base box component. Typically used to construct other components."
-    }
-  ]
-}
