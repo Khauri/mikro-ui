@@ -59,7 +59,12 @@ Let's say you want every component to accept a new attribute. Simply add a new c
 
 ## Development
 
-*Note* There is a bug where nested taglibs don't resolve properly. For now the components folder from `mikro-ui` was symlinked into the `website` folder. This may not work properly on windows or machines that don't support symlinks.
+*Note* There is a bug where nested taglibs don't resolve properly. For now the components folder from `mikro-ui` was symlinked into the `website` folder. This may not work properly on windows or machines that don't support symlinks. If the symlink isn't automatically created when cloning the repo, do this:
+
+```sh
+cd website
+ln -s ../packages/mikro-ui/components ./components
+```
 
 Currently development consists of building the documentation using the componennts here. In the future unit testing and performance testing will be the primary goal.
 

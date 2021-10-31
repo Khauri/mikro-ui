@@ -11,9 +11,13 @@
         <site-header />
         <h-stack position="relative">
           <navigation />
-          <box flex=1 p=4 maxW="100%" overflowX="hidden">
+          <container flex=1 p=4 overflowX="hidden" position="relative">
             <${renderBody} />
-          </box>
+            <!-- Footer content, haven't decided yet -->
+            <box h="150px"></box>
+          </container>
+          <!-- Do this automatically sommehow? -->
+          <table-of-contents />
         </h-stack>
       </v-stack>
     </provider>

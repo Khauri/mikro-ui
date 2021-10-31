@@ -1,21 +1,21 @@
 const defaultHandlers = {
   heading({depth}) {
-    return {tag: 'header', attrs: {as: `h${depth}`}};
+    return {tag: 'header', attrs: {as: `"h${depth}"`}};
   },
   paragraph() {
     return {tag: 'text'};
   },
   emphasis({}) {
-    return {tag: 'text', inline: true, attrs: {as: 'i'}}
+    return {tag: 'text', inline: true, attrs: {as: '"i"'}}
   },
   strong({}) {
-    return {tag: 'text', inline: true, attrs: {as: 'b'}}
+    return {tag: 'text', inline: true, attrs: {as: '"b"'}}
   },
   inlineCode({value}) {
-    return {tag: 'code', inline: true, attrs: {default: `"${value}"`}}
+    return {tag: 'code', inline: true, attrs: {default: `\`${value}\``}}
   },
   code({lang, value}) {
-    return {tag: 'codeblock', attrs: {default: `"${value}"`, lang}};
+    return {tag: 'codeblock', attrs: {default: `\`${value}\``, lang: `"${lang}"`}};
   },
   blockquote() {
     return {tag: 'quote'};
@@ -74,6 +74,8 @@ module.exports = function RemarkMikro(settings = {}) {
     file.path = file.cwd;
     file.basename = 'result';
     file.extname = '.marko'
-    return walk(node, defaultHandlers);
+    const {template = '<layout>\n{{content}}\n</layout>'} = options;
+    const result = walk(node, defaultHandlers);
+    return template.replace('{{content}}', result);
   }
 }

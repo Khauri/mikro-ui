@@ -1,9 +1,9 @@
 <!-- TODO: Use a third party library to support syntax highlighting -->
-<attrs/{renderBody, ...rest} />
+<attrs/{default: code, ...rest} />
 
-<box p=4 w="100%" bg="gray.100" ...rest>
-  <box position="relative">
-    <text as="pre" fontFamily="mono"><${renderBody}/></text>
+<box w="100%" bg="gray.100" overflowX="auto" borderRadius="md" ...rest>
+  <box m=4 position="relative">
+    <text as="pre" fontFamily="mono">${code}</text>
     <btn variant="primary" position="absolute" top=0 right=0>Copy</btn>
   </box>
 </box>

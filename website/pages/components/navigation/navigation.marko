@@ -1,3 +1,17 @@
+import sidebarConfig from '../../../configs/sidebar.js';
+
+<!-- Temporary shit until I create the list components -->
+<macro|{title, header, routes, path}| name="sidebar-list-item">
+  <if(title)>
+    <text><a href=path>${title}</a></text>
+  </if>
+  <if(routes && routes.length)>
+    <for|route| of=routes>
+      <sidebar-list-item ...route />
+    </for>
+  </if>
+</macro>
+
 <box as="nav" position="sticky" top=0 pt=4 pr=8 pb=6 pl=6>
-  <header>Getting Started</header>
+  <sidebar-list-item ...sidebarConfig />
 </box>

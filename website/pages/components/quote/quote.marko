@@ -1,0 +1,7 @@
+<attrs/{renderBody, ...rest} />
+<box position="relative" overflow="hidden" w="100%" borderRadius="md" bg="gray.100" overflowX="auto" ...rest>
+  <box borderLeft="4px solid gray" position="absolute" top=0 left=0 h="100%" w="100%"/>
+  <box mx=8>
+    <${renderBody} />
+  </box>
+</box>

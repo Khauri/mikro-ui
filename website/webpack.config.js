@@ -1,6 +1,6 @@
 const path = require('path');
 const {configBuilder} = require('@marko/build');
-const RemarkMicro = require('remark-mikro');
+const RemarkMikro = require('remark-mikro');
 
 const {getServerConfig, getBrowserConfigs} = configBuilder({
   entry: path.resolve(__dirname, './pages'),
@@ -16,12 +16,18 @@ function fixFullySpecifiedBug(config) {
   });
 }
 
+/**
+ * @description Adds a loader that parses md files into a marko template,
+ * specifically using mikro components, but maybe in the future it'll be more configurable.
+ * 
+ * Note that this relies on patching the file loader rule included in @marko/build
+ * so that the md file isn't output as an asset at the end.
+ * Additional patches are applied to @marko/build to get it to properly find the md files.
+ * 
+ * TODO: remark-loader or webpack also seems to agressively cache the results right now.
+ * @param {*} config 
+ */
 function addMarkdownToMarkoPlugin(config) {
-  // new InjectPlugin(async function() {
-  //   this.cacheable(false);
-  //   // Grab all the md files and convert them
-  // });
-  console.dir(config.module.rules);
   config.module.rules.unshift({
     test: /\.md/,
     use: [
@@ -32,7 +38,7 @@ function addMarkdownToMarkoPlugin(config) {
         loader: "remark-loader",
         options: {
           remarkOptions: {
-            plugins: [RemarkMicro],
+            plugins: [RemarkMikro],
           },
         },
       },
@@ -42,7 +48,6 @@ function addMarkdownToMarkoPlugin(config) {
 
 module.exports = [
   ...getBrowserConfigs(config => {
-    // addMarkdownToMarkoPlugin(config);
     fixFullySpecifiedBug(config);
     return config;
   }),

@@ -4,6 +4,7 @@ import space from './space';
 import layout from './layout';
 import flexbox from './flexbox';
 import typography from './typography';
+import border from './border';
 
 import defaultTheme from '../../../theme'; // temp
 
@@ -13,6 +14,7 @@ const properties = {
   ...flexbox,
   ...color,
   ...typography,
+  ...border,
 }
 
 function getDeep(key, obj) {
@@ -30,7 +32,7 @@ function resolve(prop, value, theme) {
       // TODO: if value starts with colors, fonts, fontSizes, etc, resolve that first
       if(typeof theme[prop.theme] === 'object' && typeof value === 'string') {
         // TODO: json-path-ish
-        value = getDeep(value, theme[prop.theme]);
+        value = getDeep(value, theme[prop.theme]) || value;
       }
       if(theme[prop.theme]?.[value]) {
         return `${property}: var(--mikro-${prop.theme}-${value});`
