@@ -1,5 +1,13 @@
 const defaultHandlers = {
-  heading({depth}) {
+  heading({depth, children}, meta) {
+    let i = depth;
+    let entry = meta;
+    while(--i) {
+      // Get last entry level iteratively or stick with current entry
+      entry = entry?.table[entry.table.length - 1] || entry;
+    }
+    const {value} = defaultHandlers.text(children[0]);
+    entry.table.push({value, table: []});
     return {tag: 'header', attrs: {as: `"h${depth}"`}};
   },
   paragraph() {
@@ -32,18 +40,23 @@ const defaultHandlers = {
   }
 }
 
-function walk(node, handlers, depth = 0, spaces = 2) {
+function walk(node, handlers, depth = 0, spaces = 2, metadata) {
   const {children} = node;
   if(!children?.length) {
     return '';
   }
   return children.reduce((str, child) => {
     const {type} = child;
+
     if(!handlers[type]) {
       console.warn('No handler for type', type);
     }
-    const {tag, attrs = {}, inline = false, raw, value} = handlers[type]?.(child) || handlers.default(child);
+
+    const {tag, attrs = {}, inline = false, raw, value} = 
+      handlers[type]?.(child, metadata) || handlers.default(child, metadata);
+
     const terminator = inline ? '' : '\n';
+
     if(value) {
       str = `${str}${value}`;
     } else if(typeof raw !== 'undefined') {
@@ -51,7 +64,7 @@ function walk(node, handlers, depth = 0, spaces = 2) {
     } else {
       const attrString = Object.entries(attrs).map(attr => attr.join('=')).join(' ');
       const attrDecl = attrString ? ` ${attrString}` : ''
-      const body = walk(child, defaultHandlers, depth + 1, inline ? 0 : spaces);
+      const body = walk(child, defaultHandlers, depth + 1, inline ? 0 : spaces, metadata);
       if(!body.trim()) {
         str = `${str}<${tag}${attrDecl} />${terminator}`
       } else {
@@ -74,8 +87,9 @@ module.exports = function RemarkMikro(settings = {}) {
     file.path = file.cwd;
     file.basename = 'result';
     file.extname = '.marko'
-    const {template = '<layout>\n{{content}}\n</layout>'} = options;
-    const result = walk(node, defaultHandlers);
-    return template.replace('{{content}}', result);
+    const {component = 'layout'} = options;
+    const metadata = {table: []};
+    const result = walk(node, defaultHandlers, options.depth, options.spaces, metadata);
+    return `<${component} tableOfContents=${JSON.stringify(metadata.table)}>${result}</${component}>`
   }
 }

@@ -6,7 +6,7 @@ import flexbox from './flexbox';
 import typography from './typography';
 import border from './border';
 
-import defaultTheme from '../../../theme'; // temp
+import defaultTheme from '../../../theme/index';
 
 const properties = {
   ...space,
@@ -30,11 +30,11 @@ function resolve(prop, value, theme) {
         return `${property}: ${value};`;
       }
       // TODO: if value starts with colors, fonts, fontSizes, etc, resolve that first
-      if(typeof theme[prop.theme] === 'object' && typeof value === 'string') {
+      if(typeof theme?.[prop.theme] === 'object' && typeof value === 'string') {
         // TODO: json-path-ish
         value = getDeep(value, theme[prop.theme]) || value;
       }
-      if(theme[prop.theme]?.[value]) {
+      if(theme?.[prop.theme]?.[value]) {
         return `${property}: var(--mikro-${prop.theme}-${value});`
       }
       return `${property}: ${value};`
@@ -50,10 +50,15 @@ export default function ({
   layerStyle,
   theme = defaultTheme,
 }) {
+  // This seems to break on the client for some reason
+  if(typeof theme === 'undefined') {
+    console.warn('No theme defined. Why...')
+    console.log(input, theme);
+  }
   input = {
-    ...theme.components[component]?.baseStyle,
-    ...theme.components[component]?.variants?.[variant],
-    ...theme.layerStyles?.[layerStyle],
+    ...theme?.components?.[component]?.baseStyle,
+    ...theme?.components?.[component]?.variants?.[variant],
+    ...theme?.layerStyles?.[layerStyle],
     ...input,
   }
   const attrs = {};

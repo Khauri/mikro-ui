@@ -1,3 +1,16 @@
-<box as="nav" position="sticky" top=0 pt=4 pr=8 pb=6 pl=6>
-  <text>On This Page</text>
+<!-- Temporary shit until I create the list components -->
+<macro|{value, table}| name="sidebar-list-item">
+  <if(value)>
+    <text><a href=`#${value}`>${value}</a></text>
+  </if>
+  <if(table && table.length)>
+    <for|item| of=table>
+      <sidebar-list-item ...item />
+    </for>
+  </if>
+</macro>
+
+<box as="nav" position="sticky" flex=1 top=0 pt=4 pr=8 pb=6 pl=6>
+  <text fontWeight="bold">On this page</text>
+  <sidebar-list-item ...input />
 </box>

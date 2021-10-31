@@ -1,11 +1,19 @@
 import defaultTheme from '../../theme';
-import {getThemeVariables, makeCssSafe} from '../../theme/utils';
+import {getThemeVariables, makeCssSafe, mergeThemes} from '../../theme/utils';
 
-<attrs/{default: customizeFn, theme = defaultTheme, renderBody} />
+<get/parentAttrs="." />
+
+<attrs/{
+  default: customizeFn,
+  theme = parentAttrs?.theme,
+  renderBody,
+} />
+
+<const/mergedTheme=mergeThemes(parentAttrs?.theme ?? defaultTheme, theme) />
 
 <!-- This will be optimized later. Just prototyping right now. -->
 <css=`
-  :host, :root {${getThemeVariables(defaultTheme)} }
+  :host, :root {${getThemeVariables(mergedTheme)} }
   
   html, body {
     margin: 0;
@@ -18,6 +26,6 @@ import {getThemeVariables, makeCssSafe} from '../../theme/utils';
   
 ` id="mikro-theme"/>
 
-<set={customizeFn, theme}>
+<set={customizeFn, theme: mergedTheme}>
   <${renderBody} />
 </set>

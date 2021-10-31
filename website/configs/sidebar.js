@@ -5,6 +5,21 @@ module.exports = {
       path: "/docs"
     },
     {
+      title: "Theming",
+      path: "/docs/theming",
+      heading: true,
+      routes: [
+        {
+          title: "fonts",
+          path: "/docs/theming/fonts",
+        },
+        {
+          title: "components",
+          path: "/docs/theming/components",
+        }
+      ]
+    },
+    {
       title: "Layout",
       heading: true,
       routes: [

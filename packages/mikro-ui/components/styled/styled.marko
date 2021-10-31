@@ -1,9 +1,10 @@
 import parse from './utils/index.js';
 
-<get/theme="provider" />
+<get/providedProps="provider" />
+
 <attrs/{component: componentName, variant, layerStyle, renderBody, _return, ...props} />
 
-<const/result=parse({input: props, component: componentName, variant, layerStyle}) />
+<const/result=parse({input: props, theme: providedProps?.theme, component: componentName, variant, layerStyle}) />
 
 <css=result.css id=result.classname />
 

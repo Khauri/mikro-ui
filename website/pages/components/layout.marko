@@ -1,25 +1,24 @@
-<attrs/{renderBody} />
+<attrs/{renderBody, tableOfContents} />
 
-<!doctype html>
-<html>
-  <head>
-    <title>Mikro Docs</title>
-  </head>
-  <body>
-    <provider>
-      <v-stack>
-        <site-header />
-        <h-stack position="relative">
-          <navigation />
-          <container flex=1 p=4 overflowX="hidden" position="relative">
-            <${renderBody} />
-            <!-- Footer content, haven't decided yet -->
-            <box h="150px"></box>
-          </container>
-          <!-- Do this automatically sommehow? -->
-          <table-of-contents />
-        </h-stack>
-      </v-stack>
-    </provider>
-  </body>
-</html>
+<common>
+  <let/theme={
+    fonts: {
+      body: "'Roboto', sans-serif",
+      heading: "'Raleway', sans-serif",
+      mono: "Menlo, monospace",
+    }
+  } />
+  <provider theme=theme>
+    <v-stack>
+      <site-header />
+      <h-stack position="relative">
+        <navigation />
+        <content>
+          <${renderBody} />
+        </content>
+        <!-- Do this automatically sommehow? -->
+        <table-of-contents table=tableOfContents />
+      </h-stack>
+    </v-stack>
+  </provider>
+</common>

@@ -1,8 +1,8 @@
 <!-- TODO: Use a third party library to support syntax highlighting -->
 <attrs/{default: code, ...rest} />
 
-<box w="100%" bg="gray.100" overflowX="auto" borderRadius="md" ...rest>
-  <box m=4 position="relative">
+<box w="100%" bg="gray.100" overflowX="auto" borderRadius="md" mb=4 ...rest>
+  <box m=4 position="relative" >
     <text as="pre" fontFamily="mono">${code}</text>
     <btn variant="primary" position="absolute" top=0 right=0>Copy</btn>
   </box>

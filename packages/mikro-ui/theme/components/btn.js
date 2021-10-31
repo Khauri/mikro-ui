@@ -1,9 +1,10 @@
 export default {
   baseStyle: {
     fontWeight: "bold",
-    borderRadius: "sm",
-    px: 3,
-    py: 1,
+    border: 0,
+    borderRadius: "md",
+    px: 4,
+    py: 2,
   },
   sizes: {},
   variants: {

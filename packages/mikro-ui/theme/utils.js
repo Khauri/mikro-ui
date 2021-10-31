@@ -1,3 +1,4 @@
+import merge from 'lodash.merge';
 // Makes a css-safe name
 export function makeCssSafe(value) {
   return value.replace(/\./g, '\\.')
@@ -22,4 +23,18 @@ export function getThemeVariables(theme) {
     .filter(isThemeValue)
     .map(([type, values]) => getThemeVariable(`--mikro`, type, values))
     .join('');
+}
+
+export function mergeThemes(theme1, theme2) {
+  if(!theme1) {
+    return theme2;
+  }
+  if(!theme2) {
+    return theme1;
+  }
+  if(theme1 === theme2) {
+    return theme1;
+  }
+  // Please don't @ me about using lodash.
+  return merge({}, theme1, theme2);
 }

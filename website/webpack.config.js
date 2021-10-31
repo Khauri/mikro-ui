@@ -48,6 +48,7 @@ function addMarkdownToMarkoPlugin(config) {
 
 module.exports = [
   ...getBrowserConfigs(config => {
+    addMarkdownToMarkoPlugin(config);
     fixFullySpecifiedBug(config);
     return config;
   }),
