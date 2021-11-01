@@ -8,6 +8,8 @@ import border from './border';
 
 import defaultTheme from '../../../theme/index';
 
+const cache = {};
+
 const properties = {
   ...space,
   ...layout,
@@ -27,7 +29,7 @@ function resolve(prop, value, theme) {
   return prop.properties
     .map(property => {
       if(prop.values) {
-        return `${property}: ${value};`;
+        return `${property}:${value};`;
       }
       // TODO: if value starts with colors, fonts, fontSizes, etc, resolve that first
       if(typeof theme?.[prop.theme] === 'object' && typeof value === 'string') {
@@ -35,9 +37,9 @@ function resolve(prop, value, theme) {
         value = getDeep(value, theme[prop.theme]) || value;
       }
       if(theme?.[prop.theme]?.[value]) {
-        return `${property}: var(--mikro-${prop.theme}-${value});`
+        return `${property}:var(--mikro-${prop.theme}-${value});`
       }
-      return `${property}: ${value};`
+      return `${property}:${value};`
     })
     .join('');
 }
@@ -49,6 +51,7 @@ export default function ({
   variant, 
   layerStyle,
   theme = defaultTheme,
+  cache = {},
 }) {
   // This seems to break on the client for some reason
   if(typeof theme === 'undefined') {
@@ -62,19 +65,24 @@ export default function ({
     ...input,
   }
   const attrs = {};
-  let css = '';
   // Separate styled keys from other attrs
   for(const key in input) {
     if(!properties[key]) {
       attrs[key] = input[key];
-    } else {
-      const prop = properties[key];
-      // TODO: Handle responsivenes
-      css += resolve(prop, input[key], theme);
+      delete input[key];
     }
   }
+  const entries = Object.entries(input);
+  const classname = hash(entries.sort((a,b) => a[0].localeCompare(b[0])).flat().join(';'));
+  let css = cache[classname];
+  if(!Object.entries(cache).length) {
+    console.log("Cache Is EMPTY!")
+  }
+  if(!css) {
+    css = entries.reduce((str, [key, value]) => str + resolve(properties[key], value, theme), '');
+    cache[classname] = css;
+  }
   // TODO: Sort keys before hashing
-  const classname = hash(css);
   css = `.css-${classname} {${css}}`;
   return {attrs, css, classname};
 }

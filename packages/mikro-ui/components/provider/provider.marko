@@ -10,6 +10,7 @@ import {getThemeVariables, makeCssSafe, mergeThemes} from '../../theme/utils';
 } />
 
 <const/mergedTheme=mergeThemes(parentAttrs?.theme ?? defaultTheme, theme) />
+<const/cache={} />
 
 <!-- This will be optimized later. Just prototyping right now. -->
 <css=`
@@ -26,6 +27,6 @@ import {getThemeVariables, makeCssSafe, mergeThemes} from '../../theme/utils';
   
 ` id="mikro-theme"/>
 
-<set={customizeFn, theme: mergedTheme}>
+<set={customizeFn, theme: mergedTheme, cache}>
   <${renderBody} />
 </set>
