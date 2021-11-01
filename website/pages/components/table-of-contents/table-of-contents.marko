@@ -1,7 +1,7 @@
 <!-- Temporary shit until I create the list components -->
 <macro|{value, table}| name="sidebar-list-item">
   <if(value)>
-    <text><a href=`#${value}`>${value}</a></text>
+    <link-to href=`#${value}`>${value}</link-to>
   </if>
   <if(table && table.length)>
     <for|item| of=table>

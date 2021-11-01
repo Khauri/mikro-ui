@@ -17,7 +17,7 @@ import parse from './utils/index.js';
   component: componentName, 
   variant,
   layerStyle,
-  cache: providedProps?.cache
+  cache: providedProps?.cache ?? {}
 }) />
 
 <css=result.css id=result.classname />

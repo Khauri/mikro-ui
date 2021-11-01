@@ -10,7 +10,7 @@ import {getThemeVariables, makeCssSafe, mergeThemes} from '../../theme/utils';
 } />
 
 <const/mergedTheme=mergeThemes(parentAttrs?.theme ?? defaultTheme, theme) />
-<const/cache={} />
+<let/cache=(parentAttrs?.cache || {}) />
 
 <!-- This will be optimized later. Just prototyping right now. -->
 <css=`

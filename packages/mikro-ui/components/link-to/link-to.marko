@@ -1,0 +1,8 @@
+<attrs/{default: href, renderBody, ...rest} />
+
+<get/isNestedUnderText="text" />
+
+<!-- idky but get and set aren't working here -->
+<text as="a" d=(isNestedUnderText ? undefined : 'block') href=href ...rest>
+  <${renderBody} />
+</text>

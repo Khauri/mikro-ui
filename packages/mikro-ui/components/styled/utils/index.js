@@ -51,7 +51,7 @@ export default function ({
   variant, 
   layerStyle,
   theme = defaultTheme,
-  cache = {},
+  cache,
 }) {
   // This seems to break on the client for some reason
   if(typeof theme === 'undefined') {

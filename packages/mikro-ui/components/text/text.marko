@@ -1,4 +1,7 @@
 <attrs/{align, decoration, casing, renderBody, ...rest} />
-<box as="p" component="text" textAlign=align textDecoration=decoration textCasing=casing ...rest>
-  <${renderBody} />
-</box>
+
+<set=true>
+  <box as="p" component="text" textAlign=align textDecoration=decoration textCasing=casing ...rest>
+    <${renderBody} />
+  </box>
+</set>
