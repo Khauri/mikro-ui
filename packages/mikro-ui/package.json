@@ -6,8 +6,18 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
   "devDependencies": {
+    "@babel/preset-env": "^7.16.0",
+    "@marko/jest": "^4.1.0",
+    "@marko/testing-library": "^6.0.0",
+    "@testing-library/jest-dom": "^5.15.0",
     "babel-loader": "^8.2.3",
+    "jest": "^27.3.1",
+    "jsdom": "^18.0.1",
+    "jsdom-context-require": "file:../jsdom-context-require",
     "marko": "^5.17.3"
   },
   "dependencies": {
