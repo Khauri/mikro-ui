@@ -1,4 +1,0 @@
-{
-  "type": "module",
-  "description": "This file is here to force jest to read any .js files here as esm. There's either a bug or I'm incedibly stupid because jest can't seem to find tests that end with .mjs. And if they don't end in .mjs they can't be read as esm automatically unless the closest package.json has type: module. Oh well."
-}

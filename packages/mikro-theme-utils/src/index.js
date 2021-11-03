@@ -1,5 +1,5 @@
 import merge from 'lodash.merge';
-// Makes a css-safe name
+
 export function makeCssSafe(value) {
   return value.replace(/\./g, '\\.')
 }

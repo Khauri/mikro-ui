@@ -1,14 +1,12 @@
-import hash from './hash';
-import color from './color';
-import space from './space';
-import layout from './layout';
-import flexbox from './flexbox';
-import typography from './typography';
-import border from './border';
+import hash from './definitions/hash';
+import color from './definitions/color';
+import space from './definitions/space';
+import layout from './definitions/layout';
+import flexbox from './definitions/flexbox';
+import typography from './definitions/typography';
+import border from './definitions/border';
 
-import defaultTheme from '../../../theme/index';
-
-const cache = {};
+import defaultTheme from 'mikro-theme-default';
 
 const properties = {
   ...space,
@@ -21,6 +19,10 @@ const properties = {
 
 function getDeep(key, obj) {
   return key.split(/\./g).reduce((o, i) => o[i], obj);
+}
+
+function sortEntriesByKey(entry1, entry2) {
+  return entry1[0].localeCompare(entry2[0]);
 }
 
 function resolve(prop, value, theme) {
@@ -45,7 +47,7 @@ function resolve(prop, value, theme) {
 }
 
 // Turn attrs into classes and return any unused attrs
-export default function ({
+export function parse({
   input, 
   component, 
   variant, 
@@ -73,7 +75,7 @@ export default function ({
     }
   }
   const entries = Object.entries(input);
-  const classname = hash(entries.sort((a,b) => a[0].localeCompare(b[0])).flat().join(';'));
+  const classname = hash(entries.sort(sortEntriesByKey).flat().join(';'));
   let css = cache[classname];
   if(!Object.entries(cache).length) {
     console.log("Cache Is EMPTY!")
@@ -82,7 +84,6 @@ export default function ({
     css = entries.reduce((str, [key, value]) => str + resolve(properties[key], value, theme), '');
     cache[classname] = css;
   }
-  // TODO: Sort keys before hashing
   css = `.css-${classname} {${css}}`;
   return {attrs, css, classname};
 }
