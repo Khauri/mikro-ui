@@ -30,6 +30,10 @@ module.exports = {
         {
           title: "Container",
           path: "/docs/layout/container",
+        },
+        {
+          title: "Center",
+          path: "/docs/layout/center",
         }
       ]
     },
@@ -44,6 +48,16 @@ module.exports = {
         {
           title: "Header",
           path: "/docs/typography/header"
+        }
+      ]
+    },
+    {
+      title: "Navigation",
+      heading: true,
+      routes: [
+        {
+          title: "Link-to",
+          path: "/docs/navigation/link-to"
         }
       ]
     }

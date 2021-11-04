@@ -29,8 +29,7 @@ const defaultHandlers = {
     return {tag: 'quote'};
   },
   html({value}) {
-    value = value.replace(/<!---.*-->/g, '').trim();
-    return {raw: value};
+    return {marko: value};
   },
   text({value}) {
     return {value};
@@ -52,13 +51,15 @@ function walk(node, handlers, depth = 0, spaces = 2, metadata) {
       console.warn('No handler for type', type);
     }
 
-    const {tag, attrs = {}, inline = false, raw, value} = 
+    const {tag, attrs = {}, inline = false, raw, marko, value} = 
       handlers[type]?.(child, metadata) || handlers.default(child, metadata);
 
     const terminator = inline ? '' : '\n';
 
     if(value) {
       str = `${str}${value}`;
+    } else if(typeof marko !== 'undefined') {
+      str = `${str}${marko}`;
     } else if(typeof raw !== 'undefined') {
       str = raw ? `${str}$!{${raw}}${terminator}` : str;
     } else {
