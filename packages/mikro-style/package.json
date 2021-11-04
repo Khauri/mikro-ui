@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "mikro-theme-default": "file:../mikro-theme-default"
+    "mikro-theme-default": "1.0.0"
   },
   "keywords": [],
   "author": "",

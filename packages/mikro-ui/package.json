@@ -1,5 +1,5 @@
 {
-  "name": "mikro",
+  "name": "mikro-ui",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -17,14 +17,13 @@
     "babel-loader": "^8.2.3",
     "jest": "^27.3.1",
     "jsdom": "^18.0.1",
-    "jsdom-context-require": "file:../jsdom-context-require",
     "marko": "^5.17.3"
   },
   "dependencies": {
     "@marko/tags-api-preview": "^0.1.8",
-    "mikro-style": "file:../mikro-style",
-    "mikro-theme-default": "file:../mikro-theme-default",
-    "mikro-theme-utils": "file:../mikro-theme-utils",
+    "mikro-style": "1.0.0",
+    "mikro-theme-default": "1.0.0",
+    "mikro-theme-utils": "1.0.0",
     "lodash.merge": "^4.6.2"
   },
   "peerDependencies": {

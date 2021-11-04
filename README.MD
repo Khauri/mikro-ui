@@ -1,3 +1,5 @@
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
+
 ## Mikro
 
 This is a design-system starter UI kit. These components along with theming functionality are used as a basis for creating your own elements.

@@ -1,5 +1,5 @@
 {
-  "name": "docs",
+  "name": "mikro-website",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,8 +13,8 @@
   "dependencies": {
     "@marko/tags-api-preview": "^0.1.8",
     "marko": "^5.17.3",
-    "mikro": "file:../packages/mikro-ui",
-    "remark-mikro": "file:../packages/remark-mikro"
+    "mikro-ui": "1.0.0",
+    "remark-mikro": "1.0.0"
   },
   "keywords": [],
   "author": "",

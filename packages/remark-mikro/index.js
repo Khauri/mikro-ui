@@ -91,6 +91,6 @@ module.exports = function RemarkMikro(settings = {}) {
     const metadata = {table: []};
     const result = walk(node, defaultHandlers, options.depth, options.spaces, metadata);
     // Dirty hack to make the component stateful
-    return `class{}\n<${component} tableOfContents=${JSON.stringify(metadata.table)}>${result}</${component}>`
+    return `<${component} tableOfContents=${JSON.stringify(metadata.table)}>${result}</${component}>`
   }
 }

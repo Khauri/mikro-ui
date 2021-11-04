@@ -1,0 +1,14 @@
+{
+  "name": "root",
+  "private": true,
+  "devDependencies": {
+    "lerna": "^4.0.0",
+    "patch-package": "^6.4.7",
+    "@marko/build": "4.2.3"
+  },
+  "scripts": {
+    "bootstrap": "lerna bootstrap --hoist",
+    "postinstall": "npm run bootstrap && patch-package",
+    "dev": "lerna run dev"
+  }
+}
