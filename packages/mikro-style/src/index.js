@@ -42,8 +42,63 @@ function resolve(prop, value, theme) {
         return `${property}:var(--mikro-${prop.theme}-${value});`
       }
       return `${property}:${value};`
-    })
-    .join('');
+    }).join('');
+}
+
+function resolveValue(prop, value, theme) {
+  if(!Array.isArray(value)) {
+    value = [value];
+  }
+  return value.map(v => resolve(prop, v, theme));
+}
+
+function getBreakpointsFromTheme(theme) {
+  const values = Object.values(theme.breakpoints);
+  values.unshift('0em');
+  return values;
+}
+
+function getRules(attrs, theme, cache) {
+  const entries = Object.entries(attrs);
+  const classname = hash(entries.sort(sortEntriesByKey).flat().join(';'));
+  let css = cache[classname];
+  if(!Object.entries(cache).length) {
+    console.log("Cache Is EMPTY!")
+  }
+  if(!css) {
+    css = entries.reduce((str, [key, value]) => str + resolve(properties[key], value, theme), '');
+    // const breakpoints = getBreakpointsFromTheme(theme);
+    // const rules = entries.map(([key, value]) => resolveValue(properties[key], value, theme));
+    // rules[0]?.length > 1 && console.log(rules);
+    cache[classname] = css;
+  }
+  css = `.css-${classname} {${css}}`;
+  return {css, classname};
+}
+
+// Splits attributeds into used and unused
+export function splitAttributes({
+  input,
+  component,
+  variant,
+  layerStyle,
+  theme = defaultTheme,
+}) {
+  const unusedAttrs = {};
+  const attrs = {
+    ...theme?.components?.[component]?.baseStyle,
+    ...theme?.components?.[component]?.variants?.[variant],
+    ...theme?.layerStyles?.[layerStyle],
+    ...input,
+  }
+   // Separate styled keys from other attrs
+   for(const key in attrs) {
+    if(!properties[key]) {
+      unusedAttrs[key] = attrs[key];
+      delete attrs[key];
+    }
+  }
+  return {unusedAttrs, attrs};
 }
 
 // Turn attrs into classes and return any unused attrs
@@ -60,30 +115,7 @@ export function parse({
     console.warn('No theme defined. Why...')
     console.log(input, theme);
   }
-  input = {
-    ...theme?.components?.[component]?.baseStyle,
-    ...theme?.components?.[component]?.variants?.[variant],
-    ...theme?.layerStyles?.[layerStyle],
-    ...input,
-  }
-  const attrs = {};
-  // Separate styled keys from other attrs
-  for(const key in input) {
-    if(!properties[key]) {
-      attrs[key] = input[key];
-      delete input[key];
-    }
-  }
-  const entries = Object.entries(input);
-  const classname = hash(entries.sort(sortEntriesByKey).flat().join(';'));
-  let css = cache[classname];
-  if(!Object.entries(cache).length) {
-    console.log("Cache Is EMPTY!")
-  }
-  if(!css) {
-    css = entries.reduce((str, [key, value]) => str + resolve(properties[key], value, theme), '');
-    cache[classname] = css;
-  }
-  css = `.css-${classname} {${css}}`;
-  return {attrs, css, classname};
+  const {unusedAttrs, attrs} = splitAttributes({input, component, variant, layerStyle, theme});
+  const {css, classname} = getRules(attrs, theme, cache);
+  return {attrs: unusedAttrs, css, classname};
 }

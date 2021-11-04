@@ -1,6 +1,7 @@
 import colors from './colors';
 import space from './space';
 import sizes from './sizes';
+import breakpoints from './breakpoints';
 import components from './components';
 
 // If these values look familiar it's because they are stolen from Chakra-UI
@@ -8,6 +9,7 @@ export default {
   colors,
   space,
   sizes,
+  breakpoints,
   components,
   fonts: {
     body: "system-ui, sans-serif",
