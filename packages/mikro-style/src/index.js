@@ -76,6 +76,28 @@ function getRules(attrs, theme, cache) {
   return {css, classname};
 }
 
+function getBreakpointClassname(attr, value, breakpoint) {
+  return `${attr}-${breakpoint}-${value}`;
+}
+
+function getClassnames(attrs, theme) {
+  const breakpoints = Object.entries(theme.breakpoints);
+  const entries = Object.entries(attrs);
+  return entries.reduce((acc, [attr, value]) => {
+    // TODO: Calculate breakpoints
+    // TODO: Normalize the key somehow....
+    attr = attr.replace(/[a-z][A-Z]/g, (m) => m[0] + '-' + m[1].toLowerCase());
+    if(typeof value === 'string') {
+      value = value.split(/\./g).join('-');
+    } else if (Array.isArray(value)) {
+      // breakpoints
+      const classnames = value.reduce((a, v, i) => a + ` ${getBreakpointClassname(attr, v, breakpoints[i][0])}`, '');
+      return acc + ` ${classnames}`;
+    }
+    return acc + ` ${[attr, value].join('-')}`;
+  }, '').trim();
+}
+
 // Splits attributeds into used and unused
 export function splitAttributes({
   input,
@@ -109,6 +131,7 @@ export function parse({
   layerStyle,
   theme = defaultTheme,
   cache,
+  mode = 'class',
 }) {
   // This seems to break on the client for some reason
   if(typeof theme === 'undefined') {
@@ -116,6 +139,10 @@ export function parse({
     console.log(input, theme);
   }
   const {unusedAttrs, attrs} = splitAttributes({input, component, variant, layerStyle, theme});
+  if(mode === 'class') {
+    const classnames = getClassnames(attrs, theme);
+    return {attrs: unusedAttrs, classnames};
+  }
   const {css, classname} = getRules(attrs, theme, cache);
   return {attrs: unusedAttrs, css, classname};
 }

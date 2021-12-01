@@ -17,9 +17,12 @@ import {parse} from 'mikro-style'; // todo: Make this a package
   component: componentName, 
   variant,
   layerStyle,
-  cache: providedProps?.cache ?? {}
+  cache: providedProps?.cache ?? {},
+  mode: providedProps?.mode ?? 'class'
 }) />
 
-<css=result.css id=result.classname />
+<if=result.css>
+  <css=result.css id=result.classname />
+</if>
 
-<return={attrs: result.attrs, classname: `css-${result.classname}`} />
+<return={attrs: result.attrs, classname: result.classnames || `css-${result.classname}`} />
