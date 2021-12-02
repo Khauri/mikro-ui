@@ -1,0 +1,8 @@
+@use './example/index.scss' as s;
+
+// TODO: Organize these better so that they can all be imported from one file
+@use './mixins/to-css-variables' as v;
+@use './mixins/utilities' as u;
+
+@include v.theme-vars(s.$index);
+@include u.utilities(s.$index);

@@ -1,0 +1,17 @@
+{
+  "name": "mikro-tokens",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "json-to-scss ./example/index.js && sass ./test.scss"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "json-to-scss": "^1.6.2",
+    "sass": "^1.44.0"
+  }
+}

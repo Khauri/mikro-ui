@@ -1,0 +1,66 @@
+@use "sass:map";
+@use "sass:string";
+@use "../functions/utils" as utils;
+
+@mixin generate-utility($name, $val, $property, $prefix: "") {
+  @if utils.is-map($val) {
+    @each $key, $value in $val {
+      @include generate-utility($name + "-" + #{$key}, $value, $property, $prefix + "-" + $key);
+    } 
+  } @else {
+    .#{utils.escape($name)} {
+      // May need to escape the var value too, idk though.
+      #{$property}: var(--#{$prefix});
+    }
+  }
+}
+
+// margin and padding
+@mixin generate-utilities($theme, $utils) {
+  $prefix: map.get($theme, options, prefix);
+  
+  @each $breakpoint, $size in map.get($theme, breakpoints) {
+    @media (min-width: #{$size}) {
+      
+      @each $name, $properties in $utils {
+        $key: map.get($properties, key);
+        $property: map.get($properties, property);
+
+        @include generate-utility(
+          $name + "-" + #{$breakpoint}, 
+          map.get($theme, $key),
+          $breakpoint, 
+          $prefix + "-" + $key
+        );
+      }
+    }
+  }
+}
+
+// TODO: Store this elsewhere and also make it overridable somehow
+$utils: (
+  p: (
+    key: sizes,
+    property: padding
+  ),
+  pt: (
+    key: sizes,
+    property: padding-top
+  ),
+  pb: (
+    key: sizes,
+    property: padding-bottom
+  ),
+  ps: (
+    key: sizes,
+    property: padding-start
+  ),
+  pe: (
+    key: sizes,
+    property: padding-end
+  ),
+);
+
+@mixin utilities($theme) {
+  @include generate-utilities($theme, $utils);
+}

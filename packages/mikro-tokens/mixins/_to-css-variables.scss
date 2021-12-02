@@ -1,0 +1,26 @@
+@use "sass:map";
+@use "../variables/index" as variables;
+@use "../functions/utils" as utils;
+
+// Resolve a value from the theme if it's aliased, otherwise just return the value
+@function resolve($val, $theme) {
+  // TODO - split by '.' and look for value in the theme
+  @return $val;
+}
+
+@mixin to-css-variables($val, $theme, $prefix: '') {
+  @if utils.is-map($val) {
+    @each $key, $value in $val {
+      @include to-css-variables($value, $theme, $prefix + '-' + $key);
+    }
+  } @else {
+    #{-- + $prefix}: resolve($val, $theme);
+  }
+}
+
+@mixin theme-vars($theme) {
+  $utilities: utils.pick($theme, variables.$utility-keys);
+  :root {
+    @include to-css-variables($utilities, $theme, map.get($theme, options, prefix));
+  }
+}

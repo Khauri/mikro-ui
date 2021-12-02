@@ -14,7 +14,9 @@
     "@marko/tags-api-preview": "^0.1.8",
     "marko": "^5.17.3",
     "mikro-ui": "1.0.0",
-    "remark-mikro": "1.0.0"
+    "remark-mikro": "1.0.0",
+    "mikro-theme-default": "^1.0.0",
+    "mikro-tokens": "^1.0.0"
   },
   "keywords": [],
   "author": "",

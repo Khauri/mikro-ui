@@ -1,0 +1,34 @@
+@use "sass:string";
+@use "sass:map";
+
+// Replace all instances of a string within a string with another string, recusrively.
+@function str-replace($string, $search, $replace: '') {
+  $index: string.index($string, $search);
+  
+  @if $index {
+    @return string.slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + string.length($search)), $search, $replace);
+  }
+  
+  @return $string;
+}
+
+// Determines if a variable is a map
+@function is-map($var){
+  @return type-of($var) == 'map';
+}
+
+// Returns a new map with only the keys from the $keys list
+@function pick($map, $keys){
+  $result: ();
+  @each $key in $keys {
+    @if map.has-key($map, $key) {
+      $result: map.set($result, $key, map.get($map, $key));
+    }
+  }
+  @return $result;
+}
+
+// Makes a string css classname safe
+@function escape($str) {
+  @return str-replace(#{$str}, '.', '\\.');
+}
