@@ -17,6 +17,10 @@
   @return type-of($var) == 'map';
 }
 
+@function is-list($var) {
+  @return type-of($var) == 'list';
+}
+
 // Returns a new map with only the keys from the $keys list
 @function pick($map, $keys){
   $result: ();

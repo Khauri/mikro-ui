@@ -1,0 +1,16 @@
+// Import the theme as JSON
+@use "mikro-tokens" as mikro;
+
+$theme: json('mikro-theme-default/dist/index.cjs');
+
+@include mikro.utilities($theme);
+@include mikro.theme-vars($theme);
+
+html, body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}

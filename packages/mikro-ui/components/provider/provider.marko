@@ -6,6 +6,7 @@ import {getThemeVariables, makeCssSafe, mergeThemes} from 'mikro-theme-utils';
 <attrs/{
   default: customizeFn,
   theme = parentAttrs?.theme,
+  mode = 'class',
   renderBody,
 } />
 
@@ -13,20 +14,22 @@ import {getThemeVariables, makeCssSafe, mergeThemes} from 'mikro-theme-utils';
 <let/cache=(parentAttrs?.cache || {}) />
 
 <!-- This will be optimized later. Just prototyping right now. -->
-<css=`
-  :host, :root {${getThemeVariables(mergedTheme)} }
-  
-  html, body {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-  }
-  
-` id="mikro-theme"/>
+<if=(mode !== 'class')>
+  <css=`
+    :host, :root {${getThemeVariables(mergedTheme)} }
+    
+    html, body {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 100%;
+      font: inherit;
+      vertical-align: baseline;
+    }
+    
+  ` id="mikro-theme"/>
+</if>
 
-<set={customizeFn, theme: mergedTheme, cache}>
+<set={customizeFn, theme: mergedTheme, mode, cache}>
   <${renderBody} />
 </set>

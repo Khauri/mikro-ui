@@ -1,6 +1,7 @@
 const path = require('path');
 const {configBuilder} = require('@marko/build');
 const RemarkMikro = require('remark-mikro');
+const loader = require('sass-loader');
 
 const {getServerConfig, getBrowserConfigs} = configBuilder({
   entry: path.resolve(__dirname, './pages'),
@@ -46,15 +47,39 @@ function addMarkdownToMarkoPlugin(config) {
   });
 }
 
+// Maybe turn this into a webpack plugin?
+function addSassFunction(config) {
+  const sassLoaderPath = require.resolve('sass-loader');
+  const isSassLoader = (loader) => [sassLoaderPath, 'sass-loader'].includes(loader.loader) || loader.use && loader.use.some(isSassLoader);
+  config.module.rules
+    .filter(isSassLoader)
+    .map((loader) => loader.use && loader.use.find(isSassLoader) || loader)
+    .forEach(loader => {
+      loader.options = {
+        ...loader.options, 
+        sassOptions: {
+          ...loader.options?.sassOptions, 
+          functions: {
+            ...loader.options?.sassOptions?.functions,
+            'json($path)': require('mikro-tokens/loader'),
+          }
+        }
+      }
+    });
+  // console.dir(config.module.rules[6], {depth: null});
+}
+
 module.exports = [
   ...getBrowserConfigs(config => {
     addMarkdownToMarkoPlugin(config);
     fixFullySpecifiedBug(config);
+    addSassFunction(config);
     return config;
   }),
   getServerConfig(config => {
     addMarkdownToMarkoPlugin(config);
     fixFullySpecifiedBug(config);
+    addSassFunction(config);
     return config;
   })
 ];

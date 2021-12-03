@@ -1,7 +1,7 @@
 export default {
   baseStyle: {
     fontFamily: "body",
-    lineHeight: 1.75,
+    lineHeight: "tall",
   },
   sizes: {},
   variants: {},

@@ -87,6 +87,9 @@ function getClassnames(attrs, theme) {
     // TODO: Calculate breakpoints
     // TODO: Normalize the key somehow....
     attr = attr.replace(/[a-z][A-Z]/g, (m) => m[0] + '-' + m[1].toLowerCase());
+    if(typeof value === 'undefined' || value === null) {
+      return acc;
+    }
     if(typeof value === 'string') {
       value = value.split(/\./g).join('-');
     } else if (Array.isArray(value)) {

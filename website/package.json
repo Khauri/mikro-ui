@@ -26,6 +26,8 @@
     "@marko/serve": "^4.2.3",
     "patch-package": "^6.4.7",
     "remark-loader": "^4.0.0",
-    "webpack-inject-plugin": "^1.5.5"
+    "webpack-inject-plugin": "^1.5.5",
+    "sass-loader" :"^12.3.0",
+    "sass": "^1.44.0"
   }
 }

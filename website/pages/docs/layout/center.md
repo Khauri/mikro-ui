@@ -5,7 +5,7 @@ The `<center>` component centers the contents of its children using a simple fle
 Example:
 
 <preview>
-  <center bg="tomato" color="white">
+  <center bg="red.400" color="white">
     <text>This text is centered!</text>
   </center>
 </preview>
@@ -13,18 +13,18 @@ Example:
 Additionally there is also `<square>`, which centers content in a square container.
 
 ```
-<square size="40px" color="white" bg="tomato">Hi</square>
+<square size="10" color="white" bg="red.400">Hi</square>
 ```
 
 As well as `<circle>` which is just a `<square>` with rounded borders.
 
 ```
-<circle size="40px" color="white" bg="tomato">Bye</circle>
+<circle size="10" color="white" bg="red.400">Bye</circle>
 ```
 
 Examples:
 
 <preview flex>
-  <square size="50px" color="white" bg="tomato">Hi</square>
-  <circle size="50px" color="white" bg="tomato" ml=2>Bye</circle>
+  <square size="10" color="white" bg="red.400">Hi</square>
+  <circle size="10" color="white" bg="red.400" ml=2>Bye</circle>
 </preview>

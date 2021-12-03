@@ -2,43 +2,10 @@
 @use "sass:string";
 @use "../functions/utils" as utils;
 
-@mixin generate-utility($name, $val, $property, $prefix: "") {
-  @if utils.is-map($val) {
-    @each $key, $value in $val {
-      @include generate-utility($name + "-" + #{$key}, $value, $property, $prefix + "-" + $key);
-    } 
-  } @else {
-    .#{utils.escape($name)} {
-      // May need to escape the var value too, idk though.
-      #{$property}: var(--#{$prefix});
-    }
-  }
-}
-
-// margin and padding
-@mixin generate-utilities($theme, $utils) {
-  $prefix: map.get($theme, options, prefix);
-  
-  @each $breakpoint, $size in map.get($theme, breakpoints) {
-    @media (min-width: #{$size}) {
-      
-      @each $name, $properties in $utils {
-        $key: map.get($properties, key);
-        $property: map.get($properties, property);
-
-        @include generate-utility(
-          $name + "-" + #{$breakpoint}, 
-          map.get($theme, $key),
-          $breakpoint, 
-          $prefix + "-" + $key
-        );
-      }
-    }
-  }
-}
-
 // TODO: Store this elsewhere and also make it overridable somehow
+// TODO: Maybe allow multiple keys to simplify output? ex: .pt-1, .py-1 { ... }
 $utils: (
+  // Padding/Margin
   p: (
     key: sizes,
     property: padding
@@ -51,15 +18,222 @@ $utils: (
     key: sizes,
     property: padding-bottom
   ),
-  ps: (
+  pl: (
     key: sizes,
-    property: padding-start
+    property: padding-left
   ),
-  pe: (
+  pr: (
     key: sizes,
-    property: padding-end
+    property: padding-right
   ),
+  px: (
+    key: sizes,
+    property: padding-left padding-right
+  ),
+  py: (
+    key: sizes,
+    property: padding-top padding-bottom
+  ),
+  m: (
+    key: sizes,
+    property: margin
+  ),
+  mt: (
+    key: sizes,
+    property: margin-top
+  ),
+  mb: (
+    key: sizes,
+    property: margin-bottom
+  ),
+  ml: (
+    key: sizes,
+    property: margin-left
+  ),
+  mr: (
+    key: sizes,
+    property: margin-right
+  ),
+  mx: (
+    key: sizes,
+    property: margin-left margin-right
+  ),
+  my: (
+    key: sizes,
+    property: margin-top margin-bottom
+  ),
+  // Layout
+  w: (
+    key: sizes,
+    property: width
+  ),
+  h: (
+    key: sizes,
+    property: height
+  ),
+  min-w: (
+    key: sizes,
+    property: min-width
+  ),
+  min-h: (
+    key: sizes,
+    property: min-height
+  ),
+  max-w: (
+    key: sizes,
+    property: max-width
+  ),
+  max-h: (
+    key: sizes,
+    property: max-height
+  ),
+  d: (
+    values: block flex grid inline inline-flex inline-grid,
+    property: display
+  ),
+  position: (
+    values: sticky absolute relative static,
+    property: position
+  ),
+  top: (
+    key: sizes,
+    property: top
+  ),
+  bottom: (
+    key: sizes,
+    property: bottom
+  ),
+  left: (
+    key: sizes,
+    property: left
+  ),
+  right: (
+    key: sizes,
+    property: right
+  ),
+  z: (
+    key: zIndices,
+    property: z-index
+  ),
+  // Flexbox
+  flex-align: (
+    values: start end center baseline stretch,
+    property: align-items
+  ),
+  justify-content: (
+    values: center space-around space-between space-evenly start end,
+    property: justify-content
+  ),
+  flex-direction: (
+    values: row row-reverse column column-reverse,
+    property: flex-direction
+  ),
+  // colors
+  bg: (
+    key: colors,
+    property: background-color
+  ),
+  color: (
+    key: colors,
+    property: color
+  ),
+  // Typography
+  font-family: (
+    key: fonts,
+    property: font-family
+  ),
+  line-height: (
+    key: lineHeights,
+    property: line-height
+  ),
+  font-size: (
+    key: fontSizes,
+    property: font-size
+  ),
+  text-align: (
+    values: left right center justify,
+    property: text-align
+  ),
+  // borders
+  border-style: (
+    values: solid dashed dotted,
+    property: border-style
+  ),
+  border-color: (
+    key: colors,
+    property: border-color
+  )
 );
+
+@mixin generate-properties($css-properties, $val) {
+  @if utils.is-list($css-properties) == false {
+    $css-properties: ($css-properties);
+  }
+  @each $css-property in $css-properties {
+    #{$css-property}: #{$val};
+  }
+}
+
+@mixin generate-utility($classname, $val, $css-property, $var-path: null) {
+  @if utils.is-map($val) {
+    @each $key, $value in $val {
+      @include generate-utility($classname + "-" + #{$key}, $value, $css-property, $var-path + "-" + $key);
+    }
+  } @else if utils.is-list($val) {
+    @each $property-value in $val {
+      @include generate-utility($classname + "-" + #{$property-value}, $property-value, $css-property);
+    }
+  } @else {
+    .#{utils.escape($classname)} {
+      $val: #{$val};
+      @if $var-path {
+        $val: var(--#{utils.escape($var-path)});
+      }
+      @include generate-properties($css-property, $val);
+    }
+  }
+}
+
+@mixin generate-utilities-at-breakpoint($utils, $theme, $prefix, $breakpoint: null) {
+  @each $classname, $properties in $utils {
+    // Each utility must specify either a theme key to grab the values from or a values list/object
+    $val: null;
+    $var-path: map.get($properties, key);
+    $css-property: map.get($properties, property);
+    @if $var-path {
+      $val: map.get($theme, $var-path);
+    } @else {
+      $val: map.get($properties, values);
+    }
+
+    @if $breakpoint {
+      $classname: $classname + "-" + $breakpoint;
+    }
+
+    @if $prefix {
+      $key: $prefix + "-" + $var-path;
+    }
+
+    @include generate-utility(
+      $classname, 
+      $val,
+      $css-property, 
+      $var-path
+    );
+  }
+}
+
+@mixin generate-utilities($theme, $utils) {
+  $prefix: map.get($theme, options, prefix);
+  
+  @include generate-utilities-at-breakpoint($utils, $theme, $prefix);
+
+  @each $breakpoint, $size in map.get($theme, breakpoints) {
+    @media (min-width: #{$size}) {
+      @include generate-utilities-at-breakpoint($utils, $theme, $prefix, $breakpoint);
+    }
+  }
+}
 
 @mixin utilities($theme) {
   @include generate-utilities($theme, $utils);

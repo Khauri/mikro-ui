@@ -11,7 +11,10 @@
 @mixin to-css-variables($val, $theme, $prefix: '') {
   @if utils.is-map($val) {
     @each $key, $value in $val {
-      @include to-css-variables($value, $theme, $prefix + '-' + $key);
+      @if($prefix) {
+        $key: $prefix + '-' + $key;
+      }
+      @include to-css-variables($value, $theme, $key);
     }
   } @else {
     #{-- + $prefix}: resolve($val, $theme);
