@@ -21,10 +21,10 @@
   },
   "dependencies": {
     "@marko/tags-api-preview": "^0.1.8",
+    "lodash.merge": "^4.6.2",
     "mikro-style": "1.0.0",
     "mikro-theme-default": "1.0.0",
-    "mikro-theme-utils": "1.0.0",
-    "lodash.merge": "^4.6.2"
+    "mikro-theme-utils": "1.0.0"
   },
   "peerDependencies": {
     "marko": "^5.17.3"

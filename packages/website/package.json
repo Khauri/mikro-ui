@@ -13,10 +13,10 @@
   "dependencies": {
     "@marko/tags-api-preview": "^0.1.8",
     "marko": "^5.17.3",
-    "mikro-ui": "1.0.0",
-    "remark-mikro": "1.0.0",
     "mikro-theme-default": "^1.0.0",
-    "mikro-tokens": "^1.0.0"
+    "mikro-tokens": "^1.0.0",
+    "mikro-ui": "1.0.0",
+    "remark-mikro": "1.0.0"
   },
   "keywords": [],
   "author": "",
@@ -26,8 +26,8 @@
     "@marko/serve": "^4.2.3",
     "patch-package": "^6.4.7",
     "remark-loader": "^4.0.0",
-    "webpack-inject-plugin": "^1.5.5",
-    "sass-loader" :"^12.3.0",
-    "sass": "^1.44.0"
+    "sass": "^1.44.0",
+    "sass-loader": "^12.3.0",
+    "webpack-inject-plugin": "^1.5.5"
   }
 }
