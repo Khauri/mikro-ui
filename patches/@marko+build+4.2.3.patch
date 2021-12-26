@@ -1,5 +1,5 @@
 diff --git a/node_modules/@marko/build/dist/index.js b/node_modules/@marko/build/dist/index.js
-index 496e69e..3ba24e2 100644
+index 496e69e..5184fbb 100644
 --- a/node_modules/@marko/build/dist/index.js
 +++ b/node_modules/@marko/build/dist/index.js
 @@ -210,7 +210,7 @@ const configBuilder = exports.configBuilder = ({
@@ -11,6 +11,15 @@ index 496e69e..3ba24e2 100644
        use: [{
          loader: require.resolve("file-loader"),
          options: {
+@@ -408,7 +408,7 @@ function ensurePkgs(dir, pkgs) {
+ 
+       for (const pkg of pkgs) {
+         if (!resolveFrom.silent(dir, `${pkg}/package.json`)) {
+-          throw new Error(`To load ${path.extname(info.resource)} files you must first install the following packages: ${pkgs.join(", ")}.`);
++          console.warn(`To load ${path.extname(info.resource)} files you must first install the following packages: ${pkgs.join(", ")}.`);
+         }
+       }
+     }
 diff --git a/node_modules/@marko/build/dist/util.js b/node_modules/@marko/build/dist/util.js
 index 9cb7295..f845f45 100644
 --- a/node_modules/@marko/build/dist/util.js

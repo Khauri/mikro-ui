@@ -69,3 +69,5 @@ cd mikro/website
 yarn install
 yarn workspace mikro-wesbite dev
 ```
+
+Some temporary patches have been applied to `@marko/build`, not because `@marko/build` is broken, but rather due to the laziness of not wanting to create the markdown -> marko transpilations myself. Also hoisting packages as yarn workspaces does causes a weird issue with specifically `sass` not being found using `resolve-from`. Too lazy to investigate so it was patched as a warnign instead of an error.
