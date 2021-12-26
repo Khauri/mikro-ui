@@ -6,7 +6,8 @@
     "packages/*"
   ],
   "scripts": {
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "dev": "yarn workspace mikro-website dev"
   },
   "engines": {
     "node": ">=16.13.0"
