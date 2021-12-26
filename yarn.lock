@@ -1639,7 +1639,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@marko/tags-api-preview@npm:^0.1.8":
+"@marko/tags-api-preview@npm:^0.1.8, @marko/tags-api-preview@npm:^0.1.9":
   version: 0.1.9
   resolution: "@marko/tags-api-preview@npm:0.1.9"
   checksum: 530a51b8fade061f59bd1326c345ffb6eba920d697b7b7fb6040f888c45f5d30e8db9809ee4bb8c8fff00d78930229ef7535b8a0c3e1fa56dc695c7b37351724
@@ -9167,23 +9167,32 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"mikro-ui-core@1.0.0, mikro-ui-core@workspace:packages/mikro-ui-core":
+  version: 0.0.0-use.local
+  resolution: "mikro-ui-core@workspace:packages/mikro-ui-core"
+  dependencies:
+    mikro-style: 1.0.0
+    mikro-theme-default: 1.0.0
+    mikro-theme-utils: 1.0.0
+  peerDependencies:
+    "@marko/tags-api-preview": ^0.1.9
+  languageName: unknown
+  linkType: soft
+
 "mikro-ui@1.0.0, mikro-ui@workspace:packages/mikro-ui":
   version: 0.0.0-use.local
   resolution: "mikro-ui@workspace:packages/mikro-ui"
   dependencies:
     "@babel/preset-env": ^7.16.0
     "@marko/jest": ^4.1.0
-    "@marko/tags-api-preview": ^0.1.8
+    "@marko/tags-api-preview": ^0.1.9
     "@marko/testing-library": ^6.0.0
     "@testing-library/jest-dom": ^5.15.0
     babel-loader: ^8.2.3
     jest: ^27.3.1
     jsdom: ^18.0.1
-    lodash.merge: ^4.6.2
     marko: ^5.17.3
-    mikro-style: 1.0.0
-    mikro-theme-default: 1.0.0
-    mikro-theme-utils: 1.0.0
+    mikro-ui-core: 1.0.0
   peerDependencies:
     marko: ^5.17.3
   languageName: unknown

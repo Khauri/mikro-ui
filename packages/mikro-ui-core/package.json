@@ -1,0 +1,13 @@
+{
+  "name": "mikro-ui-core",
+  "version": "1.0.0",
+  "packageManager": "yarn@3.1.1",
+  "dependencies": {
+    "mikro-style": "1.0.0",
+    "mikro-theme-default": "1.0.0",
+    "mikro-theme-utils": "1.0.0"
+  },
+  "peerDependencies": {
+    "@marko/tags-api-preview": "^0.1.9"
+  }
+}
