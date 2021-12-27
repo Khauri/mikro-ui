@@ -69,4 +69,5 @@ yarn run build
 ### TODO
 
 - Esbuild is used for ts compilation because it's fast, but still need to build types separately. 
+- Mark all node_modules as external in esbuild. Otherwise it bundles them into the output.
 

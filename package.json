@@ -7,7 +7,8 @@
   ],
   "scripts": {
     "postinstall": "patch-package",
-    "dev": "yarn workspace mikro-website dev"
+    "dev": "yarn workspace mikro-website dev",
+    "test": "yarn workspace mikro-ui-core test"
   },
   "engines": {
     "node": ">=16.13.0"

@@ -7,12 +7,14 @@
     "@marko/compiler": "^5.17.4",
     "@marko/fixture-snapshots": "^2.1.6",
     "@marko/testing-library": "^6.0.0",
-    "@testing-library/user-event": "^13.5.0"
+    "@testing-library/user-event": "^13.5.0",
+    "jsdom": "^19.0.0",
+    "jsdom-context-require": "4.0.3"
   },
   "devDependencies": {
     "esbuild": "^0.14.8"
   },
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --format=cjs --outfile=dist/index.cjs"
+    "build": "esbuild src/index.ts --bundle --format=cjs --external:@marko/compiler --external:jsdom --platform=node --outfile=dist/index.cjs"
   }
 }
