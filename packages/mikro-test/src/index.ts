@@ -38,7 +38,7 @@ class Fixture extends Function {
 
   templatePath: string;
 
-  targets: string[] = ['node']; // todo: Make this configurable
+  targets: string[] = ['node', 'web']; // todo: Make this configurable
 
   dir: string;
 
@@ -75,7 +75,8 @@ class Fixture extends Function {
   }
 
   getTitle() {
-    return this.templatePath.trim().replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+    const filename = path.parse(this.templatePath).name;
+    return filename.trim().replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
   }
 
   async run() {
@@ -83,7 +84,7 @@ class Fixture extends Function {
       constructTest(`${target} ${this.templatePath}`, async () => {
         await trySnapshot(
           this.dir,
-          path.join(target, this.getTitle()),
+          path.join(this.getTitle(), target),
           async ({title, snapshot}) => {
             title("compile");
             const context = await this.loadTemplate(target);

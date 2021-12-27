@@ -1714,6 +1714,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mikro-ui/test@1.0.0, @mikro-ui/test@workspace:packages/mikro-test":
+  version: 0.0.0-use.local
+  resolution: "@mikro-ui/test@workspace:packages/mikro-test"
+  dependencies:
+    "@marko/compiler": ^5.17.4
+    "@marko/fixture-snapshots": ^2.1.6
+    "@marko/testing-library": ^6.0.0
+    "@testing-library/user-event": ^13.5.0
+    esbuild: ^0.14.8
+    jsdom: ^19.0.0
+    jsdom-context-require: 4.0.3
+  languageName: unknown
+  linkType: soft
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -9531,20 +9545,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"mikro-test@1.0.0, mikro-test@workspace:packages/mikro-test":
-  version: 0.0.0-use.local
-  resolution: "mikro-test@workspace:packages/mikro-test"
-  dependencies:
-    "@marko/compiler": ^5.17.4
-    "@marko/fixture-snapshots": ^2.1.6
-    "@marko/testing-library": ^6.0.0
-    "@testing-library/user-event": ^13.5.0
-    esbuild: ^0.14.8
-    jsdom: ^19.0.0
-    jsdom-context-require: 4.0.3
-  languageName: unknown
-  linkType: soft
-
 "mikro-theme-default@1.0.0, mikro-theme-default@^1.0.0, mikro-theme-default@workspace:packages/mikro-theme-default":
   version: 0.0.0-use.local
   resolution: "mikro-theme-default@workspace:packages/mikro-theme-default"
@@ -9596,9 +9596,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mikro-ui-core@workspace:packages/mikro-ui-core"
   dependencies:
+    "@mikro-ui/test": 1.0.0
     chai: ^4.2.0
     mikro-style: 1.0.0
-    mikro-test: 1.0.0
     mikro-theme-default: 1.0.0
     mikro-theme-utils: 1.0.0
     mocha: ^9.1.3

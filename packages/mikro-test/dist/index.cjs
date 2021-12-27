@@ -19626,7 +19626,7 @@ function calldir() {
 var Fixture = class extends Function {
   constructor(templatePath, { steps, dir }) {
     super();
-    this.targets = ["node"];
+    this.targets = ["node", "web"];
     this.steps = steps ?? [];
     this.templatePath = templatePath;
     this.dir = dir;
@@ -19653,12 +19653,13 @@ var Fixture = class extends Function {
     return context.rerender(input);
   }
   getTitle() {
-    return this.templatePath.trim().replace(/[^a-z0-9]/gi, "-").replace(/-+/g, "-").replace(/^-|-$/g, "");
+    const filename = import_path2.default.parse(this.templatePath).name;
+    return filename.trim().replace(/[^a-z0-9]/gi, "-").replace(/-+/g, "-").replace(/^-|-$/g, "");
   }
   async run() {
     for (const target of this.targets) {
       constructTest(`${target} ${this.templatePath}`, async () => {
-        await trySnapshot(this.dir, import_path2.default.join(target, this.getTitle()), async ({ title, snapshot }) => {
+        await trySnapshot(this.dir, import_path2.default.join(this.getTitle(), target), async ({ title, snapshot }) => {
           title("compile");
           const context = await this.loadTemplate(target);
           title("render");
