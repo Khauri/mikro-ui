@@ -1,0 +1,18 @@
+{
+  "name": "mikro-test",
+  "version": "1.0.0",
+  "packageManager": "yarn@3.1.1",
+  "main": "dist/index.cjs",
+  "dependencies": {
+    "@marko/compiler": "^5.17.4",
+    "@marko/fixture-snapshots": "^2.1.6",
+    "@marko/testing-library": "^6.0.0",
+    "@testing-library/user-event": "^13.5.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.14.8"
+  },
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --format=cjs --outfile=dist/index.cjs"
+  }
+}
