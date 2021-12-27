@@ -3,6 +3,7 @@ import {render} from '@marko/testing-library'
 import type * as Testing from "@marko/testing-library";
 import {Template} from '@marko/testing-library/dist/shared';
 import {browser} from './browser';
+import {trySnapshot, trackError} from './snapshot';
 
 type InputObject = Record<string, any>;
 type RenderContext = Testing.RenderResult & {};
@@ -39,10 +40,13 @@ class Fixture extends Function {
 
   targets: string[] = ['node']; // todo: Make this configurable
 
-  constructor(templatePath: string, steps?: Step[]) {
+  dir: string;
+
+  constructor(templatePath: string, {steps, dir}) {
     super();
     this.steps = steps ?? [];
     this.templatePath = templatePath;
+    this.dir = dir;
     // Allows this class to be called as a function
     return new Proxy(this, {
       apply: (target) => target.run()
@@ -66,29 +70,38 @@ class Fixture extends Function {
     }
   }
 
-  async snapshot(target: string, step: number) {
-    // todo: if in update mode, replace snapshot
-    // otherwise compare existing snapshot to current snapshot
-  }
-
   rerender(context: RenderContext, input?: InputObject) {
     return context.rerender(input);
   }
 
+  getTitle() {
+    return this.templatePath.trim().replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+  }
+
   async run() {
     for(const target of this.targets) {
-      const context = await this.loadTemplate(target);
       constructTest(`${target} ${this.templatePath}`, async () => {
-        for(const step of this.steps) {
-          if(typeof step === 'function') {
-            await step(context);
-            this.rerender(context);
-          } else {
-            this.rerender(context, step);
+        await trySnapshot(
+          this.dir,
+          path.join(target, this.getTitle()),
+          async ({title, snapshot}) => {
+            title("compile");
+            const context = await this.loadTemplate(target);
+            title("render");
+            await snapshot("html", context.container);
+            for(let i = 0; i < this.steps.length; i++) {
+              const step = this.steps[i];
+              if(typeof step === 'function') {
+                title(`step ${i}`);
+                await step(context);
+                this.rerender(context);
+              } else {
+                this.rerender(context, step);
+              }
+              await snapshot("html", context.container);
+            }
           }
-          // TODO: replace with actual number of step
-          this.snapshot(target, 0);
-        }
+        )
       });
     }
   }
@@ -99,7 +112,7 @@ export function fixture(templatePath: string, steps: Step | Step[] = []) {
     steps = [steps];
   }
   const absPath = path.join(calldir(), templatePath);
-  return new Fixture(absPath, steps as Step[]);
+  return new Fixture(absPath, {steps, dir: calldir()});
 }
 
 export function setTestFunction(testFunction: Function) {
