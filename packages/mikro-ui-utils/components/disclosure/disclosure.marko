@@ -1,0 +1,18 @@
+<attrs/{open = false} />
+
+<let/isOpen=open />
+<const/isClosed=!isOpen />
+
+<return={
+  isOpen,
+  isClosed,
+  toggle(value) {
+    isOpen = !isOpen;
+  },
+  open() {
+    isOpen = true;
+  },
+  close() {
+    isOpen = false;
+  }
+} />

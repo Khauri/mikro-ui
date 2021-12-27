@@ -14,11 +14,25 @@ Based on my own personal use case, Mikro is being built with these principles in
 - Helpful - Documentation is clear and concise. 
 - Efficient - As little overhead on both client and server as possible
 - Accesssible - Standard acessibility concerns are met.
-- Portable - No extra build tools needed. (SASS/LESS compilers, wwebpack loaders, etc)
+- Portable - No extra build tools needed. (SASS/LESS compilers, webpack loaders, etc)
+
+## Installation
+
+mikro requires `marko` as well as the `marko/tags-api-preview` as peer dependencies, so please ensure you have them installed when installing `mikro`.
+
+```sh
+npm install marko @marko/tags-api-preview mikro
+```
+
+That's pretty much it. Due to Marko's tag resolution algorithm you will be able to immediately use the mikro tags that were installed. Refer to the documentation to configure the behavior.
+
+### Individual Packages
+
+The mikro tags are split into individual packages and the essential tags are combined into one package -- `mikro`, for convenience. If you only want to install a subset of the tags, install those packages individually.
 
 ## Usage
 
-Similar to Chakra UI, each component takes a set of properties. The properties can be defined as a responsive array or as single values. These values can be css-values _or_ be a reference to a value in your theme.
+Similar to Chakra UI, each component takes a set of properties. The properties can be defined as a responsive array or as single values. These values can be css-values (in css-mode) _or_ be a reference to a value in your theme (in any mode).
 
 ```marko
 <flex p=[1,2,3] direction="column" align="center" justify="center" bg="colors.brand">
@@ -39,7 +53,7 @@ Simply pass the class string to your element and now any styles passed
 <button class=classes><button>
 ```
 
-## Customize
+## Theming/Customization
 
 Customization is based on design tokens, specifically the [theme specification](https://styled-system.com/theme-specification/) design tokens format. Ideally you write your design tokens in JSON and those tokens then get translated into css variables. Your style dictionary should also be provided as the `theme` attribute to the provider.
 
@@ -49,10 +63,12 @@ There are also component variant styles, layer styles, and colorSchemes that wil
 
 ### Adding new attributes globally
 
-Let's say you want every component to accept a new attribute. Simply add a new config.
+Let's say you want every component to accept a new attribute. Use the provider to customize the attributes that a component will accept.
 
 ```marko
-<provider config={}>
+<const/theme={ /* ... */ } />
+
+<provider=theme attributes={}>
   ...
 </provider>
 ```

@@ -1639,7 +1639,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@marko/tags-api-preview@npm:^0.1.8, @marko/tags-api-preview@npm:^0.1.9":
+"@marko/tags-api-preview@npm:^0.1.8":
   version: 0.1.9
   resolution: "@marko/tags-api-preview@npm:0.1.9"
   checksum: 530a51b8fade061f59bd1326c345ffb6eba920d697b7b7fb6040f888c45f5d30e8db9809ee4bb8c8fff00d78930229ef7535b8a0c3e1fa56dc695c7b37351724
@@ -9167,6 +9167,26 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"mikro-ui-avatar@1.0.0, mikro-ui-avatar@workspace:packages/mikro-ui-avatar":
+  version: 0.0.0-use.local
+  resolution: "mikro-ui-avatar@workspace:packages/mikro-ui-avatar"
+  dependencies:
+    mikro-ui-core: 1.0.0
+  peerDependencies:
+    "@marko/tags-api-preview": ^0.1.9
+  languageName: unknown
+  linkType: soft
+
+"mikro-ui-button@1.0.0, mikro-ui-button@workspace:packages/mikro-ui-button":
+  version: 0.0.0-use.local
+  resolution: "mikro-ui-button@workspace:packages/mikro-ui-button"
+  dependencies:
+    mikro-ui-core: 1.0.0
+  peerDependencies:
+    "@marko/tags-api-preview": ^0.1.9
+  languageName: unknown
+  linkType: soft
+
 "mikro-ui-core@1.0.0, mikro-ui-core@workspace:packages/mikro-ui-core":
   version: 0.0.0-use.local
   resolution: "mikro-ui-core@workspace:packages/mikro-ui-core"
@@ -9179,21 +9199,78 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"mikro-ui-layout@1.0.0, mikro-ui-layout@workspace:packages/mikro-ui-layout":
+  version: 0.0.0-use.local
+  resolution: "mikro-ui-layout@workspace:packages/mikro-ui-layout"
+  dependencies:
+    mikro-ui-core: 1.0.0
+  peerDependencies:
+    "@marko/tags-api-preview": ^0.1.9
+  languageName: unknown
+  linkType: soft
+
+"mikro-ui-modal@1.0.0, mikro-ui-modal@workspace:packages/mikro-ui-modal":
+  version: 0.0.0-use.local
+  resolution: "mikro-ui-modal@workspace:packages/mikro-ui-modal"
+  dependencies:
+    mikro-ui-core: 1.0.0
+  peerDependencies:
+    "@marko/tags-api-preview": ^0.1.9
+  languageName: unknown
+  linkType: soft
+
+"mikro-ui-toast@1.0.0, mikro-ui-toast@workspace:packages/mikro-ui-toast":
+  version: 0.0.0-use.local
+  resolution: "mikro-ui-toast@workspace:packages/mikro-ui-toast"
+  dependencies:
+    mikro-ui-core: 1.0.0
+  peerDependencies:
+    "@marko/tags-api-preview": ^0.1.9
+  languageName: unknown
+  linkType: soft
+
+"mikro-ui-typography@1.0.0, mikro-ui-typography@workspace:packages/mikro-ui-typography":
+  version: 0.0.0-use.local
+  resolution: "mikro-ui-typography@workspace:packages/mikro-ui-typography"
+  dependencies:
+    mikro-ui-core: 1.0.0
+  peerDependencies:
+    "@marko/tags-api-preview": ^0.1.9
+  languageName: unknown
+  linkType: soft
+
+"mikro-ui-utils@1.0.0, mikro-ui-utils@workspace:packages/mikro-ui-utils":
+  version: 0.0.0-use.local
+  resolution: "mikro-ui-utils@workspace:packages/mikro-ui-utils"
+  dependencies:
+    mikro-ui-core: 1.0.0
+  peerDependencies:
+    "@marko/tags-api-preview": ^0.1.9
+  languageName: unknown
+  linkType: soft
+
 "mikro-ui@1.0.0, mikro-ui@workspace:packages/mikro-ui":
   version: 0.0.0-use.local
   resolution: "mikro-ui@workspace:packages/mikro-ui"
   dependencies:
     "@babel/preset-env": ^7.16.0
     "@marko/jest": ^4.1.0
-    "@marko/tags-api-preview": ^0.1.9
     "@marko/testing-library": ^6.0.0
     "@testing-library/jest-dom": ^5.15.0
     babel-loader: ^8.2.3
     jest: ^27.3.1
     jsdom: ^18.0.1
     marko: ^5.17.3
+    mikro-ui-avatar: 1.0.0
+    mikro-ui-button: 1.0.0
     mikro-ui-core: 1.0.0
+    mikro-ui-layout: 1.0.0
+    mikro-ui-modal: 1.0.0
+    mikro-ui-toast: 1.0.0
+    mikro-ui-typography: 1.0.0
+    mikro-ui-utils: 1.0.0
   peerDependencies:
+    "@marko/tags-api-preview": ^0.1.9
     marko: ^5.17.3
   languageName: unknown
   linkType: soft
