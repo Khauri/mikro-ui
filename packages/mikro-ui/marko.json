@@ -1,4 +1,7 @@
 {
   "taglibId": "@mikro/essentials",
-  "tagsDir": "./components"
+  "tagsDir": "./components",
+  "taglib-imports": [
+    "./package.json"
+  ]
 }
