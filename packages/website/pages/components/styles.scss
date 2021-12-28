@@ -1,7 +1,7 @@
 // Import the theme as JSON
-@use "mikro-tokens" as mikro;
+@use "@mikro-ui/tokens" as mikro;
 
-$theme: json('mikro-theme-default/dist/index.cjs');
+$theme: json('@mikro-ui/theme-default/dist/index.cjs');
 
 @include mikro.utilities($theme);
 @include mikro.theme-vars($theme);

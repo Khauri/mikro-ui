@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@marko/tags-api-preview": "^0.1.8",
+    "@mikro-ui/theme-default": "^1.0.0",
+    "@mikro-ui/tokens": "^1.0.0",
     "marko": "^5.17.3",
-    "mikro-theme-default": "^1.0.0",
-    "mikro-tokens": "^1.0.0",
     "mikro-ui": "1.0.0",
     "remark-mikro": "1.0.0"
   },

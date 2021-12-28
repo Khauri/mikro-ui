@@ -6,7 +6,7 @@ import flexbox from './definitions/flexbox';
 import typography from './definitions/typography';
 import border from './definitions/border';
 
-import defaultTheme from 'mikro-theme-default';
+import defaultTheme from '@mikro-ui/theme-default';
 
 const properties = {
   ...space,
@@ -62,9 +62,6 @@ function getRules(attrs, theme, cache) {
   const entries = Object.entries(attrs);
   const classname = hash(entries.sort(sortEntriesByKey).flat().join(';'));
   let css = cache[classname];
-  if(!Object.entries(cache).length) {
-    console.log("Cache Is EMPTY!")
-  }
   if(!css) {
     css = entries.reduce((str, [key, value]) => str + resolve(properties[key], value, theme), '');
     // const breakpoints = getBreakpointsFromTheme(theme);
@@ -78,6 +75,19 @@ function getRules(attrs, theme, cache) {
 
 function getBreakpointClassname(attr, value, breakpoint) {
   return `${attr}-${breakpoint}-${value}`;
+}
+
+function getStyles(attrs, theme) {
+  // breakpoints do not work when in inline mode. Unsure if a warning or an error is better here.
+  const entries = Object.entries(attrs);
+  return entries.reduce((acc, [key, value]) => {
+    const property = properties[key];
+    property.properties.forEach(prop => {
+      // TODO: don't interpolate theme variables
+      acc += resolve(property, value, theme);
+    });
+    return acc;
+  },'');
 }
 
 function getClassnames(attrs, theme) {
@@ -134,17 +144,20 @@ export function parse({
   layerStyle,
   theme = defaultTheme,
   cache,
-  mode = 'class',
+  mode,
 }) {
   // This seems to break on the client for some reason
   if(typeof theme === 'undefined') {
-    console.warn('No theme defined. Why...')
-    console.log(input, theme);
+    console.warn('No theme defined. Using default theme.');
   }
   const {unusedAttrs, attrs} = splitAttributes({input, component, variant, layerStyle, theme});
   if(mode === 'class') {
     const classnames = getClassnames(attrs, theme);
     return {attrs: unusedAttrs, classnames};
+  }
+  if(mode === 'inline') {
+    const styles = getStyles(attrs, theme);
+    return {attrs: unusedAttrs, styles};
   }
   const {css, classname} = getRules(attrs, theme, cache);
   return {attrs: unusedAttrs, css, classname};

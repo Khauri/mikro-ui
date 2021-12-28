@@ -1,6 +1,6 @@
-<attrs/{as = 'div', renderBody, class: classes, ...inp} />
-<styled/{classname, attrs} ...inp />
+<attrs/{as = 'div', renderBody, class: classes, style, ...inp} />
+<styled/{classname, styles, attrs} ...inp />
 
-<${as} class=[classes, classname] ...attrs>
+<${as} class=[classes, classname] style=[styles, style] ...attrs>
   <${renderBody} />
 </>

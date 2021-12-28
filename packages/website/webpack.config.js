@@ -61,7 +61,7 @@ function addSassFunction(config) {
           ...loader.options?.sassOptions, 
           functions: {
             ...loader.options?.sassOptions?.functions,
-            'json($path)': require('mikro-tokens/loader'),
+            'json($path)': require('@mikro-ui/tokens/loader'),
           }
         }
       }

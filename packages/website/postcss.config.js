@@ -1,5 +1,5 @@
 module.exports = {
   plugins: [
-    require('mikro-tokens/loader'),
+    require('@mikro-ui/tokens/loader'),
   ]
 }

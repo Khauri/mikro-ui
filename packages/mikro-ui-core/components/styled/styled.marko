@@ -1,13 +1,14 @@
-import {parse} from 'mikro-style';
+import {parse} from '@mikro-ui/style';
 
-<get/providedProps="provider" />
+<get/providedProps="styled-provider" />
 
 <attrs/{
   component: componentName, 
   variant, 
   layerStyle, 
   renderBody, 
-  _return, 
+  mode,
+  _return,
   ...props
 } />
 
@@ -18,11 +19,15 @@ import {parse} from 'mikro-style';
   variant,
   layerStyle,
   cache: providedProps?.cache ?? {},
-  mode: providedProps?.mode ?? 'class'
+  mode: providedProps?.mode ?? mode,
 }) />
 
 <if=result.css>
   <css=result.css id=result.classname />
 </if>
 
-<return={attrs: result.attrs, classname: result.classnames || `css-${result.classname}`} />
+<return={
+  attrs: result.attrs, // returns unused attributes
+  classname: result.styles ? undefined : result.classnames || `css-${result.classname || 0}`,
+  styles: result.styles
+} />

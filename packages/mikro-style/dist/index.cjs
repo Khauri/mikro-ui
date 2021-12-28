@@ -77,8 +77,10 @@ var space_default = {
 };
 
 // src/definitions/layout.js
+var display = { properties: ["display"], values: ["block", "inline", "flex", "inline-flex", "grid", "inline-grid"] };
 var layout_default = {
-  d: { properties: ["display"], values: ["block", "inline", "flex", "inline-flex", "grid", "inline-grid"] },
+  d: display,
+  display,
   position: { properties: ["position"], values: ["absolute", "relative", "sticky"] },
   top: { properties: ["top"], theme: "space" },
   right: { properties: ["right"], theme: "space" },
@@ -91,9 +93,9 @@ var layout_default = {
   maxH: { properties: ["max-height"], theme: "sizes" },
   minW: { properties: ["min-width"], theme: "sizes" },
   minH: { properties: ["min-height"], theme: "sizes" },
-  overflow: { properties: ["overflow"], values: [] },
-  overflowX: { properties: ["overflow-x"], values: [] },
-  overflowY: { properties: ["overflow-x"], values: [] }
+  overflow: { properties: ["overflow"], values: ["auto", "hidden", "scroll", "visible"] },
+  overflowX: { properties: ["overflow-x"], values: ["auto", "hidden", "scroll", "visible"] },
+  overflowY: { properties: ["overflow-x"], values: ["auto", "hidden", "scroll", "visible"] }
 };
 
 // src/definitions/flexbox.js
@@ -528,9 +530,6 @@ function getRules(attrs, theme, cache) {
   const entries = Object.entries(attrs);
   const classname = hash(entries.sort(sortEntriesByKey).flat().join(";"));
   let css = cache[classname];
-  if (!Object.entries(cache).length) {
-    console.log("Cache Is EMPTY!");
-  }
   if (!css) {
     css = entries.reduce((str, [key, value]) => str + resolve(properties[key], value, theme), "");
     cache[classname] = css;
@@ -540,6 +539,16 @@ function getRules(attrs, theme, cache) {
 }
 function getBreakpointClassname(attr, value, breakpoint) {
   return `${attr}-${breakpoint}-${value}`;
+}
+function getStyles(attrs, theme) {
+  const entries = Object.entries(attrs);
+  return entries.reduce((acc, [key, value]) => {
+    const property = properties[key];
+    property.properties.forEach((prop) => {
+      acc += resolve(property, value, theme);
+    });
+    return acc;
+  }, "");
 }
 function getClassnames(attrs, theme) {
   const breakpoints = Object.entries(theme.breakpoints);
@@ -587,16 +596,19 @@ function parse({
   layerStyle,
   theme = src_default,
   cache,
-  mode = "class"
+  mode
 }) {
   if (typeof theme === "undefined") {
-    console.warn("No theme defined. Why...");
-    console.log(input, theme);
+    console.warn("No theme defined. Using default theme.");
   }
   const { unusedAttrs, attrs } = splitAttributes({ input, component, variant, layerStyle, theme });
   if (mode === "class") {
     const classnames = getClassnames(attrs, theme);
     return { attrs: unusedAttrs, classnames };
+  }
+  if (mode === "inline") {
+    const styles = getStyles(attrs, theme);
+    return { attrs: unusedAttrs, styles };
   }
   const { css, classname } = getRules(attrs, theme, cache);
   return { attrs: unusedAttrs, css, classname };

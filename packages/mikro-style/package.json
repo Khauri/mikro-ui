@@ -1,5 +1,5 @@
 {
-  "name": "mikro-style",
+  "name": "@mikro-ui/style",
   "version": "1.0.0",
   "description": "",
   "module": "src/index.js",
@@ -10,8 +10,8 @@
     "build": "esbuild src/index.js --bundle --format=cjs --outfile=dist/index.cjs"
   },
   "dependencies": {
-    "mikro-theme-default": "1.0.0",
-    "mikro-tokens": "1.0.0"
+    "@mikro-ui/theme-default": "1.0.0",
+    "@mikro-ui/tokens": "1.0.0"
   },
   "devDependencies": {
     "esbuild": "^0.14.8"

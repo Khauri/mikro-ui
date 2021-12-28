@@ -14,7 +14,8 @@
 
 <!-- Using raw $! at top level seems to be broken -->
 <if=(true)>
-  $!{`<style id="${stylesheetId}">${css}</style>`}
+  <!-- in the testing env adding an id this seems to cause issues so data-id is used instead -->
+  $!{`<style data-id="${stylesheetId}">${css}</style>`}
 </if>
 
 <!-- 
@@ -23,7 +24,7 @@
   to conditionally determine if the parent component is stateful. 
 -->
 <effect() {
-  const el = document.querySelector(`#${stylesheetId}`);
+  const el = document.querySelector(`[data-id=${stylesheetId}]`);
   if(!el) {
     document.head.insertAdjacentHTML("beforeend", `<style id="${stylesheetId}">${css}</style>`)
   } else {
