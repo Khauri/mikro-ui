@@ -1,0 +1,19 @@
+<attrs/{filters} />
+
+<use-query-client/queryClient />
+
+<let/count=queryClient.isFetching(filters) />
+
+<lifecycle
+  onMount() {
+    this.disposer = queryClient.on('update', () => {
+      count = queryClient.isFetching(filters);
+    });
+  }
+
+  onDestroy() {
+    this.disposer();
+  }
+/>
+
+<return=count />

@@ -1,0 +1,20 @@
+{
+  "name": "@mikro-ui/query",
+  "version": "1.0.0",
+  "packageManager": "yarn@3.1.1",
+  "main": "dist/index.cjs",
+  "scripts": {
+    "watch:tsbuild": "rm -rf dist/ && esbuild src/index.ts --bundle --format=cjs --outfile=dist/index.cjs --watch",
+    "watch:marko": "wait-on dist/index.cjs && marko-serve ./pages",
+    "dev": "concurrently \"npm:watch:*\""
+  },
+  "dependencies": {
+    "@marko/tags-api-preview": "^0.1.9"
+  },
+  "devDependencies": {
+    "@marko/serve": "^4.2.3",
+    "concurrently": "^6.5.1",
+    "esbuild": "^0.14.9",
+    "wait-on": "6.0.0"
+  }
+}

@@ -1,0 +1,17 @@
+<!-- Adds events for when the window gains or loses focus -->
+<attrs/{onFocus, onBlur, onChange} />
+
+<effect() {
+  function onVisibilityChange(e) {
+    if(document.visibilityState === 'visible') {
+      onFocus?.(e);
+    } else {
+      onBlur?.(e);
+    }
+    onChange?.(e);
+  }
+
+  document.addEventListener('visibilitychange', onVisibilityChange);
+
+  return () => document.removeEventListener('visibilitychange', onVisibilityChange);
+} />
