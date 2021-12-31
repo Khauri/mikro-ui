@@ -2,7 +2,7 @@
 // Mostly written by github copilot
 // Can probably be replaced by a more standard library if required
 
-export class EventEmitter {
+export class EventEmitter extends Function {
   events: Map<string, Function[]> = new Map();
 
   on(event: string, fn: EventListener) {

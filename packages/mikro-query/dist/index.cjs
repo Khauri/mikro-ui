@@ -30,8 +30,9 @@ __export(src_exports, {
 });
 
 // src/EventEmitter.ts
-var EventEmitter = class {
+var EventEmitter = class extends Function {
   constructor() {
+    super(...arguments);
     this.events = /* @__PURE__ */ new Map();
   }
   on(event, fn) {
@@ -55,7 +56,7 @@ var EventEmitter = class {
   }
 };
 
-// src/QueryClient.ts
+// src/Query.ts
 var Query = class extends EventEmitter {
   constructor({
     initialData,
@@ -209,29 +210,8 @@ var Query = class extends EventEmitter {
     clearTimeout(this.cacheTimeoutKey);
   }
 };
-var QueryObserver = class {
-  constructor(queryClient, options) {
-    this.listeners = [];
-    this.queryClient = queryClient;
-    const { queryKey } = options;
-    this.query = queryClient.getOrCreateQuery(queryKey, options);
-    this.query.on("update", this.onUpdate.bind(this));
-  }
-  onUpdate(newState) {
-    this.listeners.forEach((listener) => listener(newState));
-  }
-  subscribe(listener) {
-    this.listeners.push(listener);
-    this.query.fetch();
-    return () => this.unsubscribe(listener);
-  }
-  unsubscribe(listener) {
-    this.listeners = this.listeners.filter((l) => l !== listener);
-  }
-  emit(query) {
-    this.listeners.forEach((listener) => listener(query.state()));
-  }
-};
+
+// src/QueryCache.ts
 var QueryCache = class {
   constructor({ onError, onSuccess }) {
     this.queries = [];
@@ -265,6 +245,8 @@ var QueryCache = class {
     this.queries.forEach((query) => query.destroy());
   }
 };
+
+// src/QueryClient.ts
 var QueryClient = class extends Function {
   constructor({
     queryCache = new QueryCache({ onError: null, onSuccess: null }),
@@ -322,6 +304,31 @@ var QueryClient = class extends Function {
   refetchQueries(keyOrFilters) {
   }
   prefetchQuery(key, fn) {
+  }
+};
+
+// src/QueryObserver.ts
+var QueryObserver = class {
+  constructor(queryClient, options) {
+    this.listeners = [];
+    this.queryClient = queryClient;
+    const { queryKey } = options;
+    this.query = queryClient.getOrCreateQuery(queryKey, options);
+    this.query.on("update", this.onUpdate.bind(this));
+  }
+  onUpdate(newState) {
+    this.listeners.forEach((listener) => listener(newState));
+  }
+  subscribe(listener) {
+    this.listeners.push(listener);
+    this.query.fetch();
+    return () => this.unsubscribe(listener);
+  }
+  unsubscribe(listener) {
+    this.listeners = this.listeners.filter((l) => l !== listener);
+  }
+  emit(query) {
+    this.listeners.forEach((listener) => listener(query.state()));
   }
 };
 module.exports = __toCommonJS(src_exports);
