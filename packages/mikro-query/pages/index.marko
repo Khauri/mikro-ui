@@ -1,25 +1,31 @@
 <!-- Temporary testing page -->
-<use-query/simpleFetchExample(){
-  console.log('Query Function Called');
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      console.log("Resolving the query function.");
-      resolve('Hello, World!');
-    }, 1000);
-  });
-} />
-
-<if=(simpleFetchExample.isLoading)>
-  <div>Loading...</div>
-</if>
-<else>
-  <if=(simpleFetchExample.isRefetching)>
-    <p>Reloading...</p>
+<query-client-provider>
+  <use-query/simpleFetchExample(){
+    console.log('Query Function Called');
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        console.log("Resolving the query function.");
+        resolve('Hello, World!');
+      }, 1000);
+    });
+  } />
+  
+  <if=(simpleFetchExample.isLoading)>
+    <div>Loading...</div>
   </if>
   <else>
-    <p>Returned Data: ${simpleFetchExample.data}</p>
+    <if=(simpleFetchExample.isRefetching)>
+      <p>Reloading...</p>
+    </if>
+    <else>
+      <p>Returned Data: ${simpleFetchExample.data}</p>
+    </else>
+    <button onClick() {simpleFetchExample.refetch()} disabled=simpleFetchExample.isRefetching>
+      Reload
+    </button>
   </else>
-  <button onClick() {simpleFetchExample.refetch()} disabled=simpleFetchExample.isRefetching>
-    Reload
-  </button>
-</else>
+  
+  <use-is-fetching/fetchingCount />
+  
+  <p>Fetching ${fetchingCount}</p>
+</query-client-provider>

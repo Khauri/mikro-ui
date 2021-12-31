@@ -195,12 +195,15 @@ var Query = class extends EventEmitter {
     if (typeof filters === "string") {
       filters = { queryKey: filters };
     }
-    const { queryKey, exact, predicate } = filters;
+    const { queryKey, exact, predicate, fetching } = filters;
     const hashedKey = this.hashQueryKey(queryKey);
-    if (queryKey && (exact && this.queryKey !== hashedKey) || !this.queryKey.startsWith(hashedKey)) {
+    if (queryKey && (exact && this.queryKey !== hashedKey || !this.queryKey.startsWith(hashedKey))) {
       return false;
     }
     if (typeof predicate === "function" && !predicate(this)) {
+      return false;
+    }
+    if (fetching && !this.queryState.isFetching) {
       return false;
     }
     return true;
@@ -213,7 +216,10 @@ var Query = class extends EventEmitter {
 
 // src/QueryCache.ts
 var QueryCache = class {
-  constructor({ onError, onSuccess }) {
+  constructor({
+    onError = null,
+    onSuccess = null
+  } = {}) {
     this.queries = [];
     this.onError = null;
     this.onSuccess = null;
@@ -247,7 +253,7 @@ var QueryCache = class {
 };
 
 // src/QueryClient.ts
-var QueryClient = class extends Function {
+var QueryClient = class extends EventEmitter {
   constructor({
     queryCache = new QueryCache({ onError: null, onSuccess: null }),
     mutationCache = new QueryCache({ onError: null, onSuccess: null }),
@@ -265,6 +271,7 @@ var QueryClient = class extends Function {
     let query = this.queryCache.find(key);
     if (!query) {
       query = new Query({ ...this.defaultOptions, ...options, queryKey: key });
+      query.on("update", () => this.emit("update", query));
       this.queryCache.cache(query);
     }
     return query;
@@ -287,7 +294,7 @@ var QueryClient = class extends Function {
     query.fetch();
   }
   isMutating(filters) {
-    return this.mutationCache.findAll({ ...filters, fetching: true }).length > 0;
+    return this.mutationCache.findAll({ ...filters, fetching: true }).length;
   }
   isFetching(filters) {
     return this.queryCache.findAll({ ...filters, fetching: true }).length;

@@ -230,16 +230,21 @@ export class Query extends EventEmitter {
     if(typeof filters === 'string') {
       filters = {queryKey: filters};
     }
-    const {queryKey, exact, predicate} = filters;
+    const {queryKey, exact, predicate, fetching} = filters;
     const hashedKey = this.hashQueryKey(queryKey);
     if(
       queryKey
-      && (exact && this.queryKey !== hashedKey)
-      || !this.queryKey.startsWith(hashedKey)
+      && (
+        (exact && this.queryKey !== hashedKey)
+        || !this.queryKey.startsWith(hashedKey)
+      )
     ) {
       return false;
     }
     if(typeof predicate === 'function' && !predicate(this)) {
+      return false;
+    }
+    if(fetching && !this.queryState.isFetching) {
       return false;
     }
     return true;

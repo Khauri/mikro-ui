@@ -1,6 +1,9 @@
-<attrs/{default: client} />
+import { QueryClient } from '../..';
+
+<attrs/{default: queryClient, renderBody} />
 
 <!-- The object gets frozen when passed into set here which may cause issues. -->
+<const/client=(queryClient || new QueryClient()) />
 
 <set=client>
   <${renderBody} />

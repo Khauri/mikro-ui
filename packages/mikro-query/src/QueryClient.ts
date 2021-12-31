@@ -1,3 +1,4 @@
+import { EventEmitter } from './EventEmitter';
 import { 
   Query, 
   QueryState, 
@@ -10,7 +11,7 @@ import { QueryCache } from './QueryCache';
 
 // Extends Function in order to bypass Marko's deep freeze: https://github.com/marko-js/tags-api-preview/blob/3260fe8e97139e9dd58e1e17481b693729db92b4/src/util/deep-freeze/index-browser.ts
 // Another option would be to pre-freeze the object so that the freeze remains shallow
-export class QueryClient extends Function {
+export class QueryClient extends EventEmitter {
   queryCache: QueryCache;
 
   mutationCache: QueryCache;
@@ -37,6 +38,7 @@ export class QueryClient extends Function {
     if(!query) {
       // TODO: Also fill with default options
       query = new Query({...this.defaultOptions, ...options, queryKey: key});
+      query.on('update', () => this.emit('update', query));
       this.queryCache.cache(query);
     }
     return query;
@@ -64,7 +66,7 @@ export class QueryClient extends Function {
   }
 
   isMutating(filters: QueryFilters) {
-    return this.mutationCache.findAll({...filters, fetching: true}).length > 0;
+    return this.mutationCache.findAll({...filters, fetching: true}).length;
   }
 
   isFetching(filters: QueryFilters) {

@@ -1,5 +1,10 @@
 import { Query, QueryFilters } from './Query';
 
+type QueryCacheOptions = {
+  onSuccess?: (query: Query) => void;
+  onError?: (query: Query) => void;
+}
+
 // Holds on to all the Query instances and supplies methods for finding them using filters
 export class QueryCache {
   queries: Query[] = [];
@@ -8,7 +13,10 @@ export class QueryCache {
 
   onSuccess = null;
 
-  constructor({onError, onSuccess}) {
+  constructor({
+    onError = null,
+    onSuccess = null,
+  }: QueryCacheOptions = {}) {
     this.onError = onError;
     this.onSuccess = onSuccess;
   }
