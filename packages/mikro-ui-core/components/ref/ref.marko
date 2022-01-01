@@ -1,0 +1,25 @@
+<!-- 
+  Marko deep freezes objects when you use them in a template.
+  Sometimes this can be problematic when trying to work with dependency injected objects.
+  This component is a workaround.
+
+  Usage:
+  <ref/mutableDate=(() => new Date()) />
+  <const/immutableDate=(new Date()) />
+
+  <effect() {} />
+-->
+import {Ref} from './ref';
+
+<attrs/{default: getter} />
+
+
+<let/ref=(new Ref(
+  getter, 
+  (newRef) => {
+    // Force an update by assigning ref to itself
+    ref = ref;
+  }
+)) />
+
+<return=ref />

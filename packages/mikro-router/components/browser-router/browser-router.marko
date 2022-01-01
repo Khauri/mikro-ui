@@ -1,0 +1,9 @@
+import { BrowserRouter } from '../..';
+
+<attrs/{renderBody, ...browserRouterProps} />
+
+<const/router=(new BrowserRouter(browserRouterProps)) />
+
+<set=router>
+  <${renderBody} />
+</set>
