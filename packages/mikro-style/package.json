@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "esbuild src/index.js --bundle --format=cjs --outfile=dist/index.cjs"
+    "build": "esbuild src/index.js --target=node12 --bundle --format=cjs --outfile=dist/index.cjs"
   },
   "dependencies": {
     "@mikro-ui/theme-default": "1.0.0",

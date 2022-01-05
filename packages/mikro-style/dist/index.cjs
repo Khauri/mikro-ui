@@ -1,7 +1,24 @@
 var __defProp = Object.defineProperty;
+var __defProps = Object.defineProperties;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
 var __export = (target, all) => {
   for (var name in all)
@@ -326,8 +343,7 @@ var space_default2 = {
 };
 
 // ../mikro-theme-default/src/sizes.js
-var sizes_default = {
-  ...space_default2,
+var sizes_default = __spreadProps(__spreadValues({}, space_default2), {
   max: "max-content",
   min: "min-content",
   full: "100%",
@@ -351,7 +367,7 @@ var sizes_default = {
     lg: "1024px",
     xl: "1280px"
   }
-};
+});
 
 // ../mikro-theme-default/src/breakpoints.js
 var breakpoints_default = {
@@ -498,14 +514,7 @@ var src_default = {
 };
 
 // src/index.js
-var properties = {
-  ...space_default,
-  ...layout_default,
-  ...flexbox_default,
-  ...color_default,
-  ...typography_default,
-  ...border_default
-};
+var properties = __spreadValues(__spreadValues(__spreadValues(__spreadValues(__spreadValues(__spreadValues({}, space_default), layout_default), flexbox_default), color_default), typography_default), border_default);
 function getDeep(key, obj) {
   return key.split(/\./g).reduce((o, i) => o[i], obj);
 }
@@ -514,13 +523,14 @@ function sortEntriesByKey(entry1, entry2) {
 }
 function resolve(prop, value, theme) {
   return prop.properties.map((property) => {
+    var _a;
     if (prop.values) {
       return `${property}:${value};`;
     }
-    if (typeof theme?.[prop.theme] === "object" && typeof value === "string") {
+    if (typeof (theme == null ? void 0 : theme[prop.theme]) === "object" && typeof value === "string") {
       value = getDeep(value, theme[prop.theme]) || value;
     }
-    if (theme?.[prop.theme]?.[value]) {
+    if ((_a = theme == null ? void 0 : theme[prop.theme]) == null ? void 0 : _a[value]) {
       return `${property}:var(--mikro-${prop.theme}-${value});`;
     }
     return `${property}:${value};`;
@@ -574,13 +584,9 @@ function splitAttributes({
   layerStyle,
   theme = src_default
 }) {
+  var _a, _b, _c, _d, _e, _f;
   const unusedAttrs = {};
-  const attrs = {
-    ...theme?.components?.[component]?.baseStyle,
-    ...theme?.components?.[component]?.variants?.[variant],
-    ...theme?.layerStyles?.[layerStyle],
-    ...input
-  };
+  const attrs = __spreadValues(__spreadValues(__spreadValues(__spreadValues({}, (_b = (_a = theme == null ? void 0 : theme.components) == null ? void 0 : _a[component]) == null ? void 0 : _b.baseStyle), (_e = (_d = (_c = theme == null ? void 0 : theme.components) == null ? void 0 : _c[component]) == null ? void 0 : _d.variants) == null ? void 0 : _e[variant]), (_f = theme == null ? void 0 : theme.layerStyles) == null ? void 0 : _f[layerStyle]), input);
   for (const key in attrs) {
     if (!properties[key]) {
       unusedAttrs[key] = attrs[key];
