@@ -1,0 +1,136 @@
+<!-- 
+  Make any *element* draggable.
+  Quick Note: Some functions are binded to an object as opposed to that object being defined as a const.
+              This is because Marko doesn't update the those values in the rendering phase and thus you can't use them too soon.
+              The most basic example is in `updateDragPosition` where the mouseMove updates happen too frequently and the state updates get batched.
+              This is technichally the same problem as using `this.setState({x: n, y: m})` and then using `this.state.x` and `this.state.y` immediately after.
+              The only viable way around this is to manage these objects separately, hence binding them to the function itself.
+ -->
+
+<get/sortableData="sortable" />
+
+<const/defaults={
+  axis: sortableData?.axis || 'xy',
+  minDragDistance: sortableData?.minDragDistance || 5,
+} />
+
+<attrs/{
+  ref: container,
+  axis = defaults.axis,
+  minDragDistance = defaults.minDragDistance,
+  value,
+  dragGhost,
+  renderBody,
+  enabled,
+  onDrag,
+  onDragStart,
+  onDragEnter,
+  onDragLeave,
+  onDragOver,
+  onDrop,
+} />
+
+<let/isDragging=false />
+<let/width=0 />
+<let/height=0 />
+<let/top=0 />
+<let/left=0 />
+<let/transform={x: 0, y: 0} />
+<let/initialValues={visibility: ''} />
+<let/dragClone=null />
+
+<const/getDragClone() {
+  const clone = container().cloneNode(true);
+  clone.style.visibility = 'visible';
+  return clone.outerHTML; 
+} />
+
+<const/updateDragPosition=(function (dx, dy) {
+  this.x = dx === null ? dx : this.x + dx;
+  this.y = dy === null ? dy : this.y + dy;
+  if(Math.abs(this.x) < minDragDistance && Math.abs(this.y) < minDragDistance) {
+    return false;
+  }
+  transform = {x: this.x, y: this.y};
+  return true;
+}).bind({x: 0, y: 0}) />
+
+<const/reset() {
+  updateDragPosition(null, null);
+  Object.entries(initialValues).forEach(([key, value]) => {
+    container().style[key] = value;
+  });
+  isDragging = false;
+  dragClone = null;
+  sortableData?.onDragEnd?.(value);
+} />
+
+<const/prepareDrag() {
+  initialValues = {visibility: container().style.visibility};
+  isDragging = true;
+  width = container().getBoundingClientRect().width;
+  height = container().getBoundingClientRect().height;
+  transform = {x: 0, y: 0};
+  top = container().offsetTop;
+  left = container().offsetLeft;
+} />
+
+<const/_onDragMove(e) {
+  const {movementX, movementY} = e;
+  const dx = axis.includes('x') ? movementX : 0;
+  const dy = axis.includes('y') ? movementY : 0;
+  const didUpdate = updateDragPosition(dx, dy);
+  if(didUpdate && !dragClone) {
+    // It may seem weird to set the visibility before cloning it, but it has to be in this order
+    // due to some strange Marko quirk that I don't understand.
+    container().style.visibility = 'hidden';
+    dragClone = getDragClone();
+  }
+} />
+
+<const/_onDragEnd(e) {
+  document.removeEventListener('mousemove', _onDragMove);
+  // For some reason this causes an infinite loop??
+  // document.removeEventListener('mouseup', _onDragEnd);
+  // document.removeEventListener('mouseleave', _onDragEnd);
+  reset();
+} />
+
+<const/_onDragStart(e) {
+  prepareDrag();
+  sortableData?.onDragStart?.(value);
+  document.addEventListener('mousemove', _onDragMove);
+  document.addEventListener('mouseup', _onDragEnd);
+  document.addEventListener('mouseleave', _onDragEnd);
+} />
+
+<const/setHandle=(function(el){
+  if(this.handle) {
+    return;
+  }
+  const events = {mousedown: _onDragStart};
+  Object.entries(events).forEach(([eventName, handler]) => {
+    el.addEventListener(eventName, handler);
+  });
+  this.handle = el;
+}).bind({handle: null}) />
+
+<lifecycle 
+  onMount() {
+    const el = container();
+    setHandle(el);
+  }
+/>
+
+<set={setHandle}>
+  <droppable ref=container enabled=((sortableData?.isSorting) && !isDragging) value=value>
+    <${renderBody} />
+  </droppable>
+</set>
+
+<!-- This should be portaled -->
+<if=dragClone>
+  <div style={position: 'fixed', userSelect: 'none', pointerEvents: 'none', top, left, transform: `translate(${transform.x}px, ${transform.y}px)`, width, height}>
+    $!{dragClone}
+  </div>
+</if>

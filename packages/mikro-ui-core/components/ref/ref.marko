@@ -4,21 +4,32 @@
   This component is a workaround.
 
   Usage:
-  <ref/mutableDate=(() => new Date()) />
-  <const/immutableDate=(new Date()) />
+  <ref/objRef=(() => ({counter: 0})) />
 
-  <effect() {} />
+  <p>Value: ${objRef().counter}</p>
+
+  <lifecycle
+    onMount() {
+      this.timer = setInterval(() => {
+        const obj = objRef();
+        obj.counter += 1;
+        objRef.forceUpdate();
+      }, 1000);
+    }
+    onDestroy() {
+      clearInterval(this.timer);
+    }
+  />
 -->
 import {Ref} from './ref';
 
-<attrs/{default: getter} />
-
+<attrs/{default: value} />
 
 <let/ref=(new Ref(
-  getter, 
-  (newRef) => {
-    // Force an update by assigning ref to itself
-    ref = ref;
+  value, 
+  (newValue, newRef) => {
+    // Force an update by assigning ref to its clone
+    ref = newRef;
   }
 )) />
 

@@ -1,0 +1,21 @@
+<!-- When dropped -->
+<get/sortable="sortable" />
+
+<attrs/{
+  ref: container,
+  value,
+  enabled = false,
+  renderBody
+} />
+
+<effect() {
+  const containerEl = container();
+  const onMouseEnter = (e) => {
+    if(!enabled) return;
+    sortable?.onDragOver(value);
+  };
+  containerEl.addEventListener('mouseenter', onMouseEnter);
+  return () => containerEl.removeEventListener('mouseenter', onMouseEnter);
+} />
+
+<${renderBody} />

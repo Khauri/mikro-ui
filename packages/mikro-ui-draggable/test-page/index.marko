@@ -1,0 +1,31 @@
+<!-- use tags -->
+
+<tag/draggableItem|{item}|>
+  <draggable ref=(() => ref()) value=item>
+    <div/ref style={padding: 10, display: 'flex', flexDirection: 'row', alignItems: 'center'}>
+      <drag-handle ref=(() => handleRef())>
+        <div/handleRef style={padding: 5}>=</div>
+      </drag-handle>
+      Item #${item}!
+    </div>
+  </draggable>
+</tag>
+
+<let/items=[1,2,3] />
+
+<sortable 
+  axis="y" 
+  onSwap(key1, key2) {
+    const copy = [...items];
+    const index1 = items.indexOf(key1);
+    const temp = items.indexOf(key2);
+    // swap the items
+    copy[index1] = key2;
+    copy[temp] = key1;
+    items = copy;
+  }
+>
+  <for|item| of=items by=(i => i)>
+    <${draggableItem} item=item />
+  </for>
+</sortable>

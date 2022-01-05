@@ -1,0 +1,39 @@
+<attrs/{
+  axis,
+  keyCodes,
+  minDragDistance,
+  onSwap,
+  onSortStart,
+  onSortMove,
+  onSortEnd,
+  renderBody,
+} />
+
+<let/isSorting=false />
+<let/value1=null />
+
+<const/onDragStart(value) {
+  if(typeof value === 'undefined') {
+    throw new Error('Sortable elements are required to have a unique value property.');
+  }
+  value1=value;
+  isSorting = true;
+}/>
+
+<const/onDragOver(value) {
+  onSwap?.(value1, value);
+} />
+
+<const/onDragEnd() {
+  value1 = null;
+  isSorting = false;
+} />
+
+<set={
+  axis,
+  onDragStart,
+  onDragOver,
+  isSorting,
+}>
+  <${renderBody} />
+</set>
