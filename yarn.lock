@@ -1673,10 +1673,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@marko/tags-api-preview@npm:^0.1.8":
-  version: 0.1.9
-  resolution: "@marko/tags-api-preview@npm:0.1.9"
-  checksum: 530a51b8fade061f59bd1326c345ffb6eba920d697b7b7fb6040f888c45f5d30e8db9809ee4bb8c8fff00d78930229ef7535b8a0c3e1fa56dc695c7b37351724
+"@marko/tags-api-preview@npm:^0.1.9":
+  version: 0.1.11
+  resolution: "@marko/tags-api-preview@npm:0.1.11"
+  checksum: 556e18a955febc86768ef09efec20fc8de3eead337d848749b9c2eeda449eaca0c7f7aa93acb0eb7b4d5c3424c33553f8377c472c26073aa65208563d1d2f58a
   languageName: node
   linkType: hard
 
@@ -9721,7 +9721,7 @@ __metadata:
   dependencies:
     "@marko/build": 4.2.3
     "@marko/serve": ^4.2.3
-    "@marko/tags-api-preview": ^0.1.8
+    "@marko/tags-api-preview": ^0.1.9
     "@mikro-ui/theme-default": ^1.0.0
     "@mikro-ui/tokens": ^1.0.0
     marko: ^5.17.3
