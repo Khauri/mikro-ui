@@ -1723,7 +1723,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mikro-ui/core@1.0.0, @mikro-ui/core@workspace:packages/mikro-ui-core":
+"@mikro-ui/core@1.0.1, @mikro-ui/core@workspace:packages/mikro-ui-core":
   version: 0.0.0-use.local
   resolution: "@mikro-ui/core@workspace:packages/mikro-ui-core"
   dependencies:
@@ -9623,7 +9623,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mikro-ui-avatar@workspace:packages/mikro-ui-avatar"
   dependencies:
-    "@mikro-ui/core": 1.0.0
+    "@mikro-ui/core": 1.0.1
   peerDependencies:
     "@marko/tags-api-preview": ^0.1.9
   languageName: unknown
@@ -9633,7 +9633,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mikro-ui-button@workspace:packages/mikro-ui-button"
   dependencies:
-    "@mikro-ui/core": 1.0.0
+    "@mikro-ui/core": 1.0.1
   peerDependencies:
     "@marko/tags-api-preview": ^0.1.9
   languageName: unknown
@@ -9643,7 +9643,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mikro-ui-layout@workspace:packages/mikro-ui-layout"
   dependencies:
-    "@mikro-ui/core": 1.0.0
+    "@mikro-ui/core": 1.0.1
   peerDependencies:
     "@marko/tags-api-preview": ^0.1.9
   languageName: unknown
@@ -9653,7 +9653,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mikro-ui-modal@workspace:packages/mikro-ui-modal"
   dependencies:
-    "@mikro-ui/core": 1.0.0
+    "@mikro-ui/core": 1.0.1
   peerDependencies:
     "@marko/tags-api-preview": ^0.1.9
   languageName: unknown
@@ -9663,7 +9663,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mikro-ui-toast@workspace:packages/mikro-ui-toast"
   dependencies:
-    "@mikro-ui/core": 1.0.0
+    "@mikro-ui/core": 1.0.1
   peerDependencies:
     "@marko/tags-api-preview": ^0.1.9
   languageName: unknown
@@ -9673,7 +9673,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mikro-ui-typography@workspace:packages/mikro-ui-typography"
   dependencies:
-    "@mikro-ui/core": 1.0.0
+    "@mikro-ui/core": 1.0.1
   peerDependencies:
     "@marko/tags-api-preview": ^0.1.9
   languageName: unknown
@@ -9683,7 +9683,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mikro-ui-utils@workspace:packages/mikro-ui-utils"
   dependencies:
-    "@mikro-ui/core": 1.0.0
+    "@mikro-ui/core": 1.0.1
   peerDependencies:
     "@marko/tags-api-preview": ^0.1.9
   languageName: unknown
@@ -9696,7 +9696,7 @@ __metadata:
     "@babel/preset-env": ^7.16.0
     "@marko/jest": ^4.1.0
     "@marko/testing-library": ^6.0.0
-    "@mikro-ui/core": 1.0.0
+    "@mikro-ui/core": 1.0.1
     "@testing-library/jest-dom": ^5.15.0
     babel-loader: ^8.2.3
     jest: ^27.3.1
