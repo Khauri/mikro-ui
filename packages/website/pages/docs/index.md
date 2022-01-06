@@ -16,7 +16,7 @@ That's it. You can now use mikro's tags in your templates.
 
 ## Configuration
 
-Use the `<provider>` tag to customize the theme as well as set other configurations. You can add as many provider tags as you want and the configs will be merged automatically unless you set `merge=false`.
+Use the `<styled-provider>` tag to customize the theme as well as set other configurations. You can add as many provider tags as you want and the configs will be merged automatically unless you set `merge=false`.
 
 Example:
 ```html
@@ -28,9 +28,9 @@ import theme from '../path/to/my/theme.js';
     <title> Hello, World! </title>
   </head>
   <body>
-    <provider theme=theme>
+    <styled-provider theme=theme>
       <text>Hello, World!</text>
-    </provider>
+    </styled-provider>
   </body>
 </html>
 ```
