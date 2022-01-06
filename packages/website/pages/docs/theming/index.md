@@ -15,9 +15,9 @@ module.exports = {};
 And now we can set the theme by passing it as the `theme` attribute of our provider.
 
 ```
-<provider>
+<styled-provider>
   <!-- the rest of your page -->
-</provider>
+</styled-provider>
 ```
 
 ## Theme Merging
@@ -35,12 +35,12 @@ $ {
   };
 }
 
-<provider theme=lightMode>
+<styled-provider theme=lightMode>
   <text> This text is in light mode. </text>
-  <provider theme=darkMode>
+  <styled-provider theme=darkMode>
     <text> This text is in dark mode. </text>
-  </provider>
-</provider>
+  </styled-provider>
+</styled-provider>
 ```
 
 > Note that this is just an example. You should really use layerStyles for this kind of thing.

@@ -68,9 +68,9 @@ Let's say you want every component to accept a new attribute. Use the provider t
 ```marko
 <const/theme={ /* ... */ } />
 
-<provider=theme attributes={}>
+<styled-provider=theme attributes={}>
   ...
-</provider>
+</styled-provider>
 ```
 
 ## Development
