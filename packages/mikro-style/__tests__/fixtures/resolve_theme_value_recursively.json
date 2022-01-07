@@ -1,0 +1,13 @@
+{
+  "input": {
+    "color": "a"
+  },
+  "theme": {
+    "colors": {
+      "a": "b",
+      "b": "c",
+      "c": "#FFF"
+    }
+  },
+  "mode": "inline"
+}

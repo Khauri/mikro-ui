@@ -1,0 +1,11 @@
+{
+  "input": {
+    "color": "black"
+  },
+  "theme": {
+    "colors": {
+      "black": "#000000"
+    }
+  },
+  "mode": "inline"
+}

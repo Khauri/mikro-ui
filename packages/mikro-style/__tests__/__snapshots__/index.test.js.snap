@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`atomic > returns classes 1`] = `
+Object {
+  "attrs": Object {
+    "sharpness": 5,
+  },
+  "classnames": "d-flex",
+}
+`;
+
+exports[`css > returns classname 1`] = `
+Object {
+  "attrs": Object {},
+  "classname": "1w8nbjg",
+  "css": ".css-1w8nbjg {background-color:var(--mikro-colors-background);display:flex;}",
+}
+`;
+
+exports[`inline > multi property styles 1`] = `
+Object {
+  "attrs": Object {},
+  "styles": "margin-left:20px;margin-right:20px;",
+}
+`;
+
+exports[`inline > no css variables 1`] = `
+Object {
+  "attrs": Object {},
+  "styles": "color:#000000;",
+}
+`;
+
+exports[`inline > returns styles string 1`] = `
+Object {
+  "attrs": Object {},
+  "styles": "display:flex;",
+}
+`;
+
+exports[`removes nullish properties 1`] = `
+Object {
+  "attrs": Object {},
+  "styles": "",
+}
+`;
+
+exports[`resolve property aliases 1`] = `
+Object {
+  "attrs": Object {},
+  "styles": "margin-left:20px;margin-right:20px;margin-left:10px;margin-right:10px;display:flex;display:flex;",
+}
+`;
+
+exports[`resolve theme value 1`] = `
+Object {
+  "attrs": Object {},
+  "styles": "color:#000000;",
+}
+`;
+
+exports[`resolve theme value recursively 1`] = `
+Object {
+  "attrs": Object {},
+  "styles": "color:#FFF;",
+}
+`;

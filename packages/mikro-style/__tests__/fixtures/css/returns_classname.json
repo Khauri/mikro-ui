@@ -1,0 +1,12 @@
+{
+  "theme": {
+    "colors": {
+      "background": "#EEE"
+    }
+  },
+  "input": {
+    "display": "flex",
+    "bg": "background"
+  },
+  "mode": "css"
+}

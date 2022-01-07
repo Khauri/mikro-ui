@@ -32,87 +32,66 @@ var __reExport = (target, module2, copyDefault, desc) => {
   }
   return target;
 };
-var __toCommonJS = /* @__PURE__ */ ((cache) => {
+var __toCommonJS = /* @__PURE__ */ ((cache2) => {
   return (module2, temp) => {
-    return cache && cache.get(module2) || (temp = __reExport(__markAsModule({}), module2, 1), cache && cache.set(module2, temp), temp);
+    return cache2 && cache2.get(module2) || (temp = __reExport(__markAsModule({}), module2, 1), cache2 && cache2.set(module2, temp), temp);
   };
 })(typeof WeakMap !== "undefined" ? /* @__PURE__ */ new WeakMap() : 0);
 
 // src/index.js
 var src_exports = {};
 __export(src_exports, {
-  parse: () => parse,
+  parse: () => parse4,
   splitAttributes: () => splitAttributes
 });
 
-// src/definitions/hash.js
-function hash(str) {
-  var h = 0;
-  var k, i = 0, len = str.length;
-  for (; len >= 4; ++i, len -= 4) {
-    k = str.charCodeAt(i) & 255 | (str.charCodeAt(++i) & 255) << 8 | (str.charCodeAt(++i) & 255) << 16 | (str.charCodeAt(++i) & 255) << 24;
-    k = (k & 65535) * 1540483477 + ((k >>> 16) * 59797 << 16);
-    k ^= k >>> 24;
-    h = (k & 65535) * 1540483477 + ((k >>> 16) * 59797 << 16) ^ (h & 65535) * 1540483477 + ((h >>> 16) * 59797 << 16);
-  }
-  switch (len) {
-    case 3:
-      h ^= (str.charCodeAt(i + 2) & 255) << 16;
-    case 2:
-      h ^= (str.charCodeAt(i + 1) & 255) << 8;
-    case 1:
-      h ^= str.charCodeAt(i) & 255;
-      h = (h & 65535) * 1540483477 + ((h >>> 16) * 59797 << 16);
-  }
-  h ^= h >>> 13;
-  h = (h & 65535) * 1540483477 + ((h >>> 16) * 59797 << 16);
-  return ((h ^ h >>> 15) >>> 0).toString(36);
-}
-
 // src/definitions/color.js
 var color_default = {
-  bg: { properties: ["background-color"], theme: "colors" },
+  bg: { properties: ["background-color"], aliases: ["background"], theme: "colors" },
   color: { properties: ["color"], theme: "colors" }
 };
 
 // src/definitions/space.js
 var space_default = {
-  p: { properties: ["padding"], theme: "space", responsive: true },
-  pt: { properties: ["padding-top"], theme: "space", responsive: true },
-  pr: { properties: ["padding-right"], theme: "space", responsive: true },
-  pb: { properties: ["padding-bottom"], theme: "space", responsive: true },
-  pl: { properties: ["padding-left"], theme: "space", responsive: true },
-  px: { properties: ["padding-left", "padding-right"], theme: "space", responsive: true },
-  py: { properties: ["padding-top", "padding-bottom"], theme: "space", responsive: true },
-  m: { properties: ["margin"], theme: "space", responsive: true },
-  mt: { properties: ["margin-top"], theme: "space", responsive: true },
-  mr: { properties: ["margin-right"], theme: "space", responsive: true },
-  mb: { properties: ["margin-bottom"], theme: "space", responsive: true },
-  ml: { properties: ["margin-left"], theme: "space", responsive: true },
-  mx: { properties: ["margin-left", "margin-right"], theme: "space", responsive: true },
-  my: { properties: ["margin-top", "margin-bottom"], theme: "space", responsive: true }
+  p: { properties: ["padding"], aliases: ["padding"], theme: "space", responsive: true },
+  pt: { properties: ["padding-top"], aliases: ["paddingTop"], theme: "space", responsive: true },
+  pr: { properties: ["padding-right"], aliases: ["paddingRight"], theme: "space", responsive: true },
+  pb: { properties: ["padding-bottom"], aliases: ["paddingBottom"], theme: "space", responsive: true },
+  pl: { properties: ["padding-left"], aliases: ["paddingLeft"], theme: "space", responsive: true },
+  px: { properties: ["padding-left", "padding-right"], aliases: ["paddingX"], theme: "space", responsive: true },
+  py: { properties: ["padding-top", "padding-bottom"], aliases: ["paddingY"], theme: "space", responsive: true },
+  ps: { properties: ["padding-start"], aliases: ["paddingStart"], theme: "space", responsive: true },
+  pe: { properties: ["padding-end"], aliases: ["paddingEnd"], theme: "space", responsive: true },
+  m: { properties: ["margin"], aliases: ["margin"], theme: "space", responsive: true },
+  mt: { properties: ["margin-top"], aliases: ["marginTop"], theme: "space", responsive: true },
+  mr: { properties: ["margin-right"], aliases: ["marginRight"], theme: "space", responsive: true },
+  mb: { properties: ["margin-bottom"], aliases: ["marginBottom"], theme: "space", responsive: true },
+  ml: { properties: ["margin-left"], aliases: ["marginLeft"], theme: "space", responsive: true },
+  mx: { properties: ["margin-left", "margin-right"], aliases: ["marginX"], theme: "space", responsive: true },
+  my: { properties: ["margin-top", "margin-bottom"], aliases: ["marginY"], theme: "space", responsive: true },
+  ms: { properties: ["margin-start"], aliases: ["marginStart"], theme: "space", responsive: true },
+  me: { properties: ["margin-end"], aliases: ["marginEnd"], theme: "space", responsive: true }
 };
 
 // src/definitions/layout.js
-var display = { properties: ["display"], values: ["block", "inline", "flex", "inline-flex", "grid", "inline-grid"] };
+var overflowValues = ["auto", "hidden", "scroll", "visible"];
 var layout_default = {
-  d: display,
-  display,
+  d: { properties: ["display"], aliases: ["display"], values: ["block", "inline", "flex", "inline-flex", "grid", "inline-grid"] },
   position: { properties: ["position"], values: ["absolute", "relative", "sticky"] },
   top: { properties: ["top"], theme: "space" },
   right: { properties: ["right"], theme: "space" },
   bottom: { properties: ["bottom"], theme: "space" },
   left: { properties: ["left"], theme: "space" },
-  z: { properties: ["z-index"], theme: "zIndices" },
-  w: { properties: ["width"], theme: "sizes" },
-  h: { properties: ["height"], theme: "sizes" },
-  maxW: { properties: ["max-width"], theme: "sizes" },
-  maxH: { properties: ["max-height"], theme: "sizes" },
-  minW: { properties: ["min-width"], theme: "sizes" },
-  minH: { properties: ["min-height"], theme: "sizes" },
-  overflow: { properties: ["overflow"], values: ["auto", "hidden", "scroll", "visible"] },
-  overflowX: { properties: ["overflow-x"], values: ["auto", "hidden", "scroll", "visible"] },
-  overflowY: { properties: ["overflow-x"], values: ["auto", "hidden", "scroll", "visible"] }
+  z: { properties: ["z-index"], aliases: ["zIndex"], theme: "zIndices" },
+  w: { properties: ["width"], aliases: ["width"], theme: "sizes" },
+  h: { properties: ["height"], aliases: ["height"], theme: "sizes" },
+  maxW: { properties: ["max-width"], aliases: ["maxWidth"], theme: "sizes" },
+  maxH: { properties: ["max-height"], aliases: ["maxHeight"], theme: "sizes" },
+  minW: { properties: ["min-width"], aliases: ["minWidth"], theme: "sizes" },
+  minH: { properties: ["min-height"], aliases: ["minHeight"], theme: "sizes" },
+  overflow: { properties: ["overflow"], values: overflowValues },
+  overflowX: { properties: ["overflow-x"], values: overflowValues },
+  overflowY: { properties: ["overflow-y"], values: overflowValues }
 };
 
 // src/definitions/flexbox.js
@@ -140,16 +119,208 @@ var typography_default = {
 };
 
 // src/definitions/border.js
+var borderStyles = ["none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset", "initial", "inherit"];
 var border_default = {
-  border: { properties: ["border"], theme: "borders" },
+  border: { properties: ["border"], aliases: ["b"], theme: "borders" },
   borderWidth: { properties: ["border-width"], theme: "borderWidth" },
   borderRadius: { properties: ["border-radius"], theme: "radii" },
-  borderStyle: { properties: ["border-style"], values: [] },
+  borderStyle: { properties: ["border-style"], values: borderStyles },
   borderColor: { properties: ["border-color"], theme: "colors" },
-  borderLeft: { properties: ["border-left"], theme: "borders" },
+  borderLeft: { properties: ["border-left"], aliases: ["bl"], theme: "borders" },
+  borderLeftWidth: { properties: ["border-left-width"], theme: "borderWidth" },
+  borderLeftRadius: { properties: ["border-left-radius"], theme: "radii" },
+  borderLeftStyle: { properties: ["border-left-style"], values: borderStyles },
   borderLeftColor: { properties: ["border-left-color"], theme: "colors" },
-  borderLeftWidth: { properties: ["border-left-width"], theme: "borderWidth" }
+  borderRight: { properties: ["border-right"], aliases: ["br"], theme: "borders" },
+  borderRightWidth: { properties: ["border-right-width"], theme: "borderWidth" },
+  borderRightRadius: { properties: ["border-right-radius"], theme: "radii" },
+  borderRightStyle: { properties: ["border-right-style"], values: borderStyles },
+  borderRightColor: { properties: ["border-right-color"], theme: "colors" },
+  borderTop: { properties: ["border-top"], aliases: ["bt"], theme: "borders" },
+  borderTopWidth: { properties: ["border-top-width"], theme: "borderWidth" },
+  borderTopRadius: { properties: ["border-top-radius"], theme: "radii" },
+  borderTopStyle: { properties: ["border-top-style"], values: borderStyles },
+  borderTopColor: { properties: ["border-top-color"], theme: "colors" },
+  borderBottom: { properties: ["border-bottom"], aliases: ["bb"], theme: "borders" },
+  borderBottomWidth: { properties: ["border-bottom-width"], theme: "borderWidth" },
+  borderBottomRadius: { properties: ["border-bottom-radius"], theme: "radii" },
+  borderBottomStyle: { properties: ["border-bottom-style"], values: borderStyles },
+  borderBottomColor: { properties: ["border-bottom-color"], theme: "colors" },
+  borderX: { properties: ["border-left", "border-right"], aliases: ["bx"], theme: "borders" },
+  borderXWidth: { properties: ["border-left-width", "border-right-width"], theme: "borderWidth" },
+  borderXRadius: { properties: ["border-left-radius", "border-right-radius"], theme: "radii" },
+  borderXStyle: { properties: ["border-left-style", "border-right-style"], values: borderStyles },
+  borderXColor: { properties: ["border-left-color", "border-right-color"], theme: "colors" },
+  borderY: { properties: ["border-top", "border-bottom"], aliases: ["by"], theme: "borders" },
+  borderYWidth: { properties: ["border-top-width", "border-bottom-width"], theme: "borderWidth" },
+  borderYRadius: { properties: ["border-top-radius", "border-bottom-radius"], theme: "radii" },
+  borderYStyle: { properties: ["border-top-style", "border-bottom-style"], values: borderStyles },
+  borderYColor: { properties: ["border-top-color", "border-bottom-color"], theme: "colors" }
 };
+
+// src/definitions/index.js
+var definitions = {
+  color: color_default,
+  space: space_default,
+  layout: layout_default,
+  flexbox: flexbox_default,
+  typography: typography_default,
+  border: border_default
+};
+var propertiesMap = __spreadValues(__spreadValues(__spreadValues(__spreadValues(__spreadValues(__spreadValues({}, color_default), space_default), layout_default), flexbox_default), typography_default), border_default);
+var properties = Object.entries(propertiesMap).reduce((acc, [key, value]) => {
+  if (Array.isArray(value.aliases)) {
+    value.aliases.forEach((alias) => {
+      acc[alias] = value;
+    });
+  }
+  acc[key] = value;
+  return acc;
+}, {});
+
+// src/modes/index.js
+var modes_exports = {};
+__export(modes_exports, {
+  atomic: () => parse2,
+  css: () => parse,
+  inline: () => parse3
+});
+
+// src/modes/utils/hash.js
+function hash(str) {
+  let h = 0;
+  let k, i = 0, len = str.length;
+  for (; len >= 4; ++i, len -= 4) {
+    k = str.charCodeAt(i) & 255 | (str.charCodeAt(++i) & 255) << 8 | (str.charCodeAt(++i) & 255) << 16 | (str.charCodeAt(++i) & 255) << 24;
+    k = (k & 65535) * 1540483477 + ((k >>> 16) * 59797 << 16);
+    k ^= k >>> 24;
+    h = (k & 65535) * 1540483477 + ((k >>> 16) * 59797 << 16) ^ (h & 65535) * 1540483477 + ((h >>> 16) * 59797 << 16);
+  }
+  switch (len) {
+    case 3:
+      h ^= (str.charCodeAt(i + 2) & 255) << 16;
+    case 2:
+      h ^= (str.charCodeAt(i + 1) & 255) << 8;
+    case 1:
+      h ^= str.charCodeAt(i) & 255;
+      h = (h & 65535) * 1540483477 + ((h >>> 16) * 59797 << 16);
+  }
+  h ^= h >>> 13;
+  h = (h & 65535) * 1540483477 + ((h >>> 16) * 59797 << 16);
+  return ((h ^ h >>> 15) >>> 0).toString(36);
+}
+
+// src/modes/utils/index.js
+var definitionKeys = Object.keys(definitions);
+function getValueAtPath(key, obj) {
+  if (!obj) {
+    return void 0;
+  }
+  return key.split(/\./g).reduce((o, i) => o == null ? void 0 : o[i], obj);
+}
+function getThemeValueRecursively(value, theme, prop, stack = []) {
+  let root = theme == null ? void 0 : theme[prop.theme];
+  if (typeof value === "string") {
+    const [firstEl] = value.split(".");
+    const resolveTo = definitionKeys.find((key) => key === firstEl);
+    if (resolveTo) {
+      root = theme == null ? void 0 : theme[resolveTo];
+    }
+  }
+  if (typeof root === "object" && typeof value === "string") {
+    value = getValueAtPath(value, root) || value;
+  }
+  if (typeof value === "string" && getValueAtPath(value, root) || getValueAtPath(value, theme)) {
+    if (stack.includes(value)) {
+      throw new Error(`Circular reference detected when resolving theme value. Path was: ${[...stack, value].join(" > ")}`);
+    }
+    return getThemeValueRecursively(value, theme, prop, [...stack, value]);
+  }
+  return value;
+}
+
+// src/modes/css.js
+var cache = {};
+function sortEntriesByKey(entry1, entry2) {
+  return entry1[0].localeCompare(entry2[0]);
+}
+function resolve(value, property, theme) {
+  let resolvedValue = value;
+  if (typeof value === "string" && property.theme) {
+    resolvedValue = `var(--mikro-${property.theme}-${value})`;
+  } else {
+    resolvedValue = getThemeValueRecursively(value, theme, property);
+  }
+  return property.properties.map((property2) => `${property2}:${resolvedValue};`).join("");
+}
+function getRules(attrs, theme, cache2) {
+  const entries = Object.entries(attrs);
+  const classname = hash(entries.sort(sortEntriesByKey).flat().join(";"));
+  let css = cache2[classname];
+  if (!css) {
+    css = entries.reduce((str, [key, value]) => str + resolve(value, properties[key], theme), "");
+    cache2[classname] = css;
+  }
+  css = `.css-${classname} {${css}}`;
+  return { css, classname };
+}
+function parse(attrs, theme) {
+  return getRules(attrs, theme, cache);
+}
+
+// src/modes/atomic.js
+var defaultMap = {
+  display: "d",
+  "margin-x": "mx",
+  "margin-y": "my"
+};
+function getClassname(attr, value, breakpoint) {
+  if (defaultMap[attr]) {
+    attr = defaultMap[attr];
+  }
+  return breakpoint ? `${attr}-${breakpoint}-${value}` : `${attr}-${value}`;
+}
+function getClassnames(attrs, theme) {
+  const breakpoints = Object.entries(theme.breakpoints || {});
+  const entries = Object.entries(attrs);
+  return entries.reduce((acc, [attr, value]) => {
+    attr = attr.replace(/[a-z][A-Z]/g, (m) => m[0] + "-" + m[1].toLowerCase());
+    if (typeof value === "undefined" || value === null) {
+      return acc;
+    }
+    if (typeof value === "string") {
+      value = value.split(/\./g).join("-");
+    } else if (Array.isArray(value)) {
+      const classnames = value.reduce((a, v, i) => a + ` ${getClassname(attr, v, breakpoints[i][0])}`, "");
+      return acc + ` ${classnames}`;
+    }
+    return acc + ` ${getClassname(attr, value)}`;
+  }, "").trim();
+}
+function parse2(attrs, theme) {
+  const classnames = getClassnames(attrs, theme);
+  return { classnames };
+}
+
+// src/modes/inline.js
+function resolve2(prop, value, theme) {
+  return prop.properties.map((property) => {
+    value = getThemeValueRecursively(value, theme, prop);
+    return `${property}:${value};`;
+  }).join("");
+}
+function getStyles(attrs, theme) {
+  const entries = Object.entries(attrs);
+  return entries.reduce((acc, [key, value]) => {
+    const property = properties[key];
+    acc += resolve2(property, value, theme);
+    return acc;
+  }, "");
+}
+function parse3(attrs, theme) {
+  const styles = getStyles(attrs, theme);
+  return { styles };
+}
 
 // ../mikro-theme-default/src/colors.js
 var colors = {
@@ -514,69 +685,6 @@ var src_default = {
 };
 
 // src/index.js
-var properties = __spreadValues(__spreadValues(__spreadValues(__spreadValues(__spreadValues(__spreadValues({}, space_default), layout_default), flexbox_default), color_default), typography_default), border_default);
-function getDeep(key, obj) {
-  return key.split(/\./g).reduce((o, i) => o[i], obj);
-}
-function sortEntriesByKey(entry1, entry2) {
-  return entry1[0].localeCompare(entry2[0]);
-}
-function resolve(prop, value, theme) {
-  return prop.properties.map((property) => {
-    var _a;
-    if (prop.values) {
-      return `${property}:${value};`;
-    }
-    if (typeof (theme == null ? void 0 : theme[prop.theme]) === "object" && typeof value === "string") {
-      value = getDeep(value, theme[prop.theme]) || value;
-    }
-    if ((_a = theme == null ? void 0 : theme[prop.theme]) == null ? void 0 : _a[value]) {
-      return `${property}:var(--mikro-${prop.theme}-${value});`;
-    }
-    return `${property}:${value};`;
-  }).join("");
-}
-function getRules(attrs, theme, cache) {
-  const entries = Object.entries(attrs);
-  const classname = hash(entries.sort(sortEntriesByKey).flat().join(";"));
-  let css = cache[classname];
-  if (!css) {
-    css = entries.reduce((str, [key, value]) => str + resolve(properties[key], value, theme), "");
-    cache[classname] = css;
-  }
-  css = `.css-${classname} {${css}}`;
-  return { css, classname };
-}
-function getBreakpointClassname(attr, value, breakpoint) {
-  return `${attr}-${breakpoint}-${value}`;
-}
-function getStyles(attrs, theme) {
-  const entries = Object.entries(attrs);
-  return entries.reduce((acc, [key, value]) => {
-    const property = properties[key];
-    property.properties.forEach((prop) => {
-      acc += resolve(property, value, theme);
-    });
-    return acc;
-  }, "");
-}
-function getClassnames(attrs, theme) {
-  const breakpoints = Object.entries(theme.breakpoints);
-  const entries = Object.entries(attrs);
-  return entries.reduce((acc, [attr, value]) => {
-    attr = attr.replace(/[a-z][A-Z]/g, (m) => m[0] + "-" + m[1].toLowerCase());
-    if (typeof value === "undefined" || value === null) {
-      return acc;
-    }
-    if (typeof value === "string") {
-      value = value.split(/\./g).join("-");
-    } else if (Array.isArray(value)) {
-      const classnames = value.reduce((a, v, i) => a + ` ${getBreakpointClassname(attr, v, breakpoints[i][0])}`, "");
-      return acc + ` ${classnames}`;
-    }
-    return acc + ` ${[attr, value].join("-")}`;
-  }, "").trim();
-}
 function splitAttributes({
   input,
   component,
@@ -588,35 +696,34 @@ function splitAttributes({
   const unusedAttrs = {};
   const attrs = __spreadValues(__spreadValues(__spreadValues(__spreadValues({}, (_b = (_a = theme == null ? void 0 : theme.components) == null ? void 0 : _a[component]) == null ? void 0 : _b.baseStyle), (_e = (_d = (_c = theme == null ? void 0 : theme.components) == null ? void 0 : _c[component]) == null ? void 0 : _d.variants) == null ? void 0 : _e[variant]), (_f = theme == null ? void 0 : theme.layerStyles) == null ? void 0 : _f[layerStyle]), input);
   for (const key in attrs) {
-    if (!properties[key]) {
+    if (properties[key]) {
+      if (typeof attrs[key] === "undefined" || attrs[key] === null) {
+        delete attrs[key];
+      }
+    } else {
       unusedAttrs[key] = attrs[key];
       delete attrs[key];
     }
   }
   return { unusedAttrs, attrs };
 }
-function parse({
+function parse4({
   input,
   component,
   variant,
   layerStyle,
   theme = src_default,
-  cache,
-  mode
-}) {
+  mode = "css"
+} = {}) {
   if (typeof theme === "undefined") {
     console.warn("No theme defined. Using default theme.");
   }
+  const parser = modes_exports[mode];
+  if (!parser) {
+    throw new Error(`Mode "${mode}" is not a valid mode. Must be one of ${Object.keys(modes_exports).join(", ")}`);
+  }
   const { unusedAttrs, attrs } = splitAttributes({ input, component, variant, layerStyle, theme });
-  if (mode === "class") {
-    const classnames = getClassnames(attrs, theme);
-    return { attrs: unusedAttrs, classnames };
-  }
-  if (mode === "inline") {
-    const styles = getStyles(attrs, theme);
-    return { attrs: unusedAttrs, styles };
-  }
-  const { css, classname } = getRules(attrs, theme, cache);
-  return { attrs: unusedAttrs, css, classname };
+  const result = parser(attrs, theme);
+  return __spreadValues({ attrs: unusedAttrs }, result);
 }
 module.exports = __toCommonJS(src_exports);

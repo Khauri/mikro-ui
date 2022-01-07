@@ -1,0 +1,9 @@
+{
+  "input": {
+    "mx": "20px",
+    "marginX": "10px",
+    "d": "flex",
+    "display": "flex"
+  },
+  "mode": "inline"
+}
