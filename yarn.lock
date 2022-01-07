@@ -1776,7 +1776,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@mikro-ui/core@workspace:packages/mikro-ui-core"
   dependencies:
-    "@mikro-ui/style": 1.0.1
+    "@mikro-ui/style": 1.0.2
     "@mikro-ui/test": 1.0.0
     "@mikro-ui/theme-default": 1.0.0
     "@mikro-ui/theme-utils": 1.0.0
@@ -1798,7 +1798,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mikro-ui/style@1.0.1, @mikro-ui/style@workspace:packages/mikro-style":
+"@mikro-ui/style@1.0.2, @mikro-ui/style@workspace:packages/mikro-style":
   version: 0.0.0-use.local
   resolution: "@mikro-ui/style@workspace:packages/mikro-style"
   dependencies:

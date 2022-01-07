@@ -18,8 +18,7 @@ import {parse} from '@mikro-ui/style';
   component: componentName, 
   variant,
   layerStyle,
-  cache: providedProps?.cache ?? {},
-  mode: providedProps?.mode ?? mode,
+  mode: mode ?? providedProps?.mode,
 }) />
 
 <if=result.css>

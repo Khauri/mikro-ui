@@ -7,7 +7,7 @@ export function getValueAtPath(key, obj) {
   if(!obj) {
     return undefined;
   }
-  return key.split(/\./g).reduce((o, i) => o?.[i], obj);
+  return `${key}`.split(/\./g).reduce((o, i) => o?.[i], obj);
 }
 
 export function getThemeValueRecursively(value, theme, prop, stack = []) {

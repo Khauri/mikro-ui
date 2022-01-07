@@ -1,6 +1,6 @@
 // Outputs css
 import hash from './utils/hash';
-import {getThemeValueRecursively} from './utils';
+import {getThemeValueRecursively, getValueAtPath} from './utils';
 import {properties} from '../definitions';
 
 const cache = {};
@@ -9,11 +9,19 @@ function sortEntriesByKey(entry1, entry2) {
   return entry1[0].localeCompare(entry2[0]);
 }
 
+function isRawValue(v, values) {
+  if(values?.includes(v)) {
+    return true;
+  }
+  // Includes symbols or is a css number
+  return /.*([\[\]\(\)#,\s]).*|\d+\s*(p[txp]|%|r?em|v[wh]|ex|vmax|vmin|in|[cm]m|ch)$/.test(v);
+}
+
 function resolve(value, property, theme) {
-  // Determining when to use css variables vs when use classes should be more sophisticated than this probably
-  let resolvedValue = value;
-  if(typeof value === 'string' && property.theme) {
-    resolvedValue = `var(--mikro-${property.theme}-${value})`;
+  // Determining when to use css variables vs raw value should be more sophisticated than this probably
+  let resolvedValue;
+  if(property.theme && getValueAtPath(value, theme[property.theme])) {
+    resolvedValue = `var(--${property.theme}-${value})`.replace(/\./g, '-');
   } else {
     resolvedValue = getThemeValueRecursively(value, theme, property);
   }

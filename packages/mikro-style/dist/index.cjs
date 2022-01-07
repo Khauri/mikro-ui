@@ -216,7 +216,7 @@ function getValueAtPath(key, obj) {
   if (!obj) {
     return void 0;
   }
-  return key.split(/\./g).reduce((o, i) => o == null ? void 0 : o[i], obj);
+  return `${key}`.split(/\./g).reduce((o, i) => o == null ? void 0 : o[i], obj);
 }
 function getThemeValueRecursively(value, theme, prop, stack = []) {
   let root = theme == null ? void 0 : theme[prop.theme];
@@ -245,9 +245,9 @@ function sortEntriesByKey(entry1, entry2) {
   return entry1[0].localeCompare(entry2[0]);
 }
 function resolve(value, property, theme) {
-  let resolvedValue = value;
-  if (typeof value === "string" && property.theme) {
-    resolvedValue = `var(--mikro-${property.theme}-${value})`;
+  let resolvedValue;
+  if (property.theme && getValueAtPath(value, theme[property.theme])) {
+    resolvedValue = `var(--${property.theme}-${value})`.replace(/\./g, "-");
   } else {
     resolvedValue = getThemeValueRecursively(value, theme, property);
   }

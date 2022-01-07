@@ -4,17 +4,18 @@ import {getThemeVariables, mergeThemes} from '@mikro-ui/theme-utils';
 <get/parentAttrs="." />
 
 <attrs/{
-  default: theme = parentAttrs?.theme,
-  mode = theme?.mode,
-  customize,
+  default: themeDef = parentAttrs?.theme,
+  theme = themeDef,
+  mode : inpMode = parentAttrs?.mode,
   renderBody,
 } />
 
 <const/mergedTheme=mergeThemes(parentAttrs?.theme ?? defaultTheme, theme) />
-<let/cache=(parentAttrs?.cache || {}) />
+
+<const/mode=(inpMode ?? mergedTheme.mode) />
 
 <!-- This will be optimized later. Just prototyping right now. -->
-<if=(mode !== 'class' && mode !== 'inline')>
+<if=(mode === 'css')>
   <css=`
     :host, :root {${getThemeVariables(mergedTheme)} }
     
@@ -30,6 +31,6 @@ import {getThemeVariables, mergeThemes} from '@mikro-ui/theme-utils';
   ` id="mikro-theme"/>
 </if>
 
-<set={customizeFn: customize, theme: mergedTheme, mode, cache}>
+<set={theme: mergedTheme, mode}>
   <${renderBody} />
 </set>

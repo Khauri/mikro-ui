@@ -7,7 +7,7 @@
     "test:update": "mocha --recursive __tests__ -- --update-snapshots"
   },
   "dependencies": {
-    "@mikro-ui/style": "1.0.1",
+    "@mikro-ui/style": "1.0.2",
     "@mikro-ui/theme-default": "1.0.0",
     "@mikro-ui/theme-utils": "1.0.0"
   },
