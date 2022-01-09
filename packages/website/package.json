@@ -3,17 +3,25 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
+  "private": true,
   "directories": {
     "doc": "docs"
   },
   "scripts": {
     "dev": "marko-serve .",
+    "devv": "node --experimental-specifier-resolution=node ./index",
+    "build": "vite build",
+    "preview": "vite preview",
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@marko/express": "^1.0.0",
     "@marko/tags-api-preview": "^0.1.9",
     "@mikro-ui/theme-default": "^1.0.0",
     "@mikro-ui/tokens": "^1.0.0",
+    "compression": "^1.7.4",
+    "express": "^4.17.2",
     "marko": "^5.17.3",
     "mikro-ui": "1.0.0",
     "remark-mikro": "1.0.0"
@@ -24,10 +32,12 @@
   "devDependencies": {
     "@marko/build": "4.2.3",
     "@marko/serve": "^4.2.3",
+    "@marko/vite": "^2.2.6",
     "patch-package": "^6.4.7",
     "remark-loader": "^4.0.0",
     "sass": "^1.44.0",
     "sass-loader": "^12.3.0",
+    "vite": "^2.7.10",
     "webpack-inject-plugin": "^1.5.5"
   }
 }
