@@ -20,7 +20,6 @@ const markdownToMarkoPlugin = {
       return `${id}${QUERY}`;
     }
     if(id.endsWith('.md.marko')) {
-      // For some reason `id` is an absolute url relative to the project root... No idea what that's about tbh
       let resolved;
       if(importer.endsWith(QUERY)) {
         resolved = importer.replace(QUERY, '') + '.marko';
