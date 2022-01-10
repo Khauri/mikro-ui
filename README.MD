@@ -26,9 +26,14 @@ npm install marko @marko/tags-api-preview mikro
 
 That's pretty much it. Due to Marko's tag resolution algorithm you will be able to immediately use the mikro tags that were installed. Refer to the documentation to configure the behavior.
 
-### Individual Packages
+### Packages
 
 The mikro tags are split into individual packages and the essential tags are combined into one package -- `mikro`, for convenience. If you only want to install a subset of the tags, install those packages individually.
+
+| **Package** | **Description** | **Version** |
+| ----------- | --------------- | --------------- |
+| [@mikro-ui/core](./packages/core) | Core mikro components. | [<img src="https://img.shields.io/npm/v/@mikro-ui/core" alt="npm" />](https://www.npmjs.com/package/@mikro-ui/core) |
+| [@mikro-ui/style](./packages/style) | Style parser for converting attributes to classes or inline style strings. | [<img src="https://img.shields.io/npm/v/@mikro-ui/style" alt="npm" />](https://www.npmjs.com/package/@mikro-ui/style) |
 
 ## Usage
 
