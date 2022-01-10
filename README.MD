@@ -75,14 +75,13 @@ Let's say you want every component to accept a new attribute. Use the provider t
 
 ## Development
 
-Currently development consists of building the documentation using the componennts here. In the future unit testing and performance testing will be the primary goal.
+Currently development consists of building the documentation using the components here.
+In the near future unit testing and performance testing will be the primary goal.
 
-This project is managed with `Yarn Workspaces`.
+This project is managed with `Yarn Workspaces`. Ensure you have the version of yarn specified in the `packageManager` section of the `package.json` instealled.
 
 ```sh
 git clone ....
 yarn install
 yarn dev
 ```
-
-Some temporary patches have been applied to `@marko/build`, not because `@marko/build` is broken, but rather due to the laziness of not wanting to create the markdown -> marko transpilations myself. Also hoisting packages as yarn workspaces does causes a weird issue with specifically `sass` not being found using `resolve-from`. Too lazy to investigate so it was patched into a warning instead of an error.
