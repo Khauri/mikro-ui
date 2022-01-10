@@ -1,8 +1,10 @@
 ## Mikro
 
-This is a design-system starter UI kit. These components along with theming functionality are used as a basis for creating your own elements.
+This is a design-system starter UI kit. These components, along with theming functionality, are used as a basis for creating your own components.
 
-The goal is to create a shared, easily referencable language for component architecture as well as eliminate the chore of worrying about css.
+The main goal is to create a shared, easily referencable language for component architecture as well as eliminate the chore of worrying about optimizing stylesheet bundles or css scoping issues.
+
+A secondary goal is to enable the creation of community components without the added burden of figuring out how to incorporate styles. Component creators do not need to burden themselves with using plain css over pre-compiled. mikro gives you an api and it's up to the user to decide how the styles will be output.
 
 Inspiration: Chakra UI, Rebass, Styled Components, Bootstrap, Tailwind.
 
@@ -32,8 +34,8 @@ The mikro tags are split into individual packages and the essential tags are com
 
 | **Package** | **Description** | **Version** |
 | ----------- | --------------- | --------------- |
-| [@mikro-ui/core](./packages/core) | Core mikro components. | [<img src="https://img.shields.io/npm/v/@mikro-ui/core" alt="npm" />](https://www.npmjs.com/package/@mikro-ui/core) |
-| [@mikro-ui/style](./packages/style) | Style parser for converting attributes to classes or inline style strings. | [<img src="https://img.shields.io/npm/v/@mikro-ui/style" alt="npm" />](https://www.npmjs.com/package/@mikro-ui/style) |
+| [@mikro-ui/core](./packages/mikro-ui-core) | Core mikro components. | [<img src="https://img.shields.io/npm/v/@mikro-ui/core" alt="npm" />](https://www.npmjs.com/package/@mikro-ui/core) |
+| [@mikro-ui/style](./packages/mikro-style) | Style parser for converting attributes to classes or inline style strings. | [<img src="https://img.shields.io/npm/v/@mikro-ui/style" alt="npm" />](https://www.npmjs.com/package/@mikro-ui/style) |
 
 ## Usage
 
@@ -65,18 +67,6 @@ Customization is based on design tokens, specifically the [theme specification](
 Your custom theme will be merged with the default theme, so it's not necessary to provide configs for every value if you happen to like the defaults.
 
 There are also component variant styles, layer styles, and colorSchemes that will help keep your design consistent across as many diffferent themes as you need. Themes can be tested and swapped out on-the-fly client-side as well.
-
-### Adding new attributes globally
-
-Let's say you want every component to accept a new attribute. Use the provider to customize the attributes that a component will accept.
-
-```marko
-<const/theme={ /* ... */ } />
-
-<styled-provider=theme attributes={}>
-  ...
-</styled-provider>
-```
 
 ## Development
 
