@@ -21,7 +21,7 @@ function isThemeValue(value) {
 export function getThemeVariables(theme) {
   return Object.entries(theme)
     .filter(isThemeValue)
-    .map(([type, values]) => getThemeVariable(`--mikro`, type, values))
+    .map(([type, values]) => getThemeVariable(theme.prefix ?? `--mikro`, type, values))
     .join('');
 }
 

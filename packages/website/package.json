@@ -33,6 +33,7 @@
     "@marko/build": "4.2.3",
     "@marko/serve": "^4.2.3",
     "@marko/vite": "^2.2.6",
+    "@originjs/vite-plugin-commonjs": "^1.0.2",
     "patch-package": "^6.4.7",
     "remark-loader": "^4.0.0",
     "sass": "^1.44.0",

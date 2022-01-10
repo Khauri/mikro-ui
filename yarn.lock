@@ -1924,6 +1924,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@originjs/vite-plugin-commonjs@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "@originjs/vite-plugin-commonjs@npm:1.0.2"
+  dependencies:
+    esbuild: ^0.13.15
+  checksum: 50fe6f34ef16b057b2f01155f702eafa0036ab33e5236385bf584f14fac2399a1c9f4f3131cb789d4646cf37cd04b0caa4df97de338bc7fefb961e89f44dfd04
+  languageName: node
+  linkType: hard
+
 "@sindresorhus/is@npm:^0.14.0":
   version: 0.14.0
   resolution: "@sindresorhus/is@npm:0.14.0"
@@ -5651,7 +5660,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.13.12":
+"esbuild@npm:^0.13.12, esbuild@npm:^0.13.15":
   version: 0.13.15
   resolution: "esbuild@npm:0.13.15"
   dependencies:
@@ -10128,6 +10137,7 @@ __metadata:
     "@marko/vite": ^2.2.6
     "@mikro-ui/theme-default": ^1.0.0
     "@mikro-ui/tokens": ^1.0.0
+    "@originjs/vite-plugin-commonjs": ^1.0.2
     compression: ^1.7.4
     express: ^4.17.2
     marko: ^5.17.3

@@ -12,7 +12,7 @@ import {getThemeVariables, mergeThemes} from '@mikro-ui/theme-utils';
 
 <const/mergedTheme=mergeThemes(parentAttrs?.theme ?? defaultTheme, theme) />
 
-<const/mode=(inpMode ?? mergedTheme.mode) />
+<const/mode=(inpMode ?? mergedTheme.mode ?? 'css') />
 
 <!-- This will be optimized later. Just prototyping right now. -->
 <if=(mode === 'css')>

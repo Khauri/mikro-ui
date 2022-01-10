@@ -3,6 +3,8 @@ import marko from "@marko/vite";
 import remark from 'remark';
 import remarkMikro from 'remark-mikro';
 import path from 'path';
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs'
+
 
 const virtualFiles = new Map();
 const QUERY = `?md=marko`;
@@ -26,7 +28,6 @@ const markdownToMarkoPlugin = {
       } else {
         // in ssr mode the id is relative to the project root
         resolved = path.join(path.dirname(importer), id);
-        console.log({id, importer, resolved});
       }
       if(virtualFiles.has(resolved)) {
         return resolved;
@@ -57,6 +58,7 @@ const markdownToMarkoPlugin = {
 
 export default defineConfig({
   plugins: [
+    viteCommonjs(),
     markdownToMarkoPlugin,
     marko(),
   ],

@@ -13,9 +13,9 @@ const pages = new Router();
 const root = path.join(__dirname, 'pages');
 
 const types = {
-  'md': {loader: 'import'},
+  'md': {},
   // use 'require' for Marko because it relies on some cjs stuff. This may or may not cause issues tbh.
-  'marko': {loader: 'require'}
+  'marko': {}
 }
 
 // Determine if a file is a component (as opposed to a page)
@@ -39,7 +39,7 @@ async function addRoute(file) {
   if(!types[ext]) {
     return;
   }
-  const page = types[ext].loader === 'require' ? require(file) : await import(file);
+  const page = await import(file);
   pages.get(route, (req, res) => res.marko(page.default || page, {}));
 }
 
