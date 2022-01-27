@@ -12,7 +12,7 @@
     "@mikro-ui/theme-utils": "1.0.0"
   },
   "peerDependencies": {
-    "@marko/tags-api-preview": "^0.1.9"
+    "@marko/tags-api-preview": "^0.2.0"
   },
   "devDependencies": {
     "@mikro-ui/test": "1.0.0",

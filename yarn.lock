@@ -1732,10 +1732,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@marko/tags-api-preview@npm:^0.1.9":
-  version: 0.1.11
-  resolution: "@marko/tags-api-preview@npm:0.1.11"
-  checksum: 556e18a955febc86768ef09efec20fc8de3eead337d848749b9c2eeda449eaca0c7f7aa93acb0eb7b4d5c3424c33553f8377c472c26073aa65208563d1d2f58a
+"@marko/tags-api-preview@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@marko/tags-api-preview@npm:0.2.0"
+  checksum: 0ae3e5c561da56d45271d063b7ae64043c54badb269d26c5bd6a78e01d659d52c10e445e3eff9c627d8d1270c5f06b2c23f4183fb22e76f085406e17ae577c5c
   languageName: node
   linkType: hard
 
@@ -1808,7 +1808,7 @@ __metadata:
     chai: ^4.2.0
     mocha: ^9.1.3
   peerDependencies:
-    "@marko/tags-api-preview": ^0.1.9
+    "@marko/tags-api-preview": ^0.2.0
   languageName: unknown
   linkType: soft
 
@@ -1819,7 +1819,7 @@ __metadata:
     "@marko-tags/portal": ^1.2.1
     "@marko/serve": ^4.2.3
   peerDependencies:
-    "@marko/tags-api-preview": ^0.1.9
+    "@marko/tags-api-preview": ^0.2.0
   languageName: unknown
   linkType: soft
 
@@ -10036,7 +10036,7 @@ __metadata:
   dependencies:
     "@mikro-ui/core": 1.0.1
   peerDependencies:
-    "@marko/tags-api-preview": ^0.1.9
+    "@marko/tags-api-preview": ^0.2.0
   languageName: unknown
   linkType: soft
 
@@ -10046,7 +10046,7 @@ __metadata:
   dependencies:
     "@mikro-ui/core": 1.0.1
   peerDependencies:
-    "@marko/tags-api-preview": ^0.1.9
+    "@marko/tags-api-preview": ^0.2.0
   languageName: unknown
   linkType: soft
 
@@ -10056,7 +10056,7 @@ __metadata:
   dependencies:
     "@mikro-ui/core": 1.0.1
   peerDependencies:
-    "@marko/tags-api-preview": ^0.1.9
+    "@marko/tags-api-preview": ^0.2.0
   languageName: unknown
   linkType: soft
 
@@ -10066,7 +10066,7 @@ __metadata:
   dependencies:
     "@mikro-ui/core": 1.0.1
   peerDependencies:
-    "@marko/tags-api-preview": ^0.1.9
+    "@marko/tags-api-preview": ^0.2.0
   languageName: unknown
   linkType: soft
 
@@ -10076,7 +10076,7 @@ __metadata:
   dependencies:
     "@mikro-ui/core": 1.0.1
   peerDependencies:
-    "@marko/tags-api-preview": ^0.1.9
+    "@marko/tags-api-preview": ^0.2.0
   languageName: unknown
   linkType: soft
 
@@ -10086,7 +10086,7 @@ __metadata:
   dependencies:
     "@mikro-ui/core": 1.0.1
   peerDependencies:
-    "@marko/tags-api-preview": ^0.1.9
+    "@marko/tags-api-preview": ^0.2.0
   languageName: unknown
   linkType: soft
 
@@ -10096,7 +10096,7 @@ __metadata:
   dependencies:
     "@mikro-ui/core": 1.0.1
   peerDependencies:
-    "@marko/tags-api-preview": ^0.1.9
+    "@marko/tags-api-preview": ^0.2.0
   languageName: unknown
   linkType: soft
 
@@ -10121,7 +10121,7 @@ __metadata:
     mikro-ui-typography: 1.0.0
     mikro-ui-utils: 1.0.0
   peerDependencies:
-    "@marko/tags-api-preview": ^0.1.9
+    "@marko/tags-api-preview": ^0.2.0
     marko: ^5.17.3
   languageName: unknown
   linkType: soft
@@ -10133,7 +10133,7 @@ __metadata:
     "@marko/build": 4.2.3
     "@marko/express": ^1.0.0
     "@marko/serve": ^4.2.3
-    "@marko/tags-api-preview": ^0.1.9
+    "@marko/tags-api-preview": ^0.2.0
     "@marko/vite": ^2.2.6
     "@mikro-ui/theme-default": ^1.0.0
     "@mikro-ui/tokens": ^1.0.0
