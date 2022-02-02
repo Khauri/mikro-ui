@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import {Router} from "express";
 import {fileURLToPath} from 'url';
+import template from './pages/docs/theming/index.md';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -9,6 +10,8 @@ const __dirname = path.dirname(__filename);
 const pages = new Router();
 
 const root = path.join(__dirname, 'pages');
+
+// The modules have to be pre-resolved or else hmr won't work at all.
 const modules = import.meta.glob('./pages/**/*.{marko,md}');
 
 const types = {
@@ -40,7 +43,7 @@ function addRoute(file) {
   }
   pages.get(route, async (req, res) => {
     const moduleId = `./pages/${relPath}`;
-    // TODO: HMR seems to work, but it doesn't seem to auto-reload the page. Maybe because how how it's imported here?
+    // TODO: For md files, HMR seems to work, but it doesn't seem to auto-reload the page. Maybe because how how it's imported here?
     // Seems like the hmr client isn't being send down here at all. Doesn't seem to matter is ssrLoadModule is used
     const page = await (modules[moduleId]());
     res.marko(page.default || page, {})
@@ -61,5 +64,7 @@ function walk(dir, router){
 };
 
 walk(path.join(__dirname, 'pages'), pages);
+
+pages.get('/test', (req, res) => { res.marko(template, {}) });
 
 export default pages;
