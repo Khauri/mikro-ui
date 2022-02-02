@@ -40,7 +40,9 @@ async function addRoute(file) {
     return;
   }
   const page = await import(file);
-  pages.get(route, (req, res) => res.marko(page.default || page, {}));
+  pages.get(route, (req, res) => {
+    res.marko(page.default || page, {})
+  });
 }
 
 // walk the pages directory and add each page to the router
@@ -49,8 +51,7 @@ function walk(dir, router){
     const path = dir + '/' + file;
     const stat = fs.statSync(path);
     if (stat.isDirectory()) {
-      walk(path, router);
-      return;
+      return walk(path, router);
     }
     await addRoute(path);
   });
