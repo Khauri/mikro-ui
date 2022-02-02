@@ -12,20 +12,21 @@ export default function markdownToMarkoPlugin() {
   return {
     name: 'markdown-marko',
     enforce: 'pre',
-    // async handleHotUpdate(ctx) {
-    //   try {
-    //     const id = `${ctx.file}.marko`;
-    //     const source = await ctx.read();
-    //     const vfile = await parser.process(source);
-    //     const [updated] = ctx.modules[0].importedModules;
-    //     virtualFiles.set(updated.id, vfile.contents);
-    //     // console.dir(virtualFiles.has(updated.id));
-    //     console.log({id, updated});
-    //     return ctx.modules;
-    //   } catch(err) {
-    //     console.error(err);
-    //   }
-    // },
+    async handleHotUpdate(ctx) {
+      try {
+        const id = `${ctx.file}.marko`;
+        if(!virtualFiles.has(id)) {
+          return null;
+        }
+        const source = await ctx.read();
+        const vfile = await parser.process(source);
+        const [updated] = ctx.modules[0].importedModules;
+        virtualFiles.set(id, vfile.contents);
+        return [updated];
+      } catch(err) {
+        console.error(err);
+      }
+    },
 
     // Takes in a raw id and tries to resolve it to an absolute id.
     // to the end of the id so that we know to transform it in the transform step.

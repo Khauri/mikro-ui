@@ -2,8 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import {Router} from "express";
 import {fileURLToPath} from 'url';
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,7 +22,7 @@ function isComponent(file) {
 }
 
 // Adds a page to the router given its filepath
-async function addRoute(file) {
+function addRoute(file) {
   if(isComponent(file)) {
     return;
   }
@@ -39,25 +37,26 @@ async function addRoute(file) {
   if(!types[ext]) {
     return;
   }
-  const page = await import(file);
-  pages.get(route, (req, res) => {
+  pages.get(route, async (req, res) => {
+    // TODO: HMR seems to work, but it doesn't seem to auto-reload the page. Maybe because how how it's imported here?
+    const page = await import(file);
     res.marko(page.default || page, {})
   });
 }
 
 // walk the pages directory and add each page to the router
 function walk(dir, router){
-  const promises = fs.readdirSync(dir).map(async file => {
+  fs.readdirSync(dir).forEach(file => {
     const path = dir + '/' + file;
     const stat = fs.statSync(path);
-    if (stat.isDirectory()) {
-      return walk(path, router);
+    if(stat.isDirectory()) {
+      walk(path, router);
+      return;
     }
-    await addRoute(path);
+    addRoute(path);
   });
-  return Promise.all(promises);
 };
 
-await walk(path.join(__dirname, 'pages'), pages);
+walk(path.join(__dirname, 'pages'), pages);
 
 export default pages;
