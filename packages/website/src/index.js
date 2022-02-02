@@ -9,6 +9,7 @@ const __dirname = path.dirname(__filename);
 const pages = new Router();
 
 const root = path.join(__dirname, 'pages');
+const modules = import.meta.glob('./pages/**/*.{marko,md}');
 
 const types = {
   'md': {},
@@ -38,8 +39,10 @@ function addRoute(file) {
     return;
   }
   pages.get(route, async (req, res) => {
+    const moduleId = `./pages/${relPath}`;
     // TODO: HMR seems to work, but it doesn't seem to auto-reload the page. Maybe because how how it's imported here?
-    const page = await import(file);
+    // Seems like the hmr client isn't being send down here at all. Doesn't seem to matter is ssrLoadModule is used
+    const page = await (modules[moduleId]());
     res.marko(page.default || page, {})
   });
 }

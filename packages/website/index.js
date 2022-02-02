@@ -21,15 +21,19 @@ const port = process.env.PORT || 3000;
       server: { middlewareMode: true }
     });
     app.use(devServer.middlewares);
-    app.use(async (req, res, next) =>
-      (await devServer.ssrLoadModule('./src/index')).default(req, res, err => {
+    app.use(async (req, res, next) => {
+      req.devServer = devServer;
+      const handler = await devServer.ssrLoadModule('./src/index');
+      const onerr = (err) => {
         if (err) {
           devServer.ssrFixStacktrace(err);
           next(err);
         } else {
           next();
         }
-      })
+      }
+      handler.default(req, res, onerr);
+    }
     );
   }
 
