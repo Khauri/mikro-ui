@@ -4,6 +4,18 @@ import fs from 'fs';
 
 const parser = remark().use(remarkMikro);
 
+async function parseAndWrite(id, source) {
+  const {contents: result} = await parser.process(source);
+  // Don't overwrite if result hasn't changed. Can probably do this in memory so it's quicker
+  if(fs.existsSync(id)) {
+    const oldResult = fs.readFileSync(id);
+    if(oldResult === result) {
+      return;
+    }
+  }
+  fs.writeFileSync(id, result);
+}
+
 // This plugin must be placed after the marko plugin.
 // Currently I've had to write the file to disk because marko can't read virtual files.
 export function md2Marko() {
@@ -19,21 +31,19 @@ export function md2Marko() {
         }
         const id = `${ctx.file}.marko`;
         const source = await ctx.read();
-        const vfile = await parser.process(source);
-        fs.writeFileSync(id, vfile.contents);
+        await parseAndWrite(id, source);
         return null;
       } catch(err) {
         console.error(err);
       }
     },
 
-    async transform(source, id, {ssr} = {}) {
+    async transform(source, id) {
       if(!id.endsWith('.md')) {
         return null;
       }
       let url = `${id}.marko`;
-      const vfile = await parser.process(source);
-      fs.writeFileSync(url, vfile.contents);
+      await parseAndWrite(url, source);
       return {code: `import template from "${url}"; export default template;`};
     }
   }

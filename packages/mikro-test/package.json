@@ -4,7 +4,7 @@
   "packageManager": "yarn@3.1.1",
   "main": "dist/index.cjs",
   "dependencies": {
-    "@marko/compiler": "^5.17.4",
+    "@marko/compiler": "^5.19.1",
     "@marko/fixture-snapshots": "^2.1.6",
     "@marko/testing-library": "^6.0.0",
     "@testing-library/user-event": "^13.5.0",

@@ -43,8 +43,6 @@ function addRoute(file) {
   }
   pages.get(route, async (req, res) => {
     const moduleId = `./pages/${relPath}`;
-    // TODO: For md files, HMR seems to work, but it doesn't seem to auto-reload the page. Maybe because how how it's imported here?
-    // Seems like the hmr client isn't being send down here at all. Doesn't seem to matter is ssrLoadModule is used
     const page = await (modules[moduleId]());
     res.marko(page.default || page, {})
   });

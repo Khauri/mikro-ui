@@ -1,16 +1,7 @@
 {
   "name": "@mikro-ui/draggable",
   "packageManager": "yarn@3.1.1",
-  "scripts": {
-    "dev": "marko-serve ./test-page"
-  },
   "peerDependencies": {
-    "@marko/tags-api-preview": "^0.2.1"
-  },
-  "dependencies": {
-    "@marko-tags/portal": "^1.2.1"
-  },
-  "devDependencies": {
-    "@marko/serve": "^4.2.3"
+    "@marko/tags-api-preview": "^0.2.0"
   }
 }
