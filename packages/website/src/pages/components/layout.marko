@@ -1,0 +1,27 @@
+<attrs/{renderBody, tableOfContents} />
+
+<app-layout>
+  <@body>
+    <const/theme={
+      fonts: {
+        body: "'Roboto', sans-serif",
+        heading: "'Raleway', sans-serif",
+        mono: "Menlo, monospace",
+      },
+      prefix: '-',
+    } />
+    <styled-provider=theme mode="css">
+      <v-stack>
+        <site-header />
+        <h-stack position="relative">
+          <navigation />
+          <content>
+            <${renderBody} />
+          </content>
+          <!-- Do this automatically sommehow? -->
+          <table-of-contents table=tableOfContents />
+        </h-stack>
+      </v-stack>
+    </styled-provider>
+  </@body>
+</app-layout>
