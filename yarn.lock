@@ -1547,6 +1547,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@marko/babel-utils@npm:^5.20.0":
+  version: 5.20.0
+  resolution: "@marko/babel-utils@npm:5.20.0"
+  dependencies:
+    "@babel/runtime": ^7.16.0
+    jsesc: ^3.0.2
+    relative-import-path: ^1.0.0
+  checksum: 7fb30763e4bd71a25847503280ec30ba6d569f3d1b5230049a6edb21c326a0c32b4cdd126ae511405c0c2f1ea35c835a8afa4e754d3ca64b370de45739f5bc32
+  languageName: node
+  linkType: hard
+
 "@marko/compiler@npm:^5.17.6, @marko/compiler@npm:^5.19.1":
   version: 5.19.1
   resolution: "@marko/compiler@npm:5.19.1"
@@ -1574,6 +1585,36 @@ __metadata:
     strip-ansi: ^6.0.0
     strip-json-comments: ^3.1.1
   checksum: cf2abcf818c2a8fe475713a968647ad2b21f3e988749aae1aa4206e28c4bb9c5613cdd41cd797de38804cba641a2148326173441970874a432ed82939264fe18
+  languageName: node
+  linkType: hard
+
+"@marko/compiler@npm:^5.19.0":
+  version: 5.20.0
+  resolution: "@marko/compiler@npm:5.20.0"
+  dependencies:
+    "@babel/code-frame": ^7.16.0
+    "@babel/core": ^7.16.0
+    "@babel/generator": ^7.16.0
+    "@babel/parser": ^7.16.0
+    "@babel/plugin-transform-modules-commonjs": ^7.16.0
+    "@babel/runtime": ^7.16.0
+    "@babel/traverse": ^7.16.0
+    "@babel/types": ^7.16.0
+    "@marko/babel-utils": ^5.20.0
+    complain: ^1.6.0
+    enhanced-resolve: 5.7.0
+    he: ^1.2.0
+    htmljs-parser: ^2.11.1
+    jsesc: ^3.0.2
+    lasso-package-root: ^1.0.1
+    property-handlers: ^1.1.1
+    raptor-regexp: ^1.0.1
+    raptor-util: ^3.2.0
+    resolve-from: ^5.0.0
+    self-closing-tags: ^1.0.1
+    strip-ansi: ^6.0.0
+    strip-json-comments: ^3.1.1
+  checksum: 040535c82d999e934a3357633e239a56442de5f309f47bdf2543f34475409bb24f8ec08a8e6ad3ca84e22551de95d013f36087c643ca9a985e9fabcd70b22d71
   languageName: node
   linkType: hard
 
@@ -1614,10 +1655,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@marko/tags-api-preview@npm:^0.2.0":
-  version: 0.2.1
-  resolution: "@marko/tags-api-preview@npm:0.2.1"
-  checksum: 93477880df1b539fb8a66875ad7ab2f71c29d03d363661914d4847052b709721291dfc5a495065847ab91aa80f72efe953a58e5a57c835c659e3b998fe8b3003
+"@marko/tags-api-preview@npm:^0.4.1":
+  version: 0.4.1
+  resolution: "@marko/tags-api-preview@npm:0.4.1"
+  checksum: 9d23d07d145f45520c50560eb060496280093f86cc5b7bc0f1dd23d39e60a3ae62106c2f51017a006c958b3808f71cfb4e31f5b07034621ec9ff56f72f44a98a
   languageName: node
   linkType: hard
 
@@ -1649,6 +1690,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@marko/translator-default@npm:^5.19.3":
+  version: 5.20.0
+  resolution: "@marko/translator-default@npm:5.20.0"
+  dependencies:
+    "@babel/runtime": ^7.16.0
+    "@marko/babel-utils": ^5.20.0
+    escape-string-regexp: ^4.0.0
+    magic-string: ^0.25.7
+    self-closing-tags: ^1.0.1
+  peerDependencies:
+    "@marko/compiler": ^5.16.1
+    marko: ^5.17.2
+  checksum: 9d329342a170c7595b02e5f91e551c06ddd978369d191445b0cec030ed0d9f5b0d23e33577210a2851e132222d0603dc6785f300b1f154184b759a294a606c0b
+  languageName: node
+  linkType: hard
+
 "@marko/vite@npm:^2.2.6":
   version: 2.2.6
   resolution: "@marko/vite@npm:2.2.6"
@@ -1675,28 +1732,15 @@ __metadata:
     chai: ^4.2.0
     mocha: ^9.1.3
   peerDependencies:
-    "@marko/tags-api-preview": ^0.2.0
+    "@marko/tags-api-preview": ">=0.2.0"
   languageName: unknown
   linkType: soft
-
-"@mikro-ui/core@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@mikro-ui/core@npm:1.0.1"
-  dependencies:
-    "@mikro-ui/style": 1.0.1
-    "@mikro-ui/theme-default": 1.0.0
-    "@mikro-ui/theme-utils": 1.0.0
-  peerDependencies:
-    "@marko/tags-api-preview": ^0.1.9
-  checksum: a31f96e48df33d951604349ce420da13ff3a071b32e7f67fd20e8fa15165d4e158ef624d395fe1128b278b602f1ed9d0e4af47966864903b33d7fc2dfc4a21c8
-  languageName: node
-  linkType: hard
 
 "@mikro-ui/draggable@workspace:packages/mikro-ui-draggable":
   version: 0.0.0-use.local
   resolution: "@mikro-ui/draggable@workspace:packages/mikro-ui-draggable"
   peerDependencies:
-    "@marko/tags-api-preview": ^0.2.0
+    "@marko/tags-api-preview": ">=0.2.0"
   languageName: unknown
   linkType: soft
 
@@ -1712,16 +1756,6 @@ __metadata:
     mocha-chai-jest-snapshot: ^1.1.3
   languageName: unknown
   linkType: soft
-
-"@mikro-ui/style@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@mikro-ui/style@npm:1.0.1"
-  dependencies:
-    "@mikro-ui/theme-default": 1.0.0
-    "@mikro-ui/tokens": 1.0.0
-  checksum: 91c0983b5594c93773a615b7f5c2c85f482e23aa158d79e4b7de136f4ed58afe95a2f38633754c487d55b8280f5e0cfe23b67801c6eede439ada01597b9f4d26
-  languageName: node
-  linkType: hard
 
 "@mikro-ui/test@1.1.0, @mikro-ui/test@workspace:packages/mikro-test":
   version: 0.0.0-use.local
@@ -1760,15 +1794,6 @@ __metadata:
     lodash.merge: ^4.6.2
   languageName: unknown
   linkType: soft
-
-"@mikro-ui/theme-utils@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@mikro-ui/theme-utils@npm:1.0.0"
-  dependencies:
-    lodash.merge: ^4.6.2
-  checksum: 21ac696e8fddd30d4656dcce22ecbe3dbf78fd7574ba533c64026b618bd820279e40cb2cef7d8e1cba7c79fa71a0263e1db62efdc8a67f5f83f2f4ccfb29ff77
-  languageName: node
-  linkType: hard
 
 "@mikro-ui/tokens@^1.0.0, @mikro-ui/tokens@workspace:packages/mikro-tokens":
   version: 0.0.0-use.local
@@ -5999,6 +6024,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"marko@npm:^5.17.9":
+  version: 5.19.3
+  resolution: "marko@npm:5.19.3"
+  dependencies:
+    "@marko/compiler": ^5.19.0
+    "@marko/translator-default": ^5.19.3
+    app-module-path: ^2.2.0
+    argly: ^1.2.0
+    browser-refresh-client: 1.1.4
+    complain: ^1.6.0
+    events-light: ^1.0.5
+    listener-tracker: ^2.0.0
+    minimatch: ^3.0.4
+    raptor-util: ^3.2.0
+    resolve-from: ^5.0.0
+    self-closing-tags: ^1.0.1
+    warp10: ^2.0.1
+  bin:
+    markoc: bin/markoc
+  checksum: 2b4f5e80e06a8e3bbe0b66c14cd7d23468178dd8ac8895048ba52265ae485c8de932fbbba6a5887ae6e32d407333e8c88e422ef4fe8c1695fea58e8a17bb8b84
+  languageName: node
+  linkType: hard
+
 "mdast-util-from-markdown@npm:^0.8.0":
   version: 0.8.5
   resolution: "mdast-util-from-markdown@npm:0.8.5"
@@ -6123,9 +6171,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mikro-ui-avatar@workspace:packages/mikro-ui-avatar"
   dependencies:
-    "@mikro-ui/core": 1.0.1
+    "@mikro-ui/core": 1.1.0
   peerDependencies:
-    "@marko/tags-api-preview": ^0.2.0
+    "@marko/tags-api-preview": ">=0.2.0"
   languageName: unknown
   linkType: soft
 
@@ -6133,9 +6181,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mikro-ui-button@workspace:packages/mikro-ui-button"
   dependencies:
-    "@mikro-ui/core": 1.0.1
+    "@mikro-ui/core": 1.1.0
   peerDependencies:
-    "@marko/tags-api-preview": ^0.2.0
+    "@marko/tags-api-preview": ">=0.2.0"
   languageName: unknown
   linkType: soft
 
@@ -6143,9 +6191,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mikro-ui-layout@workspace:packages/mikro-ui-layout"
   dependencies:
-    "@mikro-ui/core": 1.0.1
+    "@mikro-ui/core": 1.1.0
   peerDependencies:
-    "@marko/tags-api-preview": ^0.2.0
+    "@marko/tags-api-preview": ">=0.2.0"
   languageName: unknown
   linkType: soft
 
@@ -6153,9 +6201,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mikro-ui-modal@workspace:packages/mikro-ui-modal"
   dependencies:
-    "@mikro-ui/core": 1.0.1
+    "@mikro-ui/core": 1.1.0
   peerDependencies:
-    "@marko/tags-api-preview": ^0.2.0
+    "@marko/tags-api-preview": ">=0.2.0"
   languageName: unknown
   linkType: soft
 
@@ -6163,9 +6211,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mikro-ui-toast@workspace:packages/mikro-ui-toast"
   dependencies:
-    "@mikro-ui/core": 1.0.1
+    "@mikro-ui/core": 1.1.0
   peerDependencies:
-    "@marko/tags-api-preview": ^0.2.0
+    "@marko/tags-api-preview": ">=0.2.0"
   languageName: unknown
   linkType: soft
 
@@ -6173,9 +6221,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mikro-ui-typography@workspace:packages/mikro-ui-typography"
   dependencies:
-    "@mikro-ui/core": 1.0.1
+    "@mikro-ui/core": 1.1.0
   peerDependencies:
-    "@marko/tags-api-preview": ^0.2.0
+    "@marko/tags-api-preview": ">=0.2.0"
   languageName: unknown
   linkType: soft
 
@@ -6183,9 +6231,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "mikro-ui-utils@workspace:packages/mikro-ui-utils"
   dependencies:
-    "@mikro-ui/core": 1.0.1
+    "@mikro-ui/core": 1.1.0
   peerDependencies:
-    "@marko/tags-api-preview": ^0.2.0
+    "@marko/tags-api-preview": ">=0.2.0"
   languageName: unknown
   linkType: soft
 
@@ -6210,8 +6258,8 @@ __metadata:
     mikro-ui-typography: 1.1.0
     mikro-ui-utils: 1.1.0
   peerDependencies:
-    "@marko/tags-api-preview": ^0.2.0
-    marko: 5.17.9
+    "@marko/tags-api-preview": ">=0.2.0"
+    marko: ">=5.17.9"
   languageName: unknown
   linkType: soft
 
@@ -6221,7 +6269,7 @@ __metadata:
   dependencies:
     "@marko/compiler": ^5.19.1
     "@marko/express": ^1.0.0
-    "@marko/tags-api-preview": ^0.2.0
+    "@marko/tags-api-preview": ^0.4.1
     "@marko/vite": ^2.2.6
     "@mikro-ui/theme-default": ^1.0.0
     "@mikro-ui/tokens": ^1.0.0
@@ -6229,7 +6277,7 @@ __metadata:
     compression: ^1.7.4
     esbuild: ^0.14.17
     express: ^4.17.2
-    marko: 5.17.9
+    marko: ^5.17.9
     mikro-ui: 1.1.0
     remark-mikro: 1.1.0
     sass: ^1.49.7
@@ -7175,6 +7223,13 @@ __metadata:
   bin:
     regjsparser: bin/parser
   checksum: d069b932491761cda127ce11f6bd2729c3b1b394a35200ec33f1199e937423db28ceb86cf33f0a97c76ecd7c0f8db996476579eaf0d80a1f74c1934f4ca8b27a
+  languageName: node
+  linkType: hard
+
+"relative-import-path@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "relative-import-path@npm:1.0.0"
+  checksum: 48dda633f4814cae0c93a9f03f11fc69cb95cc90b5c2198929b6c784216e4528c6f39679ca60b7831a5adfd192735dea8ea65e3d118ebb40de7a76a474828e5e
   languageName: node
   linkType: hard
 

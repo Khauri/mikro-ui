@@ -30,7 +30,7 @@
     "mikro-ui-utils": "1.1.0"
   },
   "peerDependencies": {
-    "@marko/tags-api-preview": "^0.2.0",
-    "marko": "5.17.9"
+    "@marko/tags-api-preview": ">=0.2.0",
+    "marko": ">=5.17.9"
   }
 }

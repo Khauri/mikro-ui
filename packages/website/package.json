@@ -15,12 +15,12 @@
   },
   "dependencies": {
     "@marko/express": "^1.0.0",
-    "@marko/tags-api-preview": "^0.2.0",
+    "@marko/tags-api-preview": "^0.4.1",
     "@mikro-ui/theme-default": "^1.0.0",
     "@mikro-ui/tokens": "^1.0.0",
     "compression": "^1.7.4",
     "express": "^4.17.2",
-    "marko": "5.17.9",
+    "marko": "^5.17.9",
     "mikro-ui": "1.1.0",
     "remark-mikro": "1.1.0"
   },
