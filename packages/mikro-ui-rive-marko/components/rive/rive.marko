@@ -1,0 +1,58 @@
+import { Rive, Layout, EventType } from '@rive-app/canvas';
+
+/**
+ * @tag Rive
+ * @description Create a rive instance. Under the hood, it renders a <canvas> element that runs the animation, and a wrapping <div> element that handles sizing of the canvas based on the parent that wraps the component.
+ * When to use this: Use this for simple rendering cases where you don't need to control playback or setup state machine inputs to advance state machines. It will simply autoplay the first animation it finds in the .riv, the animation name you provide it, or the state machine name if you provide one.
+ * Note: Style-specific props set onto the component will pass down to the wrapping <div> element, while most other props will be set onto the <canvas> element itself.
+ * @prop {string} src - URL of the Rive asset, or path to where the public asset is stored.
+ * @prop {string} [artboard] - Artboard to render from the Rive asset. Defaults to the first artboard created.
+ * @prop {string|string[]} [animations] - Specify a starting animation to play.
+ * @prop {string|string[]} [stateMachines] - Specify a starting state machine to play.
+ * @prop {Layout} [layout] - Specify a starting Layout object to set Fill and Alignment for the drawing surface. See docs at https://help.rive.app/runtimes/layout for more on layout configuration.
+ * @prop {boolean} [useOffscreenRenderer] - For `@rive-app/react-webgl`, sets this property to maintain a single WebGL context for multiple canvases. **We recommend to keep the default value** when rendering multiple Rive instances on a page. Defaults to `true`.
+ */ 
+<!-- Heavily borrowed from https://github.com/rive-app/rive-react/blob/main/src/hooks/useRive.tsx -->
+<attrs/{
+  src, 
+  artboard,
+  animations,
+  stateMachines,
+  layout,
+  autoplay,
+  useDevicePixelRatio = true,
+  useOffscreenRenderer = true,
+  fitCanvasToArtboardHeight = false,
+  style,
+  class: classname,
+  ...canvasAttrs
+} />
+
+<lifecycle
+  onMount() {
+    const $canvas = canvasRef();
+    const $container = containerRef();
+    // https://github.com/rive-app/rive-react/blob/main/src/hooks/useRive.tsx#L208
+    const riveParams = {
+      src,
+      artboard,
+      animations,
+      stateMachines,
+      autoplay,
+      layout,
+      useDevicePixelRatio,
+      useOffscreenRenderer,
+      fitCanvasToArtboardHeight,
+      canvas: $canvas,
+    };
+    console.log(riveParams);
+    this.rive = new Rive(riveParams);
+  }
+  onDestroy() {
+    this.rive?.cleanup?.();
+  }
+/>
+
+<div/containerRef style=[{width: '100%', height: '100%'}, style] class=classname>
+  <canvas/canvasRef style={verticalAlign: 'top'} ...canvasAttrs/>
+</div>
