@@ -1,0 +1,24 @@
+{
+  "name": "@mikro-ui/jsdoc-tagdef",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "bin": "./cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^9.4.1",
+    "globby": "^13.1.2",
+    "jsdoc-api": "^7.1.1",
+    "jsdoc-parse": "^6.1.0"
+  },
+  "files": [
+    "cli.js",
+    "index.js"
+  ]
+}

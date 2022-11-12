@@ -4,17 +4,20 @@
   "packageManager": "yarn@3.1.1",
   "main": "dist/index.cjs",
   "dependencies": {
-    "@marko/compiler": "^5.19.1",
-    "@marko/fixture-snapshots": "^2.1.6",
-    "@marko/testing-library": "^6.0.0",
-    "@testing-library/user-event": "^13.5.0",
-    "jsdom": "^19.0.0",
-    "jsdom-context-require": "4.0.3"
+    "@marko/compiler": "^5",
+    "@marko/fixture-snapshots": "^2",
+    "@marko/testing-library": "^6",
+    "@testing-library/user-event": "^14",
+    "jsdom": "^19",
+    "jsdom-context-require": "^4"
   },
   "devDependencies": {
-    "esbuild": "^0.14.8"
+    "esbuild": "^0.15"
   },
   "scripts": {
     "build": "esbuild src/index.ts --bundle --format=cjs --external:@marko/compiler --external:jsdom --platform=node --outfile=dist/index.cjs"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

@@ -118,3 +118,6 @@ out
 
 # Intermediate build files
 *.md.marko
+
+# Other stuff
+.DS_Store
