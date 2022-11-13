@@ -3129,6 +3129,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@marko/tags-api-preview@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "@marko/tags-api-preview@npm:0.6.0"
+  dependencies:
+    magic-string: ^0.26.7
+  peerDependencies:
+    marko: ">= 5.23.0"
+  checksum: 407cbb5cfe7c1a51f828554c4667004045965fc6724eff324084e86924ee63153152fdef5d872d3f24b8605098d783e25ec9c627300f5c385d8b233e740b3da6
+  languageName: node
+  linkType: hard
+
 "@marko/testing-library@npm:^6":
   version: 6.1.2
   resolution: "@marko/testing-library@npm:6.1.2"
@@ -3267,9 +3278,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@mikro-ui/rive@workspace:packages/mikro-ui-rive":
+"@mikro-ui/rive-marko@workspace:packages/mikro-ui-rive-marko":
   version: 0.0.0-use.local
-  resolution: "@mikro-ui/rive@workspace:packages/mikro-ui-rive"
+  resolution: "@mikro-ui/rive-marko@workspace:packages/mikro-ui-rive-marko"
   dependencies:
     "@marko/serve": ^4.2.5
     "@mikro-ui/jsdoc-tagdef": "workspace:^"
@@ -3290,6 +3301,17 @@ __metadata:
     esbuild: ^0.14.8
     mocha: ^9.1.3
     mocha-chai-jest-snapshot: ^1.1.3
+  languageName: unknown
+  linkType: soft
+
+"@mikro-ui/tanstack-query@workspace:packages/mikro-query":
+  version: 0.0.0-use.local
+  resolution: "@mikro-ui/tanstack-query@workspace:packages/mikro-query"
+  dependencies:
+    "@marko/tags-api-preview": ^0.6.0
+    "@tanstack/query-core": ^4.15.1
+  peerDependencies:
+    "@marko/tags-api-preview": "*"
   languageName: unknown
   linkType: soft
 
@@ -3453,6 +3475,13 @@ __metadata:
   dependencies:
     defer-to-connect: ^1.0.1
   checksum: 4d9158061c5f397c57b4988cde33a163244e4f02df16364f103971957a32886beb104d6180902cbe8b38cb940e234d9f98a4e486200deca621923f62f50a06fe
+  languageName: node
+  linkType: hard
+
+"@tanstack/query-core@npm:^4.15.1":
+  version: 4.15.1
+  resolution: "@tanstack/query-core@npm:4.15.1"
+  checksum: ee98e75a3770fd35a6a10b9e7b3c417ea9da2b072481b5191d759182b29fd7bc4e8e340f83e2961b46fe4e1adac356087df04d4661c9459d09ff4d0574f683eb
   languageName: node
   linkType: hard
 
@@ -11858,6 +11887,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"magic-string@npm:^0.26.7":
+  version: 0.26.7
+  resolution: "magic-string@npm:0.26.7"
+  dependencies:
+    sourcemap-codec: ^1.4.8
+  checksum: 89b0d60cbb32bbf3d1e23c46ea93db082d18a8230b972027aecb10a40bba51be519ecce0674f995571e3affe917b76b09f59d8dbc9a1b2c9c4102a2b6e8a2b01
+  languageName: node
+  linkType: hard
+
 "make-dir@npm:^1.0.0, make-dir@npm:^1.2.0":
   version: 1.3.0
   resolution: "make-dir@npm:1.3.0"
@@ -12229,12 +12267,6 @@ __metadata:
   checksum: ef3d1c88e79e0a68b0e94a03137676f3324ac18a908c245a9e5936f838079fcc108ac7170a5fadc265a9c2596963462e402841406bda1a4bb7b68805601d631c
   languageName: node
   linkType: hard
-
-"mikro-query@workspace:packages/mikro-query":
-  version: 0.0.0-use.local
-  resolution: "mikro-query@workspace:packages/mikro-query"
-  languageName: unknown
-  linkType: soft
 
 "mikro-router@workspace:packages/mikro-router":
   version: 0.0.0-use.local
@@ -16121,7 +16153,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sourcemap-codec@npm:1.4.8, sourcemap-codec@npm:^1.4.4":
+"sourcemap-codec@npm:1.4.8, sourcemap-codec@npm:^1.4.4, sourcemap-codec@npm:^1.4.8":
   version: 1.4.8
   resolution: "sourcemap-codec@npm:1.4.8"
   checksum: b57981c05611afef31605732b598ccf65124a9fcb03b833532659ac4d29ac0f7bfacbc0d6c5a28a03e84c7510e7e556d758d0bb57786e214660016fb94279316

@@ -1,0 +1,41 @@
+static function cloneObject(obj) {
+    if(Array.isArray(obj)) {
+        return obj.map(cloneObject);
+    }
+    if(typeof obj === 'object' && !!obj) {
+        return Object.entries(obj).reduce((acc, [key, value]) => {
+            acc[key] = cloneObject(value);
+            return acc;
+        }, {});
+    }
+    return obj;
+}
+
+<!-- Supports pre tags-api v0.5.3 which changes default to value -->
+<attrs/{default: _d, value = _d, untracked = false } />
+
+<let/lastTrackingValue = null />
+
+<let/value = (() => {
+    // The object passed in might already be frozen, so clone to unfreeze
+    let data = cloneObject(value);
+    if(typeof data === 'function') {
+        data = data();
+    }
+    return (valueOrGetter) => {
+        if(typeof valueOrGetter === 'undefined') {
+            return data;
+        }
+        data = typeof valueOrGetter === 'function' 
+            ? valueOrGetter(data)
+            : valueOrGetter;
+        if(!untracked) {
+            lastTrackingValue = Date.now() + Math.random();
+        }
+    };
+})() />
+
+<return=value.bind(lastUpdated) 
+    defaultChange(v){value(v)} 
+    valueChange(v){value(v)}
+/>

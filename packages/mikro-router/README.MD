@@ -10,7 +10,7 @@ Marko excels at building multi-page server rendered applications, but there's no
 
 ## Usage
 
-The API is similar to that of React-Router v6
+The API is similar to that of React-Router v6. 
 
 ```marko
 <router>
