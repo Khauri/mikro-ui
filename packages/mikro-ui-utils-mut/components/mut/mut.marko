@@ -16,13 +16,13 @@ static function cloneObject(obj) {
 
 <let/lastTrackingValue = null />
 
-<let/value = (() => {
+<let/getSet = (() => {
     // The object passed in might already be frozen, so clone to unfreeze
     let data = cloneObject(value);
     if(typeof data === 'function') {
         data = data();
     }
-    return (valueOrGetter) => {
+    return function $(valueOrGetter) {
         if(typeof valueOrGetter === 'undefined') {
             return data;
         }
@@ -35,7 +35,24 @@ static function cloneObject(obj) {
     };
 })() />
 
-<return=value.bind(lastUpdated) 
-    defaultChange(v){value(v)} 
-    valueChange(v){value(v)}
+<const/binded = (() => {
+  const fn = getSet.bind(lastTrackingValue);
+  const handler = {
+    get(target, prop, receiver) {
+      if(prop === 'valueOf') {
+        return () => target();
+      }
+      if(prop === 'toString') {
+        return () => `${target()}`;
+      }
+      return Reflect.get(fn(), prop, receiver);
+    }
+  };
+  const proxy = new Proxy(fn, handler);
+  return proxy;
+})() />
+
+<return=binded
+    defaultChange(v){getSet(v)} 
+    valueChange(v){getSet(v)}
 />
