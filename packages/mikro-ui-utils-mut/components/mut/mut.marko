@@ -11,10 +11,48 @@ static function cloneObject(obj) {
     return obj;
 }
 
+static function wrapWithProxy(getter, onUpdate) {
+  const handler = {
+    get(target, prop, receiver) {
+      if(prop === 'valueOf') {
+        return () => target();
+      }
+      if(prop === 'toString') {
+        return () => `${target()}`;
+      }
+      let value = target()[prop];
+      if(typeof value === 'object' && !!value) {
+        return wrapWithProxy(() => value, onUpdate);
+      }
+      return value;
+    },
+    deleteProperty(target, prop) {
+      delete target()[prop];
+      onUpdate();
+      return true;
+    },
+    defineProperty(target, prop, descriptor){
+      Object.defineProperty(target(), prop, descriptor);
+      onUpdate();
+      return true;
+    },
+    set(target, prop, value) {
+      target()[prop] = value;
+      onUpdate();
+      return true;
+    }
+  };
+  return new Proxy(getter, handler);
+}
+
 <!-- Supports pre tags-api v0.5.3 which changes default to value -->
 <attrs/{default: _d, value = _d, untracked = false } />
 
 <let/lastTrackingValue = null />
+
+<const/triggerUpdate(){
+  lastTrackingValue = Date.now() + Math.random();
+} />
 
 <let/getSet = (() => {
     // The object passed in might already be frozen, so clone to unfreeze
@@ -30,29 +68,12 @@ static function cloneObject(obj) {
             ? valueOrGetter(data)
             : valueOrGetter;
         if(!untracked) {
-            lastTrackingValue = Date.now() + Math.random();
+            triggerUpdate();
         }
     };
 })() />
 
-<const/binded = (() => {
-  const fn = getSet.bind(lastTrackingValue);
-  const handler = {
-    get(target, prop, receiver) {
-      if(prop === 'valueOf') {
-        return () => target();
-      }
-      if(prop === 'toString') {
-        return () => `${target()}`;
-      }
-      return Reflect.get(fn(), prop, receiver);
-    }
-  };
-  const proxy = new Proxy(fn, handler);
-  return proxy;
-})() />
-
-<return=binded
+<return=wrapWithProxy(getSet, triggerUpdate)
     defaultChange(v){getSet(v)} 
     valueChange(v){getSet(v)}
 />

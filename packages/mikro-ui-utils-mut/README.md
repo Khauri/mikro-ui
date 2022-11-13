@@ -2,7 +2,7 @@
 
 Like `<let>` but with superpowers.
 
-> Warning: No benchmarking has been performed. This may or may not cause deoptimizations and/or conflict with future Marko features. Get frisky at your own risky.
+> Warning: No benchmarking has been performed. In its current state, this may cause deoptimizations, performance issues, or conflict with future Marko features. Get frisky at your own risky.
 
 By default Marko deep freezes any object you pass to `<let>`, `<const>`, `<return>`, or 
 destructure from `<attrs>`, making you unable to mutate them. Instead you have to treat them as immutable and assign to them directly.
@@ -15,30 +15,31 @@ This package represents an idea and implementation that allows a bit more flexib
 
 The `mut` tag accepts any js value and returns a lightweight Proxy that tracks assignments deeply. In theory this should work for Arrays, Objects, Sets, and Maps and their associated mutating methods.
 
-WeakSets and WeakMaps are not supported as this would necessarily add references to the values being weakly mapped and therfor result in them never being garbage collected.
-
 ```marko
 <mut/counter = {value: 0} />
 
 <button onClick(){
-    // all valid ways of incrementing counter
-    counter.value++;
-    counter.value += 1;
-    counter(curr => ({value: curr.value + 1}));
-    counter = {value: counter.value + 1};
+  // all valid ways of incrementing counter
+  counter.value++;
+  counter.value += 1;
+  counter(curr => ({value: curr.value + 1}));
+  counter = {value: counter.value + 1};
+  // counter.value is now incremented by 4
 }>
   ${counter.value}
 </button>
 ```
 
-If you would prefer _not_ to track the value, use the `umut` (untracked mutable) tag instead.
+If you would prefer _not_ to track the value, use the `umut` (untracked mutable) tag instead. 
 
 ```marko
 <umut/counter = {value: 0} />
 
 <button onClick() {
-    // This will update counter but won't trigger a state update
-    counter.value++;
+  // This will update counter but won't trigger a state update
+  counter.value += 4;
+  // call value as a function to unwrap the Proxy.
+  console.log(counter()); // {value: 4}
 }>
   ${counter.value}
 </button>

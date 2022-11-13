@@ -1,4 +1,7 @@
-<!-- Untracked mutable. Updates won't trigger -->
+<!-- Untracked mutable. Updates won't trigger state changes -->
 <attrs/attrs />
 <mut/value ...attrs untracked />
-<return = value />
+<return = value 
+  defaultChange(v){value(v)} 
+  valueChange(v){value(v)}
+/>
