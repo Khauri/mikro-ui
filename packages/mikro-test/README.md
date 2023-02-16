@@ -2,14 +2,15 @@
 
 This is a generic marko component snapshot testing library [based on the strategies seen in Marko's own libraries](https://github.com/marko-js/tags-api-preview/tree/main/src/__tests__).
 
-This package can be used with any testing library such as jest or mocha.
+This package can be used with any testing library such as jest, mocha, or vitest.
 
 ## Usage
 
-Using mocha as an example, in any given test file the most basic setup you can have is:
+Using vitest as an example, in any given test file the most basic setup you can have is:
 
 ```js
-const {fixture} = require('mikro-test');
+import {describe} from 'vitest';
+import {fixture} from '@mikro-ui/test';
 
 describe(
   "<button> click",
@@ -25,13 +26,13 @@ This method accepts either an object which will be passed in as the new input to
 
 ```js
 
-const buttonClickHandler = sinon.spy();
+const buttonClickHandler = vi.fn();
 
 describe(
   '<button> click',
   fixture('./templates/button/click.marko', {disabled: true, onClick: buttonClickHandler})
     .step({disabled: false})
-    .step(async ({rerender, fireEvent, screen}) => {
+    .step(async ({fireEvent, screen}) => {
       await fireEvent.click(screen.getById("btn"));
       expect(buttonClickHandler).has.been.called;
     });

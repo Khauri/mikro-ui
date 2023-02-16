@@ -1,14 +1,14 @@
 static function cloneObject(obj) {
-    if(Array.isArray(obj)) {
-        return obj.map(cloneObject);
-    }
-    if(typeof obj === 'object' && !!obj) {
-        return Object.entries(obj).reduce((acc, [key, value]) => {
-            acc[key] = cloneObject(value);
-            return acc;
-        }, {});
-    }
-    return obj;
+  if(Array.isArray(obj)) {
+    return obj.map(cloneObject);
+  }
+  if(typeof obj === 'object' && !!obj) {
+    return Object.entries(obj).reduce((acc, [key, value]) => {
+      acc[key] = cloneObject(value);
+      return acc;
+    }, {});
+  }
+  return obj;
 }
 
 static function wrapWithProxy(getter, onUpdate) {
@@ -48,32 +48,32 @@ static function wrapWithProxy(getter, onUpdate) {
 <!-- Supports pre tags-api v0.5.3 which changes default to value -->
 <attrs/{default: _d, value = _d, untracked = false } />
 
-<let/lastTrackingValue = null />
+<let/lastTrackingValue = [] />
 
-<const/triggerUpdate(){
-  lastTrackingValue = Date.now() + Math.random();
+<const/triggerUpdate() {
+  lastTrackingValue = [];
 } />
 
 <let/getSet = (() => {
-    // The object passed in might already be frozen, so clone to unfreeze
-    let data = cloneObject(value);
-    if(typeof data === 'function') {
-        data = data();
+  // The object passed in might already be frozen, so clone to unfreeze
+  let data = cloneObject(value);
+  if(typeof data === 'function') {
+    data = data();
+  }
+  return function $(valueOrGetter) {
+    if(typeof valueOrGetter === 'undefined') {
+      return data;
     }
-    return function $(valueOrGetter) {
-        if(typeof valueOrGetter === 'undefined') {
-            return data;
-        }
-        data = typeof valueOrGetter === 'function' 
-            ? valueOrGetter(data)
-            : valueOrGetter;
-        if(!untracked) {
-            triggerUpdate();
-        }
-    };
+    data = typeof valueOrGetter === 'function' 
+      ? valueOrGetter(data)
+      : valueOrGetter;
+    if(!untracked) {
+      triggerUpdate();
+    }
+  };
 })() />
 
 <return=wrapWithProxy(getSet, triggerUpdate)
-    defaultChange(v){getSet(v)} 
-    valueChange(v){getSet(v)}
+  defaultChange(v){getSet(v)} 
+  valueChange(v){getSet(v)}
 />

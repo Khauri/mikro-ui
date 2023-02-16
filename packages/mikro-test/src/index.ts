@@ -16,8 +16,19 @@ const loaders = {
   web: browser.require,
 } as const;
 
-// Defaults to a noop to fit testing environments that don't use global testing functions
-let constructTest: Function = (n, t) => t();
+function getDefaultTestFunction() {
+  if(typeof it !== 'undefined') {
+    return it;
+  }
+  if(typeof test !== 'undefined') {
+    return test;
+  }
+  console.warn('No test function found in environment. Use setTestFunction to set a test function.')
+  // Defaults to just running the test function and hoping for the best
+  return (n: string, t: Function) => t();
+}
+
+let constructTest: Function = getDefaultTestFunction();
 
 function calldir() {
   const { stackTraceLimit, prepareStackTrace } = Error;

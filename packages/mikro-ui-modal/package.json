@@ -1,7 +1,6 @@
 {
   "name": "mikro-ui-modal",
   "version": "1.1.0",
-  "packageManager": "yarn@3.1.1",
   "dependencies": {
     "@mikro-ui/core": "1.1.0"
   },

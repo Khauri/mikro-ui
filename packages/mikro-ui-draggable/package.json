@@ -1,6 +1,5 @@
 {
   "name": "@mikro-ui/draggable",
-  "packageManager": "yarn@3.1.1",
   "peerDependencies": {
     "@marko/tags-api-preview": ">=0.2.0"
   }

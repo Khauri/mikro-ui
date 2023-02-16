@@ -1,10 +1,13 @@
 ## Mikro
 
+> Warning: most of the tags in this repo are in development/testing. Use at your own risk (happily accepting contributions as well).
+> Also note that not everything present in this README is implemented
+
 This is a design-system starter UI kit. These components, along with theming functionality, are used as a basis for creating your own components.
 
-The main goal is to create a shared, easily referencable language for component architecture as well as eliminate the chore of worrying about optimizing stylesheet bundles or css scoping issues.
+The main goal is to create a shared, easily referencable language for component architecture.
 
-A secondary goal is to enable the creation of community components without the added burden of figuring out how to incorporate styles. Component creators do not need to burden themselves with using plain css over pre-compiled. mikro gives you an api and it's up to the user to decide how the styles will be output.
+A secondary goal is to enable the creation of community components without the added burden of figuring out how to incorporate styles. Component creators do not need to burden themselves with using plain css over pre-compiled. mikro gives you an api and it's up to the end user to decide how the styles will be output.
 
 Inspiration: Chakra UI, Rebass, Styled Components, Bootstrap, Tailwind.
 
@@ -23,19 +26,20 @@ Based on my own personal use case, Mikro is being built with these principles in
 mikro requires `marko` as well as the `marko/tags-api-preview` as peer dependencies, so please ensure you have them installed when installing `mikro`.
 
 ```sh
-npm install marko @marko/tags-api-preview mikro
+npm install marko @marko/tags-api-preview mikro-ui
 ```
 
 That's pretty much it. Due to Marko's tag resolution algorithm you will be able to immediately use the mikro tags that were installed. Refer to the documentation to configure the behavior.
 
 ### Packages
 
-The mikro tags are split into individual packages and the essential tags are combined into one package -- `mikro`, for convenience. If you only want to install a subset of the tags, install those packages individually.
+The mikro tags are split into individual packages and the essential tags are combined into one package -- `mikro-ui`, for convenience. If you only want to install a subset of the tags, install those packages individually.
 
 | **Package** | **Description** | **Version** |
 | ----------- | --------------- | --------------- |
 | [@mikro-ui/core](./packages/mikro-ui-core) | Core mikro components. | [<img src="https://img.shields.io/npm/v/@mikro-ui/core" alt="npm" />](https://www.npmjs.com/package/@mikro-ui/core) |
 | [@mikro-ui/style](./packages/mikro-style) | Style parser for converting attributes to classes or inline style strings. | [<img src="https://img.shields.io/npm/v/@mikro-ui/style" alt="npm" />](https://www.npmjs.com/package/@mikro-ui/style) |
+| [@mikro-ui/test](./packages/mikro-test) | Fixture-based component testing framework. | [<img src="https://img.shields.io/npm/v/@mikro-ui/test" alt="npm" />](https://www.npmjs.com/package/@mikro-ui/test) |
 
 ## Usage
 

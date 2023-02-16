@@ -33,12 +33,12 @@ export async function trySnapshot(
       const actualFile = path.join(snapshotDir, `${title}.actual.${ext}`);
       const data = format(rawData);
 
-      if (UPDATE) {
+      const expected = await fs.promises
+        .readFile(expectedFile, "utf-8")
+        .catch(noop);
+      if (UPDATE || !expected) {
         await fs.promises.writeFile(expectedFile, data, "utf-8");
       } else {
-        const expected = await fs.promises
-          .readFile(expectedFile, "utf-8")
-          .catch(noop);
 
         try {
           assert.strictEqual(data, expected);
